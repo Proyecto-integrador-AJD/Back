@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\PrefixPhone;
 
 return new class extends Migration
 {
@@ -23,25 +24,21 @@ return new class extends Migration
             $table->date('birthDate');
 
             //! Direccion
-            /*
-                "address": {
-                    "street": "Carrer Major",
-                    "number": "12",
-                    "floor": "3r",
-                    "door": "2a",
-                    "postalCode": "08001",
-                    "city": "Barcelona",
-                    "province": "Barcelona",
-                    "country": "Espanya"
-                },
-            */
+            // Tipo de direccion
             $table->string('addressStreet');
+            // Numero de direccion
             $table->integer('addressNumber');
+            // Piso de direccion
             $table->string('addressFloor');
+            // Puerta de direccion
             $table->string('addressDoor');
+            // Codigo Postal
             $table->integer('addressPostalCode');
+            // Ciudad
             $table->string('addressCity');
+            // Provincia
             $table->string('addressProvince');
+            // Pais
             $table->string('addressCountry');
             
 
@@ -50,7 +47,8 @@ return new class extends Migration
             $table->string('healthCardNumber')->unique();
 
             //! Telefono
-            $table->integer('prefix');
+            $table->enum('prefix', array_column(PrefixPhone::cases(), 'value'))
+                  ->default(PrefixPhone::SPAIN->value);
             $table->integer('phone');
             
             //! Email
@@ -70,11 +68,17 @@ return new class extends Migration
                 "location": "Centre ciutat"
             },
             */
+            // Situacion Personal y Familiar
             $table->string('situationPersonalFamily');
+            // Situacion de Salud
             $table->string('healthSituation');
+            // Situacion de Vivienda
             $table->string('housingSituationType');
+            // Situacion de Vivienda
             $table->string('housingSituationStatus');
+            // Situacion de Vivienda
             $table->integer('housingSituationNumberOfRooms');
+            // Situacion de Vivienda
             $table->string('housingSituationLocation');
 
             //! Economic Situation
