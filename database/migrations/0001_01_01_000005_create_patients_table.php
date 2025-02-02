@@ -48,26 +48,16 @@ return new class extends Migration
 
             //! Telefono
             $table->enum('prefix', array_column(PrefixPhone::cases(), 'value'))
-                  ->default(PrefixPhone::SPAIN->value);
+                ->default(PrefixPhone::SPAIN->value);
             $table->integer('phone');
             
             //! Email
             $table->string('email')->unique();
 
             //! Foreing Key Zona
-            // $table->unsignedBigInteger('zoneId');
+            $table->unsignedBigInteger('zoneId');
             
             //! Sitauion
-            /*
-            "situationPersonalFamily": "Viu sol, rep visites del seu fill cada cap de setmana.",
-            "healthSituation": "Hipertensió, medicació diària, risc de caigudes.",
-            "housingSituation": {
-                "type": "Pis",
-                "status": "Bona conservació",
-                "numberOfRooms": 4,
-                "location": "Centre ciutat"
-            },
-            */
             // Situacion Personal y Familiar
             $table->string('situationPersonalFamily');
             // Situacion de Salud
@@ -82,28 +72,12 @@ return new class extends Migration
             $table->string('housingSituationLocation');
 
             //! Economic Situation
-            /*
-            "personalAutonomy": "Necessita ajuda per activitats domèstiques.",
-            "economicSituation": "Pensió mínima, sense copagament.",
-            */
             $table->string('personalAutonomy');
             $table->string('economicSituation');
             
             //! Emergency Contacts
-            //! Relacion con contacto de emergencia con una tabla intermedia
-            /*
-            "emergencyContacts": [
-                {
-                    "name": "Pere",
-                    "lastName": "Garcia",
-                    "phone": {
-                        "prefix": "34",
-                        "number": "677889900"
-                    },
-                    "relationship": "Fill"
-                }
-            ]
-            */
+            //! Relacion con contacto de emergencia en la tabla de Contacts
+
 
             $table->timestamps();
         });

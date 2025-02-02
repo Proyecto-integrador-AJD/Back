@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Enums\{Language};
 
 class User extends Authenticatable
 {
@@ -48,8 +49,9 @@ class User extends Authenticatable
         ];
     }
 
-    public function equip()
-    {
-        return $this->belongsTo(Equip::class );
-    }
+    protected $attributes = [
+        'language' => '["' . Language::SPANISH->value . '", "' . Language::CATALAN->value . '"]',
+    ];
+    
+    
 }
