@@ -2,7 +2,7 @@
 
 namespace App\Enums\Alerts;
 
-enum typeAndSubtipe: string
+enum TypeAndSubtipe: string
 {
     // Notices
     case MEDICATION = 'medicació';
