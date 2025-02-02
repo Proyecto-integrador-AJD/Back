@@ -16,12 +16,16 @@ class UserSeeder extends Seeder
         // Crear administrador
         User::create([
             'name' => 'Admin',
+            'lastName' => 'Admin',
             'email' => 'admin@example.com',
             'password' => Hash::make('password'),
             'role' => 'administrador',
+            'phone' => 666777888,
+            'dateHire' => '2025-01-01',
+
         ]);
 
         // Crear 30 árbitros
-        User::factory()->count(30)->arbitro()->create();
+        // User::factory()->count(30)->arbitro()->create();
     }
 }
