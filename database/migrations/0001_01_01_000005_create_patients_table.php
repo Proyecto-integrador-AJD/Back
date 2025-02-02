@@ -55,8 +55,8 @@ return new class extends Migration
             $table->string('email')->unique();
 
             //! Foreing Key Zona
-            $table->unsignedBigInteger('zoneId');
-            
+            $table->foreignId('zoneId')->constrained('zones');
+                        
             //! Sitauion
             // Situacion Personal y Familiar
             $table->string('situationPersonalFamily');
