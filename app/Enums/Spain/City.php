@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums;
+namespace App\Enums\Spain;
 
 use App\Enums\Spain\Province;
 
@@ -51,5 +51,31 @@ enum City: string
             self::OURENSE => Province::OURENSE,
             self::PAMPLONA => Province::NAVARRA,
         };
+    }
+
+    public static function getValues(): array
+    {
+        return [
+            self::BARCELONA,
+            self::MADRID,
+            self::VALENCIA,
+            self::SEVILLA,
+            self::ZARAGOZA,
+            self::MALAGA,
+            self::MURCIA,
+            self::PALMA,
+            self::LAS_PALMAS,
+            self::ALICANTE,
+            self::CORDOBA,
+            self::GRANADA,
+            self::TOLEDO,
+            self::SANTA_CRUZ,
+            self::BILBAO,
+            self::A_CORUNA,
+            self::OVIEDO,
+            self::SANTANDER,
+            self::OURENSE,
+            self::PAMPLONA,
+        ];
     }
 }

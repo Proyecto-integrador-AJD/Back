@@ -17,24 +17,39 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        /*
+        {
+                    "id": 1,
+                    "role": "admin",
+                    "name": "Anna",
+                    "lastName": "Martínez",
+                    "email": "anna.martinez@example.com",
+                    "phone": {
+                        "prefix": "34",
+                        "number": "666777888"
+                    },
+                    "zoneIds": [1],
+                    "language": ["Català"],
+                    "contactIds": [1],
+                    "dateHire": "2023-01-01",
+                    "dateTermination": null,
+                    "username": "admin_anna",
+                    "passwordHash": "hashed_password"
+                },
+        */
+
         return [
             'name' => $this->faker->name(),
+            'lastName' => $this->faker->lastName(),
+            'username' => $this->faker->userName(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'role' => 'user', // Valor por defecto
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
+            'role' => 'operator', // Valor por defecto
+            'phone' => $this->faker->numerify('#########'),
+            'dateHire' => $this->faker->date(),
         ];
-    }
-
-    /**
-     * Estado para usuarios con rol de árbitro.
-     */
-    public function arbitro(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'role' => 'operario',
-        ]);
     }
 
     /**
@@ -42,7 +57,7 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
         ]);
     }

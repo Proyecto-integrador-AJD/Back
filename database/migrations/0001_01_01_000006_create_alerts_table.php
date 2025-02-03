@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\Alerts\RecurrenceType;
 
 return new class extends Migration
 {
@@ -20,8 +21,8 @@ return new class extends Migration
             $table->string('description');
             $table->date('startDate');
             $table->boolean('isRecurring');
-            $table->enum ('recurrenceType', ['daily', 'weekly', 'monthly', 'yearly']);
-            $table->integer('recurrence');            
+            $table->string('recurrenceType')->nullable();
+            $table->integer('recurrence')->nullable();
             $table->timestamps();
         });
     }
