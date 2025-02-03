@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             ZoneSeeder::class,
             PatientSeeder::class,
             AlertSeeder::class,
+            UsersZonesSeeder::class,
         ]);
     }
 }

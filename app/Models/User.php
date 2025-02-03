@@ -53,5 +53,10 @@ class User extends Authenticatable
         'language' => '["' . Language::SPANISH->value . '", "' . Language::CATALAN->value . '"]',
     ];
     
+
+    public function zones()
+    {
+        return $this->belongsToMany(Zone::class, 'users_zones', 'userId', 'zoneId');
+    }
     
 }

@@ -40,26 +40,16 @@ class UserFactory extends Factory
 
         return [
             'name' => $this->faker->name(),
+            'lastName' => $this->faker->lastName(),
+            'username' => $this->faker->userName(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'role' => 'user', // Valor por defecto
             'password' => Hash::make('password'),
-            'phone' => $this->faker->phoneNumber(),
-            'dateHire' => $this->faker->date(),
-            'username' => $this->faker->userName(),
-            'passwordHash' => Hash::make('password'),
             'remember_token' => Str::random(10),
+            'role' => 'operario', // Valor por defecto
+            'phone' => $this->faker->numerify('#########'),
+            'dateHire' => $this->faker->date(),
         ];
-    }
-
-    /**
-     * Estado para usuarios con rol de árbitro.
-     */
-    public function arbitro(): static
-    {
-        return $this->state(fn(array $attributes) => [
-            'role' => 'operario',
-        ]);
     }
 
     /**

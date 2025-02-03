@@ -18,14 +18,7 @@ class Zone extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'usuario_zona', 'zoneId', 'userId');
     }
 
-    // public function patients()
-    // {
-    //     return $this->belongsToMany(User::class);
-    // }
-
-
-    
 }
