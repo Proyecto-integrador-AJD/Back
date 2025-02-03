@@ -2,29 +2,42 @@
 
 namespace App\Enums\Alerts;
 
-enum typeAndSubtipe: string
+enum TypeAndSubtipe: string
 {
     // Notices
-    case MEDICATION = 'avisos.medicació';
-    case SPECIALS_ALERT = 'avisos.Especials o per alerta';
+    case MEDICATION = 'medicació';
+    case SPECIALS_ALERT = 'Especials o per alerta';
 
     // Follow-up according to protocols
-    case EMERGENCIES = 'Seguiment segons protocols.Després d’emergències';
-    case GRIEF = 'Seguiment segons protocols.Per processos de dol';
-    case HOSPITAL_DISCHARGES = 'Seguiment segons protocols.Per altes hospitalàries';
+    case EMERGENCIES = 'Després d’emergències';
+    case GRIEF = 'Per processos de dol';
+    case HOSPITAL_DISCHARGES = 'Per altes hospitalàries';
 
     // Schedules for home absence and return
-    case TEMPORARY_SERVICE_SUSPENSION = 'Agendes d’absència domiciliària i retorn.Suspensió temporal del servei';
-    case RETURNS_END_ABSENCE = 'Agendes d’absència domiciliària i retorn.Retorns o fi de l’absència';
+    case TEMPORARY_SERVICE_SUSPENSION = 'Suspensió temporal del servei';
+    case RETURNS_END_ABSENCE = 'Retorns o fi de l’absència';
 
     // Method to get the main category
-    public function category(): string
+    public function getCategory(): string
     {
         return match ($this) {
             self::MEDICATION, self::SPECIALS_ALERT => 'Aviso',
             self::EMERGENCIES, self::GRIEF, self::HOSPITAL_DISCHARGES => 'Seguiment segons protocols',
             self::TEMPORARY_SERVICE_SUSPENSION, self::RETURNS_END_ABSENCE => 'Agendes d’absència domiciliària i retorn',
         };
+    }
+
+    public static function getValues(): array
+    {
+        return [
+            self::MEDICATION,
+            self::SPECIALS_ALERT,
+            self::EMERGENCIES,
+            self::GRIEF,
+            self::HOSPITAL_DISCHARGES,
+            self::TEMPORARY_SERVICE_SUSPENSION,
+            self::RETURNS_END_ABSENCE,
+        ];
     }
 
     // Method to get the readable name

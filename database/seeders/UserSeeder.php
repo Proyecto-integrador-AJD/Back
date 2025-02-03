@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Admin',
             'lastName' => 'Admin',
+            'username' => 'admin',
             'email' => 'admin@example.com',
             'password' => Hash::make('password'),
             'role' => 'administrador',
@@ -26,6 +27,6 @@ class UserSeeder extends Seeder
         ]);
 
         // Crear 30 árbitros
-        // User::factory()->count(30)->arbitro()->create();
+        User::factory()->count(30)->create();
     }
 }
