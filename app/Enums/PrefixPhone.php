@@ -24,4 +24,17 @@ enum PrefixPhone: string
             self::MOROCCO => 'Marruecos',
         };
     }
+
+    public static function getValues(): array
+    {
+        return [
+            self::SPAIN,
+            self::PORTUGAL,
+            self::FRANCE,
+            self::ANDORRA,
+            self::GIBRALTAR,
+            self::ITALY,
+            self::MOROCCO,
+        ];
+    }
 }

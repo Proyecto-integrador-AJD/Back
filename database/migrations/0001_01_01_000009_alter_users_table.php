@@ -12,24 +12,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-
-        /*
-        "id": 2,
-            "role": "operador",
-            "name": "Pere",
-            "lastName": "Garcia",
-            "email": "peregar@gmail.com",
-            "phone": {
-                "prefix": "34",
-                "number": "666777888"
-            },
-            "zoneIds": [2],
-            "language": ["Català"],
-            "contactIds": [2],
-            "dateHire": "2023-01-01",
-            "dateTermination": "2025-01-01"
-        */
         Schema::table('users', function (Blueprint $table) {
+            $table->string('username')->unique();
             $table->string('role')->default('operador');
             $table->string('lastName');
             $table->string('prefix')->default(PrefixPhone::SPAIN);
@@ -51,6 +35,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('username');
             $table->dropColumn('role');
             $table->dropColumn('lastName');
             $table->dropColumn('prefix');
