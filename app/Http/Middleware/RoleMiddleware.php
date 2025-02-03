@@ -15,7 +15,7 @@ class RoleMiddleware
      */
     public function handle($request, Closure $next, $role)
     {
-        if (auth()->user()->role !== $role && $role !== 'administrador') {
+        if (auth()->user()->role !== $role && $role !== 'admintrator') {
             abort(403, 'No tens permís per accedir a aquesta pàgina.' . $role);
         }
         return $next($request);
