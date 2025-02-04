@@ -20,7 +20,8 @@ return new class extends Migration
             $table->integer('phone');
 
             
-            $table->json('language');
+            // $table->json('language');
+            $table->string('language');
 
             $table->date('dateHire');
             $table->date('dateTermination')->nullable();
