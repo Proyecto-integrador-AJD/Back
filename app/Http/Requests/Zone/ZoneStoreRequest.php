@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Zone;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class ZoneStoreRequest extends FormRequest
 {
     /**
      * Determina si l'usuari està autoritzat a fer aquesta petició.

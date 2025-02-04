@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class ZoneUpdateRequest extends FormRequest
 {
     /**
      * Determina si l'usuari està autoritzat a fer aquesta petició.
