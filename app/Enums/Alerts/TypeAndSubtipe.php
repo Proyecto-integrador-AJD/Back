@@ -16,9 +16,6 @@ enum TypeAndSubtipe: string
     case SPECIALS = 'Especials';
     case ALERT = 'per alerta';
 
-    // Follow-up according to protocols
-    case FOLLOW_THE_PROTOCOL = 'Seguiment segons protocols';
-
     // Follow-up app de protocols
     case EMERGENCIES = 'Després d’emergències';
     case GRIEF = 'Per processos de dol';
@@ -34,7 +31,7 @@ enum TypeAndSubtipe: string
     {
         return match ($this) {
             self::MEDICATION, self::SPECIALS, self::ALERT => self::TYPE_WARNING,
-            self::FOLLOW_THE_PROTOCOL => self::TYPE_FOLLOW_THE_PROTOCOL,
+            self::TYPE_FOLLOW_THE_PROTOCOL => self::TYPE_FOLLOW_THE_PROTOCOL,
             self::EMERGENCIES, self::GRIEF, self::HOSPITAL_DISCHARGES => self::TYPE_MONITORING_IN_APPLICATION_ACCORDING_TO_PROTOCOLS,
             self::TEMPORARY_SERVICE_SUSPENSION, self::ABSENCE_HOME, self::RETURNS_END_ABSENCE => self::TYPE_HOME_ABSENCE_AND_RETURN_AGENDAS,
         };
@@ -46,13 +43,22 @@ enum TypeAndSubtipe: string
             self::MEDICATION,
             self::SPECIALS,
             self::ALERT,
-            self::FOLLOW_THE_PROTOCOL,
+            self::TYPE_FOLLOW_THE_PROTOCOL,
             self::EMERGENCIES,
             self::GRIEF,
             self::HOSPITAL_DISCHARGES,
             self::TEMPORARY_SERVICE_SUSPENSION,
             self::ABSENCE_HOME,
             self::RETURNS_END_ABSENCE,
+        ];
+    }
+
+    public static function getValuesType(): array{
+        return [
+            self::TYPE_WARNING,
+            self::TYPE_FOLLOW_THE_PROTOCOL,
+            self::TYPE_MONITORING_IN_APPLICATION_ACCORDING_TO_PROTOCOLS,
+            self::TYPE_HOME_ABSENCE_AND_RETURN_AGENDAS,
         ];
     }
 }

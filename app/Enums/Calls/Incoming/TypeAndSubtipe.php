@@ -56,4 +56,12 @@ enum TypeAndSubtipe: string
             self::OTHER_CALLS,
         ];
     }
+
+    public static function getValuesType(): array
+    {
+        return [
+            self::TYPE_EMERGENCY_CARE,
+            self::TYPE_NON_URGENT_COMMUNICATIONS,
+        ];
+    }
 }
