@@ -4,6 +4,13 @@ namespace App\Enums\Alerts;
 
 enum TypeAndSubtipe: string
 {
+
+    // Types
+    case TYPE_WARNING = 'Aviso';
+    case TYPE_FOLLOW_THE_PROTOCOL = 'Seguiment segons protocols';
+    case TYPE_MONITORING_IN_APPLICATION_ACCORDING_TO_PROTOCOLS = 'Seguiment en aplicació segons protocols';
+    case TYPE_HOME_ABSENCE_AND_RETURN_AGENDAS = 'Agendes d’absència domiciliària i retorn';
+
     // Notices
     case MEDICATION = 'medicació';
     case SPECIALS = 'Especials';
@@ -23,13 +30,13 @@ enum TypeAndSubtipe: string
     case RETURNS_END_ABSENCE = 'Retorns o fi de l’absència';
 
     // Method to get the main category
-    public function getCategory(): string
+    public function getCategory(): TypeAndSubtipe
     {
         return match ($this) {
-            self::MEDICATION, self::SPECIALS, self::ALERT => 'Aviso',
-            self::FOLLOW_THE_PROTOCOL => 'Seguiment segons protocols',
-            self::EMERGENCIES, self::GRIEF, self::HOSPITAL_DISCHARGES => 'Seguiment segons protocols',
-            self::TEMPORARY_SERVICE_SUSPENSION, self::ABSENCE_HOME, self::RETURNS_END_ABSENCE => 'Agendes d’absència domiciliària i retorn',
+            self::MEDICATION, self::SPECIALS, self::ALERT => self::TYPE_WARNING,
+            self::FOLLOW_THE_PROTOCOL => self::TYPE_FOLLOW_THE_PROTOCOL,
+            self::EMERGENCIES, self::GRIEF, self::HOSPITAL_DISCHARGES => self::TYPE_MONITORING_IN_APPLICATION_ACCORDING_TO_PROTOCOLS,
+            self::TEMPORARY_SERVICE_SUSPENSION, self::ABSENCE_HOME, self::RETURNS_END_ABSENCE => self::TYPE_HOME_ABSENCE_AND_RETURN_AGENDAS,
         };
     }
 

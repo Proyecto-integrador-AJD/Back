@@ -22,7 +22,7 @@ class AlertFactory extends Factory
         $isRecurring = $this->faker->boolean;
         return [
             'patientId' => Patient::all()->random()->id,
-            'type' => $type->getCategory(),
+            'type' => $type->getCategory()->value,
             'subType' => $type->value,
             'description' => $this->faker->sentence,
             'startDate' => $this->faker->date,

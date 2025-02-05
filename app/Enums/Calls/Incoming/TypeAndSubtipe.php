@@ -4,6 +4,11 @@ namespace App\Enums\Calls\Incoming;
 
 enum TypeAndSubtipe: string
 {
+
+    // type
+    case TYPE_EMERGENCY_CARE = 'Atenció d’emergències';
+    case TYPE_NON_URGENT_COMMUNICATIONS = 'Comunicacions no urgents';
+
     // • Atenció d’emergències:
     case SOCIAL_EMERGENCIES = 'Emergències socials';
     case HEALTH_EMERGENCIES = 'Emergències sanitàries';
@@ -25,12 +30,12 @@ enum TypeAndSubtipe: string
 
 
     // Method to get the main category
-    public function getCategory(): string
+    public function getCategory(): TypeAndSubtipe
     {
 
         return match ($this) {
-            self::SOCIAL_EMERGENCIES, self::HEALTH_EMERGENCIES, self::LONELINESS_OR_ANGUISH_CRISIS, self::UNANSWERED_ALARM => 'Atenció d’emergències',
-            self::ABSENCES_OR_RETURNS, self::MODIFY_PERSONAL_DATA, self::ACCIDENTAL_CALLS, self::INFORMATION_REQUEST, self::SUGGESTIONS_COMPLAINTS_OR_CLAIMS, self::SOCIAL_CALLS, self::REGISTER_MEDICAL_APPOINTMENTS, self::OTHER_CALLS => 'Comunicacions no urgents',
+            self::SOCIAL_EMERGENCIES, self::HEALTH_EMERGENCIES, self::LONELINESS_OR_ANGUISH_CRISIS, self::UNANSWERED_ALARM => self::TYPE_EMERGENCY_CARE,
+            self::ABSENCES_OR_RETURNS, self::MODIFY_PERSONAL_DATA, self::ACCIDENTAL_CALLS, self::INFORMATION_REQUEST, self::SUGGESTIONS_COMPLAINTS_OR_CLAIMS, self::SOCIAL_CALLS, self::REGISTER_MEDICAL_APPOINTMENTS, self::OTHER_CALLS => self::TYPE_NON_URGENT_COMMUNICATIONS,
         };
     }
 
