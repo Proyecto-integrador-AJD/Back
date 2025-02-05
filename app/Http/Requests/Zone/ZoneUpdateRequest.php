@@ -29,4 +29,21 @@ class ZoneUpdateRequest extends FormRequest
             'location' => 'required|max:255',
         ];
     }
+
+    /**
+     * Obté els missatges d'error personalitzats per a cada regla.
+     *
+     * @return array<string, string>
+     */
+    public function messages()
+    {
+        return [
+            'name.required' => 'El camp "Nom" és obligatori.',
+            'name.unique' => 'Aquest nom ja està en ús. Si us plau, tria un altre.',
+            'description.required' => 'El camp "Descripció" és obligatori.',
+            'description.max' => 'La descripció no pot superar els 255 caràcters.',
+            'location.required' => 'El camp "Ubicació" és obligatori.',
+            'location.max' => 'La ubicació no pot superar els 255 caràcters.',
+        ];
+    }
 }
