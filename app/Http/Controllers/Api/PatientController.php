@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Patient;
 use App\Http\Requests\{UpdateJugadoraRequest, StoreJugadoraRequest};
-use App\Http\Resources\JugadoraResource;
+use App\Http\Resources\PatientResource;
 use App\Http\Controllers\Api\BaseController;
 
 /**
@@ -31,7 +31,7 @@ class PatientController extends BaseController
      */
     public function index()
     {
-        return JugadoraResource::collection(Patient::paginate());
+        return PatientResource::collection(Patient::paginate());
     }
 
     /**
@@ -60,7 +60,7 @@ class PatientController extends BaseController
      */
     // public function show(Patients $jugadora)
     // {
-    //     return $this->sendResponse(new JugadoraResource($jugadora), 'Jugadora Recuperada amb èxit', 200);
+    //     return $this->sendResponse(new PatientResource($jugadora), 'Jugadora Recuperada amb èxit', 200);
     // }
 
     // /**
