@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Api\{AuthController, PatientController, ZoneController, AlertController};
+use App\Http\Controllers\Api\{AuthController, PatientController, ZoneController, AlertController, CallController};
 
 
 Route::get('/user', function (Request $request) {
@@ -22,6 +22,7 @@ Route::middleware(['auth:sanctum','api'])->group( function () {
     Route::apiResource('patients',  PatientController::class);
     Route::apiResource('zones',  ZoneController::class);
     Route::apiResource('alerts',  AlertController::class);
+    Route::apiResource('calls',  CallController::class);
 
     Route::post('logout', [AuthController::class, 'logout']);
 });
