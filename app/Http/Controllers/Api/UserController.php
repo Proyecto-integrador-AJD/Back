@@ -2,44 +2,44 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Call;
-use App\Http\Requests\Call\{CallStoreRequest, CallUpdateRequest};
-use App\Http\Resources\CallResource;
+use App\Models\User;
+use App\Http\Requests\User\{UserStoreRequest, UserUpdateRequest};
+use App\Http\Resources\UserResource;
 use App\Http\Controllers\Api\BaseController;
 
 /**
  * @OA\Info(
- *     title="Calls API",
+ *     title="Users API",
  *     version="1.0.0",
  *     description="API para gestionar los pacientes."
  * )
  */
-class CallController extends BaseController
+class UserController extends BaseController
 {
     /**
      * @OA\Get(
-     *     path="/api/calls",
+     *     path="/api/users",
      *     summary="Obtener todos los pacientes",
      *     description="Devuelve una lista paginada de pacientes.",
-     *     tags={"Calls"},
+     *     tags={"Users"},
      *     @OA\Response(
      *         response=200,
      *         description="Lista de pacientes devuelta con éxito.",
-     *         @OA\JsonContent(type="array", @OA\Items(ref="/components/schemas/Calls"))
+     *         @OA\JsonContent(type="array", @OA\Items(ref="/components/schemas/Users"))
      *     )
      * )
      */
     public function index()
     {
-        return CallResource::collection(Call::paginate());
+        return UserResource::collection(User::paginate());
     }
 
     /**
      * @OA\Get(
-     *     path="/api/calls/{id}",
+     *     path="/api/users/{id}",
      *     summary="Obtener un paciente",
      *     description="Devuelve los datos de un paciente específico por su ID.",
-     *     tags={"Calls"},
+     *     tags={"Users"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -50,7 +50,7 @@ class CallController extends BaseController
      *     @OA\Response(
      *         response=200,
      *         description="Paciente recuperado con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Calls")
+     *         @OA\JsonContent(ref="/components/schemas/Users")
      *     ),
      *     @OA\Response(
      *         response=404,
@@ -58,40 +58,40 @@ class CallController extends BaseController
      *     )
      * )
      */
-    public function show(Call $call)
+    public function show(User $user)
     {
-        return $this->sendResponse(new CallResource($call), 'Paciente recuperado con éxito', 200);
+        return $this->sendResponse(new UserResource($user), 'Paciente recuperado con éxito', 200);
     }
 
     /**
      * @OA\Post(
-     *     path="/api/calls",
+     *     path="/api/users",
      *     summary="Crear un nuevo paciente",
      *     description="Crea un nuevo paciente con los datos proporcionados.",
-     *     tags={"Calls"},
+     *     tags={"Users"},
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(ref="/components/schemas/StoreCallRequest")
+     *         @OA\JsonContent(ref="/components/schemas/StoreUserRequest")
      *     ),
      *     @OA\Response(
      *         response=201,
      *         description="Paciente creado con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Calls")
+     *         @OA\JsonContent(ref="/components/schemas/Users")
      *     )
      * )
      */
-    public function store(CallStoreRequest $request)
+    public function store(UserStoreRequest $request)
     {
-        $call = Call::create($request->validated());
-        return $this->sendResponse($call, 'Paciente creado con éxito', 201);
+        $user = User::create($request->validated());
+        return $this->sendResponse($user, 'Paciente creado con éxito', 201);
     }
 
     /**
      * @OA\Put(
-     *     path="/api/calls/{id}",
+     *     path="/api/users/{id}",
      *     summary="Actualizar un paciente",
      *     description="Actualiza los datos de un paciente existente.",
-     *     tags={"Calls"},
+     *     tags={"Users"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -101,27 +101,27 @@ class CallController extends BaseController
      *     ),
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(ref="/components/schemas/UpdateCallRequest")
+     *         @OA\JsonContent(ref="/components/schemas/UpdateUserRequest")
      *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Paciente actualizado con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Calls")
+     *         @OA\JsonContent(ref="/components/schemas/Users")
      *     )
      * )
      */
-    public function update(Call $call, CallUpdateRequest $request)
+    public function update(User $user, UserUpdateRequest $request)
     {
-        $call->update($request->validated());
-        return $this->sendResponse($call, 'Paciente actualizado con éxito', 200);
+        $user->update($request->validated());
+        return $this->sendResponse($user, 'Paciente actualizado con éxito', 200);
     }
 
     /**
      * @OA\Delete(
-     *     path="/api/calls/{id}",
+     *     path="/api/users/{id}",
      *     summary="Eliminar un paciente",
      *     description="Elimina un paciente específico por su ID.",
-     *     tags={"Calls"},
+     *     tags={"Users"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -139,9 +139,9 @@ class CallController extends BaseController
      *     )
      * )
      */
-    public function destroy(Call $call)
+    public function destroy(User $user)
     {
-        $call->delete();
+        $user->delete();
         return $this->sendResponse(null, 'Paciente eliminado con éxito', 200);
     }
 }
