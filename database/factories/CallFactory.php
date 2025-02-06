@@ -39,7 +39,7 @@ class CallFactory extends Factory
             'patientId' => Patient::all()->random()->id,
             'userId' => User::where('role', 'operator')->get()->random()->id,
             'incoming' => true,
-            'type' => $subtipe->getCategory(),
+            'type' => $subtipe->getCategory()->value,
             'subType' => $subtipe->value,
             'alertId' => Alert::all()->random()->id,
             'duration' => $this->faker->numberBetween(1, 60),
