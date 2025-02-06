@@ -50,13 +50,18 @@ class User extends Authenticatable
     }
 
     protected $attributes = [
-        'language' => '["' . Language::SPANISH->value . '", "' . Language::CATALAN->value . '"]',
+        'language' => Language::SPANISH->value . ',' . Language::CATALAN->value,
     ];
     
 
     public function zones()
     {
         return $this->belongsToMany(Zone::class, 'users_zones', 'userId', 'zoneId');
+    }
+
+    public function hasAnyRole(array $roles): bool
+    {
+        return in_array($this->role, $roles);
     }
     
 }

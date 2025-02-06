@@ -20,7 +20,7 @@ class CallSeeder extends Seeder
             'patientId' => 1,
             'userId' => 1,
             'incoming' => true,
-            'type' => IncomingTypeAndSubtipe::HEALTH_EMERGENCIES->getCategory(),
+            'type' => IncomingTypeAndSubtipe::HEALTH_EMERGENCIES->getCategory()->value,
             'subType' => IncomingTypeAndSubtipe::HEALTH_EMERGENCIES,
             'alertId' => 1,
             'duration' => 60,
