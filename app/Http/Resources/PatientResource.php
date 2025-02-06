@@ -44,6 +44,7 @@ class PatientResource extends JsonResource
             'zoneId' => $this->zoneId,
 
             // Situation fields
+            'healthSituation' => $this->healthSituation,
             'situationPersonalFamily' => $this->situationPersonalFamily,
             'situationHealth' => $this->healthSituation,
             'situationType' => $this->housingSituationType,

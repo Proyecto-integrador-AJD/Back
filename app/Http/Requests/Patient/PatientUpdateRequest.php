@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Patient;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -13,7 +13,12 @@ class PatientUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->hasAnyRole(['admintrator', 'operator']);
+        $user = $this->user(); // Obtener el usuario autenticado
+
+        if (!$user) {
+            return false; // Si no hay usuario autenticado, denegar la petición
+        }
+        return $user->hasAnyRole(['admintrator', 'operator']);
     }
 
     /**
@@ -37,7 +42,7 @@ class PatientUpdateRequest extends FormRequest
             'addressCountry' => 'required|max:255',
             'dni' => 'required|unique:patients|max:255',
             'healthCardNumber' => 'required|unique:patients|max:255',
-            'prefix' => 'required|in:SPAIN',
+            'prefix' => 'required|string',
             'phone' => 'required|integer',
             'email' => 'required|unique:patients|max:255',
             'zoneId' => 'required|exists:zones,id',
@@ -87,7 +92,6 @@ class PatientUpdateRequest extends FormRequest
             'healthCardNumber.unique' => 'Aquest número de targeta sanitària ja està en ús. Si us plau, tria un altre.',
             'healthCardNumber.max' => 'El número de targeta sanitària no pot superar els 255 caràcters.',
             'prefix.required' => 'El camp "Prefix" és obligatori.',
-            'prefix.in' => 'El camp "Prefix" ha de ser "SPAIN".',
             'phone.required' => 'El camp "Telèfon" és obligatori.',
             'phone.integer' => 'El camp "Telèfon" ha de ser un número enter.',
             'email.required' => 'El camp "Email" és obligatori.',
