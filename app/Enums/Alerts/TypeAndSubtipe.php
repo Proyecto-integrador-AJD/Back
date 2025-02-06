@@ -4,26 +4,36 @@ namespace App\Enums\Alerts;
 
 enum TypeAndSubtipe: string
 {
+
+    // Types
+    case TYPE_WARNING = 'Aviso';
+    case TYPE_FOLLOW_THE_PROTOCOL = 'Seguiment segons protocols';
+    case TYPE_MONITORING_IN_APPLICATION_ACCORDING_TO_PROTOCOLS = 'Seguiment en aplicació segons protocols';
+    case TYPE_HOME_ABSENCE_AND_RETURN_AGENDAS = 'Agendes d’absència domiciliària i retorn';
+
     // Notices
     case MEDICATION = 'medicació';
-    case SPECIALS_ALERT = 'Especials o per alerta';
+    case SPECIALS = 'Especials';
+    case ALERT = 'per alerta';
 
-    // Follow-up according to protocols
+    // Follow-up app de protocols
     case EMERGENCIES = 'Després d’emergències';
     case GRIEF = 'Per processos de dol';
     case HOSPITAL_DISCHARGES = 'Per altes hospitalàries';
 
     // Schedules for home absence and return
     case TEMPORARY_SERVICE_SUSPENSION = 'Suspensió temporal del servei';
+    case ABSENCE_HOME = 'Ausencia domiciliarí';
     case RETURNS_END_ABSENCE = 'Retorns o fi de l’absència';
 
     // Method to get the main category
-    public function getCategory(): string
+    public function getCategory(): TypeAndSubtipe
     {
         return match ($this) {
-            self::MEDICATION, self::SPECIALS_ALERT => 'Aviso',
-            self::EMERGENCIES, self::GRIEF, self::HOSPITAL_DISCHARGES => 'Seguiment segons protocols',
-            self::TEMPORARY_SERVICE_SUSPENSION, self::RETURNS_END_ABSENCE => 'Agendes d’absència domiciliària i retorn',
+            self::MEDICATION, self::SPECIALS, self::ALERT => self::TYPE_WARNING,
+            self::TYPE_FOLLOW_THE_PROTOCOL => self::TYPE_FOLLOW_THE_PROTOCOL,
+            self::EMERGENCIES, self::GRIEF, self::HOSPITAL_DISCHARGES => self::TYPE_MONITORING_IN_APPLICATION_ACCORDING_TO_PROTOCOLS,
+            self::TEMPORARY_SERVICE_SUSPENSION, self::ABSENCE_HOME, self::RETURNS_END_ABSENCE => self::TYPE_HOME_ABSENCE_AND_RETURN_AGENDAS,
         };
     }
 
@@ -31,26 +41,24 @@ enum TypeAndSubtipe: string
     {
         return [
             self::MEDICATION,
-            self::SPECIALS_ALERT,
+            self::SPECIALS,
+            self::ALERT,
+            self::TYPE_FOLLOW_THE_PROTOCOL,
             self::EMERGENCIES,
             self::GRIEF,
             self::HOSPITAL_DISCHARGES,
             self::TEMPORARY_SERVICE_SUSPENSION,
+            self::ABSENCE_HOME,
             self::RETURNS_END_ABSENCE,
         ];
     }
 
-    // Method to get the readable name
-    // public function name(): string
-    // {
-    //     return match ($this) {
-    //         self::MEDICATION => 'Medication notices',
-    //         self::SPECIALS_ALERT => 'Special or alert notices',
-    //         self::EMERGENCIES => 'Follow-up after emergencies',
-    //         self::GRIEF => 'Follow-up for grief processes',
-    //         self::HOSPITAL_DISCHARGES => 'Follow-up for hospital discharges',
-    //         self::TEMPORARY_SERVICE_SUSPENSION => 'Temporary service suspension',
-    //         self::RETURNS_END_ABSENCE => 'Returns or end of absence',
-    //     };
-    // }
+    public static function getValuesType(): array{
+        return [
+            self::TYPE_WARNING,
+            self::TYPE_FOLLOW_THE_PROTOCOL,
+            self::TYPE_MONITORING_IN_APPLICATION_ACCORDING_TO_PROTOCOLS,
+            self::TYPE_HOME_ABSENCE_AND_RETURN_AGENDAS,
+        ];
+    }
 }
