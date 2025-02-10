@@ -25,7 +25,7 @@ class Patient extends Model
         'addressCountry',
         'dni',
         'healthCardNumber',
-        'prefix',
+        'prefixId',
         'phone',
         'email',
         'zoneId',
@@ -57,5 +57,15 @@ class Patient extends Model
     public function alerts()
     {
         return $this->hasMany(Alert::class, 'patientId');
+    }
+
+    public function calls()
+    {
+        return $this->hasMany(Call::class, 'patientId');
+    }
+
+    public function prefixs()
+    {
+        return $this->belongsTo(Prefix::class, 'prefixId');
     }
 }

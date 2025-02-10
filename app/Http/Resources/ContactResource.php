@@ -19,7 +19,7 @@ class ContactResource extends JsonResource
             'name' => $this->name,
             'lastName' => $this->lastName,
             'email' => $this->email,
-            'prefix' => $this->prefix,
+            'prefix' => new PrefixResource($this->prefix),
             'phone' => $this->phone,
             'patientId' => $this->patientId,
             'relationship' => new RelationshipResource($this->relationship),

@@ -3,8 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Enums\PrefixPhone;
-use App\Models\{Patient, Zone, User};
+use App\Models\{Patient, Zone, User, Prefix};
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Patient>
@@ -78,7 +77,7 @@ class PatientFactory extends Factory
             'addressCountry' => $this->faker->country(),
             'dni' => $this->faker->unique()->numerify('#########A'),
             'healthCardNumber' => $this->faker->unique()->bothify('???#########'),
-            'prefix' => $this->faker->randomElement(PrefixPhone::getValues())->value,
+            'prefixId' => Prefix::all()->random()->id,
             'phone' => $this->faker->numerify('#########'),
             'email' => $this->faker->unique()->safeEmail(),
             'zoneId' => Zone::all()->random()->id,

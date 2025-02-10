@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\{Patient, Relationship};
+use App\Models\{Patient, Relationship, Prefix, Contact};
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Zone>
  */
@@ -31,6 +31,7 @@ class ContactFactory extends Factory
             'lastName' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'phone' => $this->faker->numberBetween(600000000, 699999999),
+            'prefixId' => Prefix::all()->random()->id,
             'patientId' => Patient::all()->random()->id,
             'relationshipId' => Relationship::all()->random()->id,
         ];

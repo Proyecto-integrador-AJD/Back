@@ -48,8 +48,7 @@ return new class extends Migration
             $table->string('healthCardNumber')->unique();
 
             //! Telefono
-            $table->enum('prefix', array_column(PrefixPhone::cases(), 'value'))
-                ->default(PrefixPhone::SPAIN->value);
+            $table->foreignId('prefixId')->constrained('prefixes')->onDelete('cascade');
             $table->integer('phone');
             
             //! Email

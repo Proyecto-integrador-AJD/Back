@@ -20,8 +20,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('lastName');
             $table->string('email')->unique();
-            $table->enum('prefix', array_column(PrefixPhone::cases(), 'value'))
-                ->default(PrefixPhone::SPAIN->value);
+            $table->foreignId('prefixId')->constrained('prefixes')->onDelete('cascade');
             $table->integer('phone');
 
             // Foreing Key Patient

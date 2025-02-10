@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@example.com',
             'password' => Hash::make('password'),
             'role' => 'admintrator',
+            'prefixId' => 1,
             'phone' => 666777888,
             'dateHire' => '2025-01-01',
 
@@ -32,6 +33,7 @@ class UserSeeder extends Seeder
             'email' => 'adminMalo@example.com',
             'password' => Hash::make('password'),
             'role' => 'operator',
+            'prefixId' => 1,
             'phone' => 666777888,
             'dateHire' => '2025-01-01',
 

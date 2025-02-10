@@ -25,10 +25,10 @@ class DatabaseSeeder extends Seeder
             PrefixSeeder::class,
             UserSeeder::class,
             RelationshipSeeder::class,
+            UsersZonesSeeder::class,
             PatientSeeder::class,
             ContactSeeder::class,
             AlertSeeder::class,
-            UsersZonesSeeder::class,
             CallSeeder::class,
         ]);
     }
