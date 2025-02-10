@@ -3,6 +3,7 @@
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Enums\Language;
 
 class UserUpdateRequest extends FormRequest
 {
@@ -24,17 +25,16 @@ class UserUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'role' => 'required|string|max:255',
-            'lastName' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'prefix' => 'required|string|max:255',
-            'phone' => 'required|integer|max:255',
-            'language' => 'required|array',
-            'dateHire' => 'required|date',
+            'name' => 'string|max:255',
+            'lastName' => 'string|max:255',
+            'prefix' => 'string|max:255',
+            'phone' => 'integer',
+            'role' => 'string',
+            'language' => 'array',
+            'language.*' => 'string|max:255',
+            'dateHire' => 'date',
             'dateTermination' => 'nullable|date',
-            'username' => 'required|string|max:255',
-            'password' => 'required|string|max:255',
+            'password' => 'string|max:255',
         ];
     }
 
@@ -46,28 +46,22 @@ class UserUpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'El camp "Nom" és obligatori.',
-            'name.unique' => 'Aquest nom ja està en ús. Si us plau, tria un altre.',
-            'role.required' => 'El camp "Rol" és obligatori.',
-            'role.max' => 'El rol no pot superar els 255 caràcters.',
-            'lastName.required' => 'El camp "Cognom" és obligatori.',
-            'lastName.max' => 'El cognom no pot superar els 255 caràcters.',
-            'email.required' => 'El camp "Email" és obligatori.',
-            'email.email' => 'El format de l\'email no és vàlid.',
-            'email.max' => 'L\'email no pot superar els 255 caràcters.',
-            'prefix.required' => 'El camp "Prefix" és obligatori.',
-            'prefix.max' => 'El prefix no pot superar els 255 caràcters.',
-            'phone.required' => 'El camp "Telèfon" és obligatori.',
-            'phone.integer' => 'El telèfon ha de ser un número enter.',
-            'phone.max' => 'El telèfon no pot superar els 255 caràcters.',
-            'language.required' => 'El camp "Idioma" és obligatori.',
-            'dateHire.required' => 'El camp "Data d\'alta" és obligatori.',
-            'dateHire.date' => 'El format de la data d\'alta no és vàlid.',
-            'dateTermination.date' => 'El format de la data de baixa no és vàlid.',
-            'username.required' => 'El camp "Nom d\'usuari" és obligatori.',
-            'username.max' => 'El nom d\'usuari no pot superar els 255 caràcters.',
-            'password.required' => 'El camp "Contrasenya" és obligatori.',
-            'password.max' => 'La contrasenya no pot superar els 255 caràcters.',
+            'name.string' => 'El campo nombre debe ser una cadena de texto.',
+            'name.max' => 'El campo nombre no puede tener más de 255 caracteres.',
+            'lastName.string' => 'El campo apellido debe ser una cadena de texto.',
+            'lastName.max' => 'El campo apellido no puede tener más de 255 caracteres.',
+            'prefix.string' => 'El campo prefijo debe ser una cadena de texto.',
+            'prefix.max' => 'El campo prefijo no puede tener más de 255 caracteres.',
+            'phone.integer' => 'El campo teléfono debe ser un número entero.',
+            'role.string' => 'El campo rol debe ser una cadena de texto.',
+            'language.array' => 'El campo idioma debe ser un array.',
+            'language.*.string' => 'El campo idioma debe ser una cadena de texto.',
+            'language.*.max' => 'El campo idioma no puede tener más de 255 caracteres.',
+            'dateHire.date' => 'El campo fecha de contratación debe ser una fecha válida.',
+            'dateTermination.nullable' => 'El campo fecha de terminación debe ser nulo.',
+            'dateTermination.date' => 'El campo fecha de terminación debe ser una fecha válida.',
+            'password.string' => 'El campo contraseña debe ser una cadena de texto.',
+            'password.max' => 'El campo contraseña no puede tener más de 255 caracteres.',
         ];
     }
 }
