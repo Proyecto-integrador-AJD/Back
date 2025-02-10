@@ -30,7 +30,7 @@ class ContactStoreRequest extends FormRequest
             'prefix' => 'required|string',
             'phone' => 'required|integer',
             'patientId' => 'required|exists:patients,id',
-            'relationship' => 'required|string',
+            'relationship' => 'required|exists:relationships,id',
         ];
     }
 
@@ -58,7 +58,7 @@ class ContactStoreRequest extends FormRequest
             'patientId.required' => 'El campo ID del paciente es obligatorio.',
             'patientId.exists' => 'El ID del paciente proporcionado no existe.',
             'relationship.required' => 'El campo relación es obligatorio.',
-            'relationship.string' => 'El campo relación debe ser una cadena de caracteres.',
+            'relationship.exists' => 'La relación proporcionada no existe.',
         ];
     }
 }

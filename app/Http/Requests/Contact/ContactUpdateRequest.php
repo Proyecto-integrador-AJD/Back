@@ -30,7 +30,7 @@ class ContactUpdateRequest extends FormRequest
             'prefix' => 'string',
             'phone' => 'integer',
             'patientId' => 'exists:patients,id',
-            'relationship' => 'string',
+            'relationship' => 'exists:relationships,id',
         ];
     }
 
@@ -51,7 +51,7 @@ class ContactUpdateRequest extends FormRequest
             'prefix.string' => 'El campo "Prefijo" debe ser una cadena de caracteres.',
             'phone.integer' => 'El campo "Teléfono" debe ser un número entero.',
             'patientId.exists' => 'El campo "ID del paciente" no existe en la tabla de pacientes.',
-            'relationship.string' => 'El campo "Relación" debe ser una cadena de caracteres.',
+            'relationship.exists' => 'El campo "Relación" no existe en la tabla de relaciones.',
         ];
     }
 }
