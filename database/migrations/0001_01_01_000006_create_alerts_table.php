@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('type');
             $table->string('subType');
             $table->string('description');
-            $table->date('startDate');
+            $table->datetime('startDate');
             $table->boolean('isRecurring');
             $table->string('recurrenceType')->nullable();
             $table->integer('recurrence')->nullable();
