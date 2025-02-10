@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('recurrenceTypes', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->primary();
+            $table->string('name')->unique();
             $table->string('spanishName')->unique();
             $table->string('valencianName')->unique();
             $table->timestamps();
