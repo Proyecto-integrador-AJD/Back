@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('relationships', function (Blueprint $table) {
+        Schema::create('prefixes', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('spanishName')->unique();
-            $table->string('valencianName')->unique();
+            $table->string('prefix')->unique();
+            $table->string('country')->unique();
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('relationships');
+        Schema::dropIfExists('prefixes');
     }
 };

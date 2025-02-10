@@ -27,7 +27,7 @@ class ContactStoreRequest extends FormRequest
             'name' => 'required|string|max:255',
             'lastName' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'prefix' => 'required|string',
+            'prefix' => 'required|exists:prefixes,prefix',
             'phone' => 'required|integer',
             'patientId' => 'required|exists:patients,id',
             'relationship' => 'required|exists:relationships,id',
