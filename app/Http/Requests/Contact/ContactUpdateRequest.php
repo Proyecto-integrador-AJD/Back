@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Contact;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,12 +24,13 @@ class ContactUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:zone|max:255',
-            'email' => 'required|unique:contacts|max:255',
-            'prefix' => 'required|string',
-            'phone' => 'required|integer',
-            'patientId' => 'required|exists:patients,id',
-            'relationship' => 'required|string',
+            'name' => 'string|max:255',
+            'lastName' => 'string|max:255',
+            'email' => 'email|max:255',
+            'prefix' => 'string',
+            'phone' => 'integer',
+            'patientId' => 'exists:patients,id',
+            'relationship' => 'string',
         ];
     }
 
@@ -41,18 +42,16 @@ class ContactUpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'El camp "Nom" és obligatori.',
-            'name.unique' => 'Aquest nom ja està en ús. Si us plau, tria un altre.',
-            'email.required' => 'El camp "Email" és obligatori.',
-            'email.unique' => 'Aquest email ja està en ús. Si us plau, tria un altre.',
-            'prefix.required' => 'El camp "Prefix" és obligatori.',
-            'prefix.string' => 'El camp "Prefix" ha de ser una cadena de caràcters.',
-            'phone.required' => 'El camp "Telèfon" és obligatori.',
-            'phone.integer' => 'El camp "Telèfon" ha de ser un número enter.',
-            'patientId.required' => 'El camp "ID del pacient" és obligatori.',
-            'patientId.exists' => 'L\'ID del pacient proporcionat no existeix.',
-            'relationship.required' => 'El camp "Relació" és obligatori.',
-            'relationship.string' => 'El camp "Relació" ha de ser una cadena de caràcters.',
+            'name.string' => 'El campo "Nombre" debe ser una cadena de caracteres.',
+            'name.max' => 'El campo "Nombre" no puede tener más de 255 caracteres.',
+            'lastName.string' => 'El campo "Apellido" debe ser una cadena de caracteres.',
+            'lastName.max' => 'El campo "Apellido" no puede tener más de 255 caracteres.',
+            'email.email' => 'El campo "Email" debe ser una dirección de correo electrónico válida.',
+            'email.max' => 'El campo "Email" no puede tener más de 255 caracteres.',
+            'prefix.string' => 'El campo "Prefijo" debe ser una cadena de caracteres.',
+            'phone.integer' => 'El campo "Teléfono" debe ser un número entero.',
+            'patientId.exists' => 'El campo "ID del paciente" no existe en la tabla de pacientes.',
+            'relationship.string' => 'El campo "Relación" debe ser una cadena de caracteres.',
         ];
     }
 }

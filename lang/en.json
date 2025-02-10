@@ -1,0 +1,25 @@
+{
+    "btn.new": "Create New",
+    "btn.crear": "Create",
+    "btn.edit": "Edit",
+    "btn.show": "Show",
+    "btn.borrar": "Delete",
+    "btn.guardar": "Save",
+    "btn.actualitzar": "Update",
+  
+    "equips.titulo.creacion": "Team Creation",
+    "equips.titulo.guia": "Team Guide",
+    "equips.titulo.editar": "Team Modification",
+  
+    "equips.campos.nombre": "Name",
+    "equips.campos.escudo_act": "Current Shield",
+    "equips.campos.escudo": "Shield",
+    "equips.campos.estadio": "Stadium",
+    "equips.campos.titulos": "Titles",
+    "equips.campos.jugadoras": "Players",
+    "equips.campos.jugadoras.none": "No players associated with this team.",
+    "equips.campos.jugadoras.edadMedia": "Average Age of the Players",
+    "equips.campos.jugadoras.años": "years",
+    "equips.campos.partidos": "Last 5 Results",
+    "equips.campos.partidos.none": "No results available."
+}

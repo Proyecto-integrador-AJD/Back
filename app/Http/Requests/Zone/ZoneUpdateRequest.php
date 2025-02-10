@@ -24,9 +24,9 @@ class ZoneUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:zone|max:255',
-            'description' => 'required|max:255',
-            'location' => 'required|max:255',
+            'name' => 'string|unique:zones,name|max:255',
+            'description' => 'string|max:255',
+            'location' => 'string|max:255',
         ];
     }
 
@@ -38,12 +38,13 @@ class ZoneUpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'El camp "Nom" és obligatori.',
-            'name.unique' => 'Aquest nom ja està en ús. Si us plau, tria un altre.',
-            'description.required' => 'El camp "Descripció" és obligatori.',
-            'description.max' => 'La descripció no pot superar els 255 caràcters.',
-            'location.required' => 'El camp "Ubicació" és obligatori.',
-            'location.max' => 'La ubicació no pot superar els 255 caràcters.',
+            'name.unique' => 'Este nombre ya está en uso. Por favor, elige otro.',
+            'name.string' => 'El campo "Nombre" debe ser una cadena de caracteres.',
+            'name.max' => 'El campo "Nombre" no puede superar los 255 caracteres.',
+            'description.max' => 'La descripción no puede superar los 255 caracteres.',
+            'description.string' => 'El campo "Descripción" debe ser una cadena de caracteres.',
+            'location.max' => 'La ubicación no puede superar los 255 caracteres.',
+            'location.string' => 'El campo "Ubicación" debe ser una cadena de caracteres.',
         ];
     }
 }

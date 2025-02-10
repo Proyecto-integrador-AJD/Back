@@ -24,41 +24,29 @@ class AlertUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:zone|max:255',
-            'description' => 'required|max:255',
-            'location' => 'required|max:255',
-            'patientId' => 'required|exists:patients,id',
-            'type' => 'required|string|max:255',
-            'subType' => 'required|string|max:255',
-            'startDate' => 'required|date',
-            'isRecurring' => 'required|boolean',
+            'patientId' => 'exists:patients,id',
+            'type' => 'string|max:255',
+            'subType' => 'string|max:255',
+            'startDate' => 'datetime',
+            'isRecurring' => 'boolean',
             'recurrenceType' => 'nullable|string',
+            'description' => 'nullable|string|max:255',
             'recurrence' => 'nullable|integer', // no se para que es
         ];
     }
 
     public function messages(){
-        return[
-            'name.required' => 'El camp "Nom" és obligatori.',
-            'name.unique' => 'Aquest nom ja està en ús. Si us plau, tria un altre.',
-            'description.required' => 'El camp "Descripció" és obligatori.',
-            'description.max' => 'La descripció no pot superar els 255 caràcters.',
-            'location.required' => 'El camp "Ubicació" és obligatori.',
-            'location.max' => 'La ubicació no pot superar els 255 caràcters.',
-            'patientId.required' => 'El camp "Pacient" és obligatori.',
-            'patientId.exists' => 'El pacient seleccionat no existeix.',
-            'type.required' => 'El camp "Tipus" és obligatori.',
-            'type.string' => 'El camp "Tipus" ha de ser una cadena de caràcters.',
-            'type.max' => 'El camp "Tipus" no pot superar els 255 caràcters.',
-            'subType.required' => 'El camp "Subtipus" és obligatori.',
-            'subType.string' => 'El camp "Subtipus" ha de ser una cadena de caràcters.',
-            'subType.max' => 'El camp "Subtipus" no pot superar els 255 caràcters.',
-            'startDate.required' => 'El camp "Data d\'inici" és obligatori.',
-            'startDate.date' => 'El camp "Data d\'inici" ha de ser una data.',
-            'isRecurring.required' => 'El camp "Es recurrent" és obligatori.',
-            'isRecurring.boolean' => 'El camp "Es recurrent" ha de ser un booleà.',
-            'recurrenceType.string' => 'El camp "Tipus de recurrència" ha de ser una cadena de caràcters.',
-            'recurrence.integer' => 'El camp "Recurrencia" ha de ser un enter.',
+        return [
+            'patientId.exists' => 'El paciente seleccionado no existe.',
+            'type.string' => 'El campo "Tipo" debe ser una cadena de caracteres.',
+            'type.max' => 'El campo "Tipo" no puede superar los 255 caracteres.',
+            'subType.string' => 'El campo "Subtipo" debe ser una cadena de caracteres.',
+            'subType.max' => 'El campo "Subtipo" no puede superar los 255 caracteres.',
+            'startDate.datetime' => 'El campo "Fecha de inicio" debe ser una fecha y hora.',
+            'isRecurring.boolean' => 'El campo "Es recurrente" debe ser un booleano.',
+            'description.max' => 'La descripción no puede superar los 255 caracteres.',
+            'recurrenceType.string' => 'El campo "Tipo de recurrencia" debe ser una cadena de caracteres.',
+            'recurrence.integer' => 'El campo "Recurrencia" debe ser un número entero.',
         ];
     }
 }

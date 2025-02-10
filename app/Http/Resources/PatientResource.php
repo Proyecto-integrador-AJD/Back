@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Models\User;
 
 class PatientResource extends JsonResource
 {
@@ -46,14 +47,21 @@ class PatientResource extends JsonResource
             // Situation fields
             'healthSituation' => $this->healthSituation,
             'situationPersonalFamily' => $this->situationPersonalFamily,
-            'situationHealth' => $this->healthSituation,
-            'situationType' => $this->housingSituationType,
-            'situationStatus' => $this->housingSituationStatus,
-            'situationNumberOfRooms' => $this->housingSituationNumberOfRooms,
-            'situationLocation' => $this->housingSituationLocation,
+            'housingSituationType' => $this->housingSituationType,
+            'housingSituationStatus' => $this->housingSituationStatus,
+            'housingSituationNumberOfRooms' => $this->housingSituationNumberOfRooms,
+            'housingSituationLocation' => $this->housingSituationLocation,
+            'personalAutonomy' => $this->personalAutonomy,
+
 
             // Economic Situation
             'economicSituation' => $this->economicSituation,
         ];
+
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'userId'); // Relación inversa
     }
 }

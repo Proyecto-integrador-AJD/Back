@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('lastName');
 
+            $table->foreignId('userId')->constrained('users')->onDelete('cascade');
 
             //! Fecha de Nacimiento
             $table->date('birthDate');

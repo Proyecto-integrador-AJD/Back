@@ -13,6 +13,7 @@ class Patient extends Model
     protected $fillable = [
         'name',
         'lastName',
+        'userId',
         'birthDate',
         'addressStreet',
         'addressNumber',
@@ -37,4 +38,24 @@ class Patient extends Model
         'personalAutonomy',
         'economicSituation',
     ];
+
+    public function zone()
+    {
+        return $this->belongsTo(Zone::class, 'zoneId');
+    }
+
+    public function operator()
+    {
+        return $this->belongsTo(User::class, 'operatorId');
+    }
+
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class, 'patientId');
+    }
+
+    public function alerts()
+    {
+        return $this->hasMany(Alert::class, 'patientId');
+    }
 }
