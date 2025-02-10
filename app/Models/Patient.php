@@ -37,4 +37,19 @@ class Patient extends Model
         'personalAutonomy',
         'economicSituation',
     ];
+
+    public function zone()
+    {
+        return $this->belongsTo(Zone::class, 'zoneId');
+    }
+
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class, 'patientId');
+    }
+
+    public function alerts()
+    {
+        return $this->hasMany(Alert::class, 'patientId');
+    }
 }
