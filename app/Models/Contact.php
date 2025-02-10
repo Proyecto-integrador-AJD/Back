@@ -24,4 +24,9 @@ class Contact extends Model
     {
         return $this->belongsTo(Patient::class, 'patientId');
     }
+
+    public function relationship()
+    {
+        return $this->belongsTo(Relationship::class, 'relationshipId');
+    }
 }

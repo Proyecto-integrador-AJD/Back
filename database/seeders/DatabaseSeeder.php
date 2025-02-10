@@ -23,7 +23,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             ZoneSeeder::class,
+            RelationshipSeeder::class,
             PatientSeeder::class,
+            ContactSeeder::class,
             AlertSeeder::class,
             UsersZonesSeeder::class,
             CallSeeder::class,
