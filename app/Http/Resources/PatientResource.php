@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Models\User;
 
 class PatientResource extends JsonResource
 {
@@ -57,5 +58,10 @@ class PatientResource extends JsonResource
             'economicSituation' => $this->economicSituation,
         ];
 
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'userId'); // Relación inversa
     }
 }

@@ -76,5 +76,20 @@ class User extends Authenticatable
     {
         return in_array($this->role, $roles);
     }
+
+    public function patients()
+    {
+        return $this->hasMany(Patient::class, 'userId');
+    }
+
+    public function calls()
+    {
+        return $this->hasMany(Call::class, 'userId');
+    }
+
+    public function alerts()
+    {
+        return $this->hasMany(Alert::class, 'userId');
+    }
     
 }

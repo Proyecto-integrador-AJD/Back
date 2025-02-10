@@ -46,6 +46,7 @@ class UserResource extends JsonResource
             'dateTermination' => $this->dateTermination,
             'username' => $this->username,
             'password' => $this->password,
+            'patients' => $this->patients,
         ];
     }
 }

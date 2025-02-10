@@ -13,6 +13,7 @@ class Patient extends Model
     protected $fillable = [
         'name',
         'lastName',
+        'userId',
         'birthDate',
         'addressStreet',
         'addressNumber',
@@ -41,6 +42,11 @@ class Patient extends Model
     public function zone()
     {
         return $this->belongsTo(Zone::class, 'zoneId');
+    }
+
+    public function operator()
+    {
+        return $this->belongsTo(User::class, 'operatorId');
     }
 
     public function contacts()
