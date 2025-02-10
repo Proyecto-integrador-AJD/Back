@@ -31,7 +31,6 @@ class UserFactory extends Factory
                     },
                     "zoneIds": [1],
                     "language": ["Català"],
-                    "contactIds": [1],
                     "dateHire": "2023-01-01",
                     "dateTermination": null,
                     "username": "admin_anna",

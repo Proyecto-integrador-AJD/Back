@@ -28,6 +28,9 @@ Route::middleware(['auth:sanctum','api'])->group( function () {
     Route::apiResource('alerts',  AlertController::class);
     Route::apiResource('calls',  CallController::class);
 
+
+    Route::get('user',  [AuthController::class, 'user']);
+
     Route::middleware(['auth', AdminPermissionsMiddleware::class])->group(function (){
         Route::apiResource('users',  UserController::class);
     });

@@ -25,7 +25,6 @@ class UserResource extends JsonResource
             "phone": "666777888",
             "zoneIds": [1],
             "language": ["Català"],
-            "contactIds": [1],
             "dateHire": "2023-01-01",
             "dateTermination": null,
             "username": "admin_anna",
@@ -39,14 +38,12 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'prefix' => new PrefixResource($this->prefix),
             'phone' => $this->phone,
-            'zoneIds' => $this->zoneIds,
+            // 'zones' => new ZoneResource($this->zones),
             'language' => $this->language,
-            'contactIds' => $this->contactIds,
             'dateHire' => $this->dateHire,
             'dateTermination' => $this->dateTermination,
             'username' => $this->username,
-            'password' => $this->password,
-            'patients' => $this->patients,
+            // 'patients' => new PatientResource($this->patients),
         ];
     }
 }

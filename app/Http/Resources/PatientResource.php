@@ -20,6 +20,7 @@ class PatientResource extends JsonResource
             'name' => $this->name,
             'lastName' => $this->lastName,
             'birthDate' => $this->birthDate,
+            'userId' => $this->userId,
 
             // Address fields
             'addressStreet' => $this->addressStreet,
@@ -56,6 +57,7 @@ class PatientResource extends JsonResource
 
             // Economic Situation
             'economicSituation' => $this->economicSituation,
+            // 'contacts' => new ContactResource($this->contacts),
         ];
 
     }

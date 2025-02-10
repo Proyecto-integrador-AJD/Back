@@ -46,7 +46,7 @@ class Patient extends Model
 
     public function operator()
     {
-        return $this->belongsTo(User::class, 'operatorId');
+        return $this->belongsTo(User::class, 'userId');
     }
 
     public function contacts()
