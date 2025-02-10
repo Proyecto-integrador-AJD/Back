@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Enums\{Language};
+use App\Casts\CsvToArrayCast;
 
 class User extends Authenticatable
 {
@@ -24,6 +25,11 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'phone',
+        'dateHire',
+        'dateTermination',
+        'username',
+        'language',
     ];
 
     /**
@@ -46,6 +52,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'language' => CsvToArrayCast::class,
         ];
     }
 

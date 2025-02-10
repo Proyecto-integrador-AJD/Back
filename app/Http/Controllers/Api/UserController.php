@@ -11,7 +11,7 @@ use App\Http\Controllers\Api\BaseController;
  * @OA\Info(
  *     title="Users API",
  *     version="1.0.0",
- *     description="API para gestionar los pacientes."
+ *     description="API para gestionar los usuarios."
  * )
  */
 class UserController extends BaseController
@@ -19,12 +19,12 @@ class UserController extends BaseController
     /**
      * @OA\Get(
      *     path="/api/users",
-     *     summary="Obtener todos los pacientes",
-     *     description="Devuelve una lista paginada de pacientes.",
+     *     summary="Obtener todos los usuarios",
+     *     description="Devuelve una lista paginada de usuarios.",
      *     tags={"Users"},
      *     @OA\Response(
      *         response=200,
-     *         description="Lista de pacientes devuelta con éxito.",
+     *         description="Lista de usuarios devuelta con éxito.",
      *         @OA\JsonContent(type="array", @OA\Items(ref="/components/schemas/Users"))
      *     )
      * )
@@ -37,37 +37,37 @@ class UserController extends BaseController
     /**
      * @OA\Get(
      *     path="/api/users/{id}",
-     *     summary="Obtener un paciente",
-     *     description="Devuelve los datos de un paciente específico por su ID.",
+     *     summary="Obtener un usuario",
+     *     description="Devuelve los datos de un usuario específico por su ID.",
      *     tags={"Users"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="ID del paciente",
+     *         description="ID del usuario",
      *         required=true,
      *         @OA\Schema(type="integer")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Paciente recuperado con éxito.",
+     *         description="Usuario recuperado con éxito.",
      *         @OA\JsonContent(ref="/components/schemas/Users")
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Paciente no encontrado."
+     *         description="Usuario no encontrado."
      *     )
      * )
      */
     public function show(User $user)
     {
-        return $this->sendResponse(new UserResource($user), 'Paciente recuperado con éxito', 200);
+        return $this->sendResponse(new UserResource($user), 'Usuario recuperado con éxito', 200);
     }
 
     /**
      * @OA\Post(
      *     path="/api/users",
-     *     summary="Crear un nuevo paciente",
-     *     description="Crea un nuevo paciente con los datos proporcionados.",
+     *     summary="Crear un nuevo usuario",
+     *     description="Crea un nuevo usuario con los datos proporcionados.",
      *     tags={"Users"},
      *     @OA\RequestBody(
      *         required=true,
@@ -75,7 +75,7 @@ class UserController extends BaseController
      *     ),
      *     @OA\Response(
      *         response=201,
-     *         description="Paciente creado con éxito.",
+     *         description="Usuario creado con éxito.",
      *         @OA\JsonContent(ref="/components/schemas/Users")
      *     )
      * )
@@ -83,19 +83,19 @@ class UserController extends BaseController
     public function store(UserStoreRequest $request)
     {
         $user = User::create($request->validated());
-        return $this->sendResponse($user, 'Paciente creado con éxito', 201);
+        return $this->sendResponse($user, 'Usuario creado con éxito', 201);
     }
 
     /**
      * @OA\Put(
      *     path="/api/users/{id}",
-     *     summary="Actualizar un paciente",
-     *     description="Actualiza los datos de un paciente existente.",
+     *     summary="Actualizar un usuario",
+     *     description="Actualiza los datos de un usuario existente.",
      *     tags={"Users"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="ID del paciente",
+     *         description="ID del usuario",
      *         required=true,
      *         @OA\Schema(type="integer")
      *     ),
@@ -105,7 +105,7 @@ class UserController extends BaseController
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Paciente actualizado con éxito.",
+     *         description="Usuario actualizado con éxito.",
      *         @OA\JsonContent(ref="/components/schemas/Users")
      *     )
      * )
@@ -113,35 +113,35 @@ class UserController extends BaseController
     public function update(User $user, UserUpdateRequest $request)
     {
         $user->update($request->validated());
-        return $this->sendResponse($user, 'Paciente actualizado con éxito', 200);
+        return $this->sendResponse($user, 'Usuario actualizado con éxito', 200);
     }
 
     /**
      * @OA\Delete(
      *     path="/api/users/{id}",
-     *     summary="Eliminar un paciente",
-     *     description="Elimina un paciente específico por su ID.",
+     *     summary="Eliminar un usuario",
+     *     description="Elimina un usuario específico por su ID.",
      *     tags={"Users"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="ID del paciente",
+     *         description="ID del usuario",
      *         required=true,
      *         @OA\Schema(type="integer")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Paciente eliminado con éxito."
+     *         description="Usuario eliminado con éxito."
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Paciente no encontrado."
+     *         description="Usuario no encontrado."
      *     )
      * )
      */
     public function destroy(User $user)
     {
         $user->delete();
-        return $this->sendResponse(null, 'Paciente eliminado con éxito', 200);
+        return $this->sendResponse(null, 'Usuario eliminado con éxito', 200);
     }
 }
