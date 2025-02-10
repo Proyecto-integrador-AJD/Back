@@ -3,6 +3,7 @@
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Enums\Language;
 
 class UserStoreRequest extends FormRequest
 {
@@ -29,7 +30,8 @@ class UserStoreRequest extends FormRequest
             'email' => 'required|email|max:255|unique:users,email',
             'prefix' => 'required|string|max:255',
             'phone' => 'required|integer',
-            'language' => 'required|string',
+            'language' => 'required|array',
+            'language.*' => 'string|max:255',
             'dateHire' => 'required|date',
             'dateTermination' => 'nullable|date',
             'username' => 'required|string|max:255|unique:users,username',
@@ -61,7 +63,9 @@ class UserStoreRequest extends FormRequest
             'phone.required' => 'El campo teléfono es obligatorio.',
             'phone.integer' => 'El campo teléfono debe ser un número entero.',
             'language.required' => 'El campo idioma es obligatorio.',
-            'language.string' => 'El campo idioma debe ser una cadena de texto.',
+            'language.array' => 'El campo idioma debe ser un array.',
+            'language.*.string' => 'El campo idioma debe ser una cadena de texto.',
+            'language.*.max' => 'El campo idioma no puede tener más de 255 caracteres.',
             'dateHire.required' => 'El campo fecha de contratación es obligatorio.',
             'dateHire.date' => 'El campo fecha de contratación debe ser una fecha válida.',
             'dateTermination.nullable' => 'El campo fecha de terminación debe ser nulo.',
