@@ -46,14 +46,16 @@ class PatientResource extends JsonResource
             // Situation fields
             'healthSituation' => $this->healthSituation,
             'situationPersonalFamily' => $this->situationPersonalFamily,
-            'situationHealth' => $this->healthSituation,
-            'situationType' => $this->housingSituationType,
-            'situationStatus' => $this->housingSituationStatus,
-            'situationNumberOfRooms' => $this->housingSituationNumberOfRooms,
-            'situationLocation' => $this->housingSituationLocation,
+            'housingSituationType' => $this->housingSituationType,
+            'housingSituationStatus' => $this->housingSituationStatus,
+            'housingSituationNumberOfRooms' => $this->housingSituationNumberOfRooms,
+            'housingSituationLocation' => $this->housingSituationLocation,
+            'personalAutonomy' => $this->personalAutonomy,
+
 
             // Economic Situation
             'economicSituation' => $this->economicSituation,
         ];
+
     }
 }
