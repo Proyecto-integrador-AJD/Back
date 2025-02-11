@@ -1,0 +1,25 @@
+{
+    "btn.new": "Crear Nou",
+    "btn.crear": "Crear",
+    "btn.edit": "Editar",
+    "btn.show": "Mostrar",
+    "btn.borrar": "Esborrar",
+    "btn.guardar": "Desar",
+    "btn.actualitzar": "Actualitzar",
+  
+    "equips.titulo.creacion": "Creació d'Equip",
+    "equips.titulo.guia": "Guia d'Equips",
+    "equips.titulo.editar": "Modificació d'Equip",
+  
+    "equips.campos.nombre": "Nom",
+    "equips.campos.escudo_act": "Escut actual",
+    "equips.campos.escudo": "Escut",
+    "equips.campos.estadio": "Estadi",
+    "equips.campos.titulos": "Títols",
+    "equips.campos.jugadoras": "Jugadores",
+    "equips.campos.jugadoras.none": "No hi ha jugadores associades a aquest equip.",
+    "equips.campos.jugadoras.edadMedia": "Edat Mitjana de les Jugadores",
+    "equips.campos.jugadoras.años": "anys",
+    "equips.campos.partidos": "Últims 5 Resultats",
+    "equips.campos.partidos.none": "No hi ha resultats disponibles."
+}

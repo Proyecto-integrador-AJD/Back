@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer('phone');
 
             // Foreing Key Patient
-            $table->unsignedBigInteger('patientId');
+            $table->unsignedBigInteger('patientId')->onDelete('cascade');
             $table->enum('relationship', array_column(Relationship::cases(), 'value'));
             $table->timestamps();
         });

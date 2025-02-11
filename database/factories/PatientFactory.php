@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Enums\PrefixPhone;
-use App\Models\{Patient, Zone};
+use App\Models\{Patient, Zone, User};
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Patient>
@@ -66,6 +66,7 @@ class PatientFactory extends Factory
 
             'name' => $this->faker->name(),
             'lastName' => $this->faker->lastName(),
+            'userId' => User::where('role', 'operator')->get()->random()->id,
             'birthDate' => $this->faker->dateTimeBetween('-80 years', '-40 years')->format('Y-m-d'),
             'addressStreet' => $this->faker->streetName(),
             'addressNumber' => $this->faker->buildingNumber(),

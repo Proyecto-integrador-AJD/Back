@@ -2,44 +2,44 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Patient;
-use App\Http\Requests\Patient\{PatientStoreRequest, PatientUpdateRequest};
-use App\Http\Resources\PatientResource;
+use App\Models\Contact;
+use App\Http\Requests\Contact\{ContactStoreRequest, ContactUpdateRequest};
+use App\Http\Resources\ContactResource;
 use App\Http\Controllers\Api\BaseController;
 
 /**
  * @OA\Info(
- *     title="Patients API",
+ *     title="Contacts API",
  *     version="1.0.0",
  *     description="API para gestionar los pacientes."
  * )
  */
-class PatientController extends BaseController
+class ContactController extends BaseController
 {
     /**
      * @OA\Get(
-     *     path="/api/patients",
+     *     path="/api/contacts",
      *     summary="Obtener todos los pacientes",
      *     description="Devuelve una lista paginada de pacientes.",
-     *     tags={"Patients"},
+     *     tags={"Contacts"},
      *     @OA\Response(
      *         response=200,
      *         description="Lista de pacientes devuelta con éxito.",
-     *         @OA\JsonContent(type="array", @OA\Items(ref="/components/schemas/Patients"))
+     *         @OA\JsonContent(type="array", @OA\Items(ref="/components/schemas/Contacts"))
      *     )
      * )
      */
     public function index()
     {
-        return PatientResource::collection(Patient::paginate());
+        return ContactResource::collection(Contact::paginate());
     }
 
     /**
      * @OA\Get(
-     *     path="/api/patients/{id}",
+     *     path="/api/contacts/{id}",
      *     summary="Obtener un paciente",
      *     description="Devuelve los datos de un paciente específico por su ID.",
-     *     tags={"Patients"},
+     *     tags={"Contacts"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -50,7 +50,7 @@ class PatientController extends BaseController
      *     @OA\Response(
      *         response=200,
      *         description="Paciente recuperado con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Patients")
+     *         @OA\JsonContent(ref="/components/schemas/Contacts")
      *     ),
      *     @OA\Response(
      *         response=404,
@@ -58,40 +58,40 @@ class PatientController extends BaseController
      *     )
      * )
      */
-    public function show(Patient $patient)
+    public function show(Contact $contact)
     {
-        return $this->sendResponse(new PatientResource($patient), 'Paciente recuperado con éxito', 200);
+        return $this->sendResponse(new ContactResource($contact), 'Paciente recuperado con éxito', 200);
     }
 
     /**
      * @OA\Post(
-     *     path="/api/patients",
+     *     path="/api/contacts",
      *     summary="Crear un nuevo paciente",
      *     description="Crea un nuevo paciente con los datos proporcionados.",
-     *     tags={"Patients"},
+     *     tags={"Contacts"},
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(ref="/components/schemas/StorePatientRequest")
+     *         @OA\JsonContent(ref="/components/schemas/StoreContactRequest")
      *     ),
      *     @OA\Response(
      *         response=201,
      *         description="Paciente creado con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Patients")
+     *         @OA\JsonContent(ref="/components/schemas/Contacts")
      *     )
      * )
      */
-    public function store(PatientStoreRequest $request)
+    public function store(ContactStoreRequest $request)
     {
-        $patient = Patient::create($request->validated());
-        return $this->sendResponse($patient, 'Paciente creado con éxito', 201);
+        $contact = Contact::create($request->validated());
+        return $this->sendResponse($contact, 'Paciente creado con éxito', 201);
     }
 
     /**
      * @OA\Put(
-     *     path="/api/patients/{id}",
+     *     path="/api/contacts/{id}",
      *     summary="Actualizar un paciente",
      *     description="Actualiza los datos de un paciente existente.",
-     *     tags={"Patients"},
+     *     tags={"Contacts"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -101,27 +101,27 @@ class PatientController extends BaseController
      *     ),
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(ref="/components/schemas/UpdatePatientRequest")
+     *         @OA\JsonContent(ref="/components/schemas/UpdateContactRequest")
      *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Paciente actualizado con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Patients")
+     *         @OA\JsonContent(ref="/components/schemas/Contacts")
      *     )
      * )
      */
-    public function update(Patient $patient, PatientUpdateRequest $request)
+    public function update(Contact $contact, ContactUpdateRequest $request)
     {
-        $patient->update($request->validated());
-        return $this->sendResponse($patient, 'Paciente actualizado con éxito', 200);
+        $contact->update($request->validated());
+        return $this->sendResponse($contact, 'Paciente actualizado con éxito', 200);
     }
 
     /**
      * @OA\Delete(
-     *     path="/api/patients/{id}",
+     *     path="/api/contacts/{id}",
      *     summary="Eliminar un paciente",
      *     description="Elimina un paciente específico por su ID.",
-     *     tags={"Patients"},
+     *     tags={"Contacts"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -139,9 +139,9 @@ class PatientController extends BaseController
      *     )
      * )
      */
-    public function destroy(Patient $patient)
+    public function destroy(Contact $contact)
     {
-        $patient->delete();
+        $contact->delete();
         return $this->sendResponse(null, 'Paciente eliminado con éxito', 200);
     }
 }

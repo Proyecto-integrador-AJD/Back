@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Zone;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,9 +24,9 @@ class ZoneStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:zone|max:255',
-            'description' => 'required|max:255',
-            'location' => 'required|max:255',
+            'name' => 'required|string|unique:zones,name|max:255',
+            'description' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
         ];
     }
 
@@ -38,12 +38,15 @@ class ZoneStoreRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'El camp "Nom" és obligatori.',
-            'name.unique' => 'Aquest nom ja està en ús. Si us plau, tria un altre.',
-            'description.required' => 'El camp "Descripció" és obligatori.',
-            'description.max' => 'La descripció no pot superar els 255 caràcters.',
-            'location.required' => 'El camp "Ubicació" és obligatori.',
-            'location.max' => 'La ubicació no pot superar els 255 caràcters.',
+            'name.required' => 'El campo "Nombre" es obligatorio.',
+            'name.string' => 'El campo "Nombre" debe ser una cadena de caracteres.',
+            'name.unique' => 'Este nombre ya está en uso. Por favor, elija otro.',
+            'description.required' => 'El campo "Descripción" es obligatorio.',
+            'description.string' => 'El campo "Descripción" debe ser una cadena de caracteres.',
+            'description.max' => 'La descripción no puede superar los 255 caracteres.',
+            'location.required' => 'El campo "Ubicación" es obligatorio.',
+            'location.string' => 'El campo "Ubicación" debe ser una cadena de caracteres.',
+            'location.max' => 'La ubicación no puede superar los 255 caracteres.',
         ];
     }
 }

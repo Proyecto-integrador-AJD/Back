@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Enums\{Language};
+use App\Casts\CsvToArrayCast;
 
 class User extends Authenticatable
 {
@@ -21,9 +22,15 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'lastName',
         'email',
         'password',
         'role',
+        'phone',
+        'dateHire',
+        'dateTermination',
+        'username',
+        'language',
     ];
 
     /**
@@ -36,6 +43,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function isAdmin(): bool
+    {
+        return isset($this->role) && $this->role === 'admintrator';
+    }
+
     /**
      * Get the attributes that should be cast.
      *
@@ -46,6 +58,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'language' => CsvToArrayCast::class,
         ];
     }
 
@@ -57,6 +70,26 @@ class User extends Authenticatable
     public function zones()
     {
         return $this->belongsToMany(Zone::class, 'users_zones', 'userId', 'zoneId');
+    }
+
+    public function hasAnyRole(array $roles): bool
+    {
+        return in_array($this->role, $roles);
+    }
+
+    public function patients()
+    {
+        return $this->hasMany(Patient::class, 'userId');
+    }
+
+    public function calls()
+    {
+        return $this->hasMany(Call::class, 'userId');
+    }
+
+    public function alerts()
+    {
+        return $this->hasMany(Alert::class, 'userId');
     }
     
 }

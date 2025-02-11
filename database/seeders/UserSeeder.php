@@ -25,6 +25,17 @@ class UserSeeder extends Seeder
             'dateHire' => '2025-01-01',
 
         ]);
+        User::create([
+            'name' => 'AdminMalo',
+            'lastName' => 'Admin',
+            'username' => 'adminMalo',
+            'email' => 'adminMalo@example.com',
+            'password' => Hash::make('password'),
+            'role' => 'operator',
+            'phone' => 666777888,
+            'dateHire' => '2025-01-01',
+
+        ]);
 
         // Crear 30 árbitros
         User::factory()->count(30)->create();

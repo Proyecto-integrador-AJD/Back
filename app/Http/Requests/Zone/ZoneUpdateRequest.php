@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Zone;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,9 +24,27 @@ class ZoneUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:zone|max:255',
-            'description' => 'required|max:255',
-            'location' => 'required|max:255',
+            'name' => 'string|unique:zones,name|max:255',
+            'description' => 'string|max:255',
+            'location' => 'string|max:255',
+        ];
+    }
+
+    /**
+     * Obté els missatges d'error personalitzats per a cada regla.
+     *
+     * @return array<string, string>
+     */
+    public function messages()
+    {
+        return [
+            'name.unique' => 'Este nombre ya está en uso. Por favor, elige otro.',
+            'name.string' => 'El campo "Nombre" debe ser una cadena de caracteres.',
+            'name.max' => 'El campo "Nombre" no puede superar los 255 caracteres.',
+            'description.max' => 'La descripción no puede superar los 255 caracteres.',
+            'description.string' => 'El campo "Descripción" debe ser una cadena de caracteres.',
+            'location.max' => 'La ubicación no puede superar los 255 caracteres.',
+            'location.string' => 'El campo "Ubicación" debe ser una cadena de caracteres.',
         ];
     }
 }
