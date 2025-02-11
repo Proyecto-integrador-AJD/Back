@@ -4,7 +4,9 @@ namespace Deployer;
 require 'recipe/laravel.php';
 
 // Config
-set('application', 'futbol_femeni');
+set('keep_releases', 3);
+set('composer_options', '--verbose --prefer-dist --no-progress --no-interaction');
+set('application', 'teleasistencia_projecte');
 set('repository', 'git@github.com:Proyecto-integrador-AJD/Back.git');
 set('branch', 'Deployer');
 set('git_tty', true);
@@ -26,6 +28,20 @@ task('build', function () {
     run('cd {{release_path}} && build');
 });
 
-after('deploy:failed', 'deploy:unlock');
+task('reload:php-fpm', function () {
+    run('sudo /etc/init.d/php8.3-fpm restart');
+});
 
-before('deploy:symlink', 'artisan:migrate');
+task('deploy:build_assets', function () {
+    run('cd {{release_path}} && npm install');
+    run('cd {{release_path}} && npm run build');
+});
+
+task('artisan:db:seed', function () {
+    run('{{bin/php}} {{release_path}}/artisan migrate:refresh --seed --force');
+});
+
+after('deploy', 'reload:php-fpm');
+after('deploy:failed', 'deploy:unlock');
+after('deploy:update_code', 'deploy:build_assets');
+before('deploy:symlink', 'artisan:db:seed');
