@@ -37,7 +37,7 @@ class PatientResource extends JsonResource
             'healthCardNumber' => $this->healthCardNumber,
 
             // Phone
-            'prefix' => new PrefixResource($this->prefix),
+            'prefix' => $this->prefix->prefix,
             'phone' => $this->phone,
 
             'email' => $this->email,
