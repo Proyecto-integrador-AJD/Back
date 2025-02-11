@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\BaseController as BaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use App\Http\Resources\UserResource;
 
 class AuthController extends BaseController
 {
@@ -149,5 +150,12 @@ class AuthController extends BaseController
         $success['name'] = $user->name;
 
         return $this->sendResponse($success, 'User successfully signed out.');
+    }
+
+    /**
+     * Infomacion de user logueado
+     */
+    public function user(Request $request){
+        return $this->sendResponse(new UserResource($request->user()), 'Usuario recuperado con éxito', 200);
     }
 }

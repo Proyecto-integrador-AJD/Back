@@ -91,5 +91,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Alert::class, 'userId');
     }
+
+    public function prefix()
+    {
+        return $this->belongsTo(Prefix::class, 'prefixId');
+    }
+
+
+    
     
 }

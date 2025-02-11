@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Contact;
 use App\Http\Requests\Contact\{ContactStoreRequest, ContactUpdateRequest};
-use App\Http\Resources\ContactResource;
+use App\Http\Resources\{ContactResource};
 use App\Http\Controllers\Api\BaseController;
 
 /**
