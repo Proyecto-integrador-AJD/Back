@@ -41,6 +41,12 @@ task('artisan:db:seed', function () {
     run('{{bin/php}} {{release_path}}/artisan migrate:refresh --seed --force');
 });
 
+task('artisan:route:clear', function () {
+    run('{{bin/php}} {{release_path}}/artisan route:clear');
+});
+
+before('artisan:route:cache', 'artisan:route:clear');
+
 after('deploy', 'reload:php-fpm');
 after('deploy:failed', 'deploy:unlock');
 after('deploy:update_code', 'deploy:build_assets');
