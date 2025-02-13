@@ -63,7 +63,7 @@ class User extends Authenticatable
     }
 
     protected $attributes = [
-        'language' => Language::SPANISH->value . ',' . Language::CATALAN->value,
+        'language' => 'Castellano,Valenciano',
     ];
     
 

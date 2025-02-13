@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('lastName');
 
-            $table->foreignId('userId')->constrained('users')->onDelete('cascade');
+            $table->foreignId('userId')->nullable()->constrained('users')->onDelete('cascade');
 
             //! Fecha de Nacimiento
             $table->date('birthDate');
@@ -48,7 +48,7 @@ return new class extends Migration
             $table->string('healthCardNumber')->unique();
 
             //! Telefono
-            $table->foreignId('prefixId')->constrained('prefixes')->onDelete('cascade');
+            $table->string('prefix');
             $table->integer('phone');
             
             //! Email

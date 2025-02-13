@@ -27,7 +27,7 @@ class Patient extends Model
         'addressCountry',
         'dni',
         'healthCardNumber',
-        'prefixId',
+        'prefix',
         'phone',
         'language',
         'email',
