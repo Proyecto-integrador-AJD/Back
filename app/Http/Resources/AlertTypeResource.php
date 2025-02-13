@@ -19,6 +19,7 @@ class AlertTypeResource extends JsonResource
             'name' => $this->name,
             'spanishName' => $this->spanishName,
             'valencianName' => $this->valencianName,
+            'subtypes' => AlertSubtypeResource::collection($this->subtypes),
         ];
     }
 }

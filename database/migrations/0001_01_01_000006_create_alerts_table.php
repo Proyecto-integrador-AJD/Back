@@ -16,7 +16,7 @@ return new class extends Migration
 
             $table->foreignId('patientId')->constrained('patients')->onDelete('cascade');
             $table->string('type');
-            $table->string('subType');
+            $table->string('subType')->nullable();
             $table->string('description');
             $table->datetime('startDate');
             $table->boolean('isRecurring');

@@ -18,12 +18,19 @@ class AlertFactory extends Factory
      */
     public function definition(): array
     {
-        $type = $this->faker->randomElement(TypeAndSubtipe::getValues());
+        $dbType = AlertType::all()->random();
+        $type = $dbType->name;
+        try {
+            $subType = $dbType->subtypes->random()->name;
+        } catch (\Exception $e) {
+            $subType = null;
+        }
+
         $isRecurring = $this->faker->boolean;
         return [
             'patientId' => Patient::all()->random()->id,
-            'type' => AlertType::all()->random()->name,
-            'subType' => $type->value,
+            'type' => $type,
+            'subType' => $subType,
             'description' => $this->faker->sentence,
             'startDate' => $this->faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d H:i:s'),
             'isRecurring' => $isRecurring,
