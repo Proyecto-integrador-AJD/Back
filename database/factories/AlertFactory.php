@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\{Alert, Patient};
-use App\Enums\Alerts\{TypeAndSubtipe, RecurrenceType};
+use App\Models\{Alert, Patient, RecurrenceType};
+use App\Enums\Alerts\{TypeAndSubtipe};
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Alert>
@@ -25,9 +25,9 @@ class AlertFactory extends Factory
             'type' => $type->getCategory()->value,
             'subType' => $type->value,
             'description' => $this->faker->sentence,
-            'startDate' => $this->faker->datetime,
+            'startDate' => $this->faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d H:i:s'),
             'isRecurring' => $isRecurring,
-            'recurrenceType' => ($isRecurring) ? $this->faker->randomElement(RecurrenceType::getValues()) : null,
+            'recurrenceType' => ($isRecurring) ? RecurrenceType::all()->random()->name : null,
             'recurrence' => ($isRecurring) ? $this->faker->numberBetween(1, 10) : null,
         ];
     }

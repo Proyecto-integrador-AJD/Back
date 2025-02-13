@@ -54,6 +54,9 @@ return new class extends Migration
             //! Email
             $table->string('email')->unique();
 
+            //! Idioma
+            $table->string('language');
+
             //! Foreing Key Zona
             $table->foreignId('zoneId')->constrained('zones');
                         

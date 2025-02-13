@@ -41,6 +41,7 @@ class PatientResource extends JsonResource
             'phone' => $this->phone,
 
             'email' => $this->email,
+            'language' => $this->language,
 
             // Foreign Key - Zone
             'zoneId' => $this->zoneId,

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\{Patient, Zone, User, Prefix};
+use App\Enums\{Language};
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Patient>
@@ -80,6 +81,7 @@ class PatientFactory extends Factory
             'prefixId' => Prefix::all()->random()->id,
             'phone' => $this->faker->numerify('#########'),
             'email' => $this->faker->unique()->safeEmail(),
+            'language' => $this->faker->randomElement(Language::getValues())->value,
             'zoneId' => Zone::all()->random()->id,
             'situationPersonalFamily' => $this->faker->sentence(),
             'healthSituation' => $this->faker->sentence(),

@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             PrefixSeeder::class,
             UserSeeder::class,
             RelationshipSeeder::class,
+            RecurrenceTypeSeeder::class,
             UsersZonesSeeder::class,
             PatientSeeder::class,
             ContactSeeder::class,

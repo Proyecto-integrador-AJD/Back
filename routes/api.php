@@ -21,6 +21,7 @@ Route::post('register', [AuthController::class, 'register'])->middleware('api');
 
 Route::middleware(['auth:sanctum','api'])->group( function () {
     Route::apiResource('prefix',  PrefixController::class);
+    Route::get('patients/current',  [PatientController::class, 'current']);
     Route::apiResource('patients',  PatientController::class);
     Route::apiResource('relationship',  RelationshipController::class);
     Route::apiResource('contacts',  ContactController::class);

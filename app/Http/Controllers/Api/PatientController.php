@@ -6,6 +6,8 @@ use App\Models\Patient;
 use App\Http\Requests\Patient\{PatientStoreRequest, PatientUpdateRequest};
 use App\Http\Resources\PatientResource;
 use App\Http\Controllers\Api\BaseController;
+use Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @OA\Info(
@@ -16,6 +18,17 @@ use App\Http\Controllers\Api\BaseController;
  */
 class PatientController extends BaseController
 {
+    public function current(Request $request){
+        // Obtiene el usuario autenticado
+        $authUser = Auth::user();
+        
+        // Obtiene todos los pacientes asignados al usuario
+        $patients = $authUser->patients()->get(); // Asegúrate de ejecutar la consulta
+    
+        return $this->sendResponse(PatientResource::collection($patients), 'Pacientes del usuario actual recuperados con éxito', 200);
+    }
+    
+
     /**
      * @OA\Get(
      *     path="/api/patients",
