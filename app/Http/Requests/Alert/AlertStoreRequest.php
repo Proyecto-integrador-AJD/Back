@@ -33,6 +33,23 @@ class AlertStoreRequest extends FormRequest
             'recurrenceType' => 'nullable|string',
             'recurrence' => 'nullable|integer', // no se para que es
         ];
+
+
+                // 'type' => [
+                //     'required',
+                //     'exists:alertTypes,name',
+                // ],
+                // 'subtype' => [
+                //     'required',
+                //     'exists:alertSubtypes,name',
+                //     function ($attribute, $value, $fail) {
+                //         $type = $this->input('type');
+                //         $name = $this->input('name');
+                //         if (!AlertSubtype::where('name', $name)->where('alertType', $type)->exists()) {
+                //             $fail('El subtipo seleccionado no pertenece al tipo proporcionado.');
+                //         }
+                //     },
+                // ],
     }
 
     public function messages(){

@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Api\{AuthController, PatientController, RecurrenceTypeController, ContactController, ZoneController, LanguageController, AlertController, CallController, UserController, RelationshipController, PrefixController};
+use App\Http\Controllers\Api\{AuthController, PatientController, AlertTypeController, RecurrenceTypeController, ContactController, ZoneController, LanguageController, AlertController, CallController, UserController, RelationshipController, PrefixController};
 use App\Http\Middleware\AdminPermissionsMiddleware;
 
 
@@ -27,6 +27,7 @@ Route::middleware(['auth:sanctum','api'])->group( function () {
     Route::apiResource('relationship',  RelationshipController::class);
     Route::apiResource('contacts',  ContactController::class);
     Route::apiResource('zones',  ZoneController::class);
+    Route::apiResource('alert/types',  AlertTypeController::class);
     Route::apiResource('alert/recurrence',  RecurrenceTypeController::class);
     Route::apiResource('alerts',  AlertController::class);
     Route::apiResource('calls',  CallController::class);
