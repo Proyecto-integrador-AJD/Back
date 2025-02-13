@@ -27,10 +27,10 @@ class ContactStoreRequest extends FormRequest
             'name' => 'required|string|max:255',
             'lastName' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'prefix' => 'required|exists:prefixes,prefix',
+            'prefix' => 'required|string|exists:prefixes,prefix',
             'phone' => 'required|integer',
             'patientId' => 'required|exists:patients,id',
-            'relationship' => 'required|exists:relationships,id',
+            'relationship' => 'required|string|exists:relationships,name',
         ];
     }
 
