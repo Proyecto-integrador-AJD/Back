@@ -16,6 +16,7 @@ class AlertTypeResource extends JsonResource
     {
 
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'spanishName' => $this->spanishName,
             'valencianName' => $this->valencianName,
