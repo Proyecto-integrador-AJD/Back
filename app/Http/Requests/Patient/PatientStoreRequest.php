@@ -40,7 +40,7 @@ class PatientStoreRequest extends FormRequest
             'addressNumber' => 'required|integer',
             'addressFloor' => 'nullable|string|max:255',
             'addressDoor' => 'nullable|string|max:255',
-            'addressPostalCode' => 'required|integer',
+            'addressPostalCode' => 'required|string|max:255',
             'addressCity' => 'required|string|max:255',
             'addressProvince' => 'required|string|max:255',
             'addressCountry' => 'required|string|max:255',

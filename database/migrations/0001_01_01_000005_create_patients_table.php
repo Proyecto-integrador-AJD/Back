@@ -34,7 +34,7 @@ return new class extends Migration
             // Puerta de direccion
             $table->string('addressDoor');
             // Codigo Postal
-            $table->integer('addressPostalCode');
+            $table->string('addressPostalCode');
             // Ciudad
             $table->string('addressCity');
             // Provincia
