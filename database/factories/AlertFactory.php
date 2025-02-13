@@ -25,7 +25,7 @@ class AlertFactory extends Factory
             'type' => $type->getCategory()->value,
             'subType' => $type->value,
             'description' => $this->faker->sentence,
-            'startDate' => $this->faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d H:i:s'),
+            'startDate' => $this->faker->datetime,
             'isRecurring' => $isRecurring,
             'recurrenceType' => ($isRecurring) ? $this->faker->randomElement(RecurrenceType::getValues()) : null,
             'recurrence' => ($isRecurring) ? $this->faker->numberBetween(1, 10) : null,
