@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Api\{AuthController, PatientController, ContactController, ZoneController, AlertController, CallController, UserController, RelationshipController, PrefixController};
+use App\Http\Controllers\Api\{AuthController, PatientController, ContactController, ZoneController, LanguageController, AlertController, CallController, UserController, RelationshipController, PrefixController};
 use App\Http\Middleware\AdminPermissionsMiddleware;
 
 
@@ -21,6 +21,7 @@ Route::post('register', [AuthController::class, 'register'])->middleware('api');
 
 Route::middleware(['auth:sanctum','api'])->group( function () {
     Route::apiResource('prefix',  PrefixController::class);
+    Route::apiResource('language',  LanguageController::class);
     Route::get('patients/current',  [PatientController::class, 'current']);
     Route::apiResource('patients',  PatientController::class);
     Route::apiResource('relationship',  RelationshipController::class);
