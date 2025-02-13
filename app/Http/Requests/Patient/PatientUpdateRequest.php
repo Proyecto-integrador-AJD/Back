@@ -29,6 +29,7 @@ class PatientUpdateRequest extends FormRequest
     public function rules(): array
     {
         $currentHealthCardNumber = $this->route('patient')->healthCardNumber;
+        $currentEmail = $this->route('patient')->email;
         return [
             'name' => 'string|max:255',
             'lastName' => 'string|max:255',
@@ -44,7 +45,7 @@ class PatientUpdateRequest extends FormRequest
             'healthCardNumber' => 'string|unique:patients,healthCardNumber,' . $currentHealthCardNumber . ',healthCardNumber|max:255',
             'prefix' => 'exists:prefixes,prefix',
             'phone' => 'integer',
-            'email' => 'email|unique:patients,email|max:255',
+            'email' => 'email|unique:patients,email,'. $currentEmail .',email|max:255',
             'language' => 'array',
             'language.*' => 'string|max:255',
             'zoneId' => 'exists:zones,id',
