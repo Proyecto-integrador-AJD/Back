@@ -14,25 +14,26 @@ class AlertTypeSeeder extends Seeder
     {
         $alertTypes = [
             [
-                'name' => 'Aviso',
+                'name' => 'Notice',
                 'spanishName' => 'Aviso',
                 'valencianName' => 'Aviso',
             ],
             [
-                'name' => 'Seguiment segons protocols',
+                'name' => 'Follow-up according to protocols',
                 'spanishName' => 'Seguimiento según protocolos',
                 'valencianName' => 'Seguiment segons protocols',
             ],
             [
-                'name' => 'Seguiment en aplicació segons protocols',
+                'name' => 'Follow-up in application according to protocols',
                 'spanishName' => 'Seguimiento en aplicación según protocolos',
                 'valencianName' => 'Seguiment en aplicació segons protocols',
             ],
             [
-                'name' => 'Agendes d’absència domiciliària i retorn',
+                'name' => 'Home absence and return agendas',
                 'spanishName' => 'Agendas de ausencia domiciliaria y retorno',
                 'valencianName' => 'Agendes d’absència domiciliària i retorn',
             ],
+            
         ];
 
         foreach ($alertTypes as $alertType) {

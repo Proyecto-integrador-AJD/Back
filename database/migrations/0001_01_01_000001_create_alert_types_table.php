@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('alertTypes', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+            $table->string('name')->primary();
             $table->string('spanishName');
             $table->string('valencianName');
             $table->timestamps();
