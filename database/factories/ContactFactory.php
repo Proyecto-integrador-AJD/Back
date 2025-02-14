@@ -31,9 +31,9 @@ class ContactFactory extends Factory
             'lastName' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'phone' => $this->faker->numberBetween(600000000, 699999999),
-            'prefixId' => Prefix::all()->random()->id,
+            'prefix' => Prefix::all()->random()->prefix,
             'patientId' => Patient::all()->random()->id,
-            'relationshipId' => Relationship::all()->random()->id,
+            'relationship' => Relationship::all()->random()->name,
         ];
     }
 }

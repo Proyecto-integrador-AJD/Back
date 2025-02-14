@@ -30,7 +30,7 @@ class ContactUpdateRequest extends FormRequest
             'prefix' => 'exists:prefixes,prefix',
             'phone' => 'integer',
             'patientId' => 'exists:patients,id',
-            'relationship' => 'exists:relationships,id',
+            'relationship' => 'exists:relationships,name',
         ];
     }
 

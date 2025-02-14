@@ -31,6 +31,7 @@ class User extends Authenticatable
         'dateTermination',
         'username',
         'language',
+        'prefix'
     ];
 
     /**
@@ -90,11 +91,6 @@ class User extends Authenticatable
     public function alerts()
     {
         return $this->hasMany(Alert::class, 'userId');
-    }
-
-    public function prefix()
-    {
-        return $this->belongsTo(Prefix::class, 'prefixId');
     }
 
 
