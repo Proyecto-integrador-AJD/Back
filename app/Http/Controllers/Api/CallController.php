@@ -16,6 +16,19 @@ use App\Http\Controllers\Api\BaseController;
  */
 class CallController extends BaseController
 {
+    public function getCallsByPatient($id)
+    {
+        // Buscar las llamadas asociadas al paciente
+        $calls = Call::where('patientId', $id)->get();
+
+        // Verificar si hay llamadas
+        if ($calls->isEmpty()) {
+            return $this->sendResponse([], 'No hay llamadas para este paciente', 200);
+        }
+
+        return $this->sendResponse(CallResource::collection($calls), 'Llamadas del paciente recuperadas con éxito', 200);
+    }
+
     /**
      * @OA\Get(
      *     path="/api/calls",
@@ -31,7 +44,7 @@ class CallController extends BaseController
      */
     public function index()
     {
-        return CallResource::collection(Call::paginate());
+        return CallResource::collection(Call::all());
     }
 
     /**

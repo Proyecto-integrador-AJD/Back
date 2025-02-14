@@ -15,7 +15,8 @@ use App\Http\Controllers\Api\BaseController;
  * )
  */
 class ZoneController extends BaseController
-{
+{  
+
     /**
      * @OA\Get(
      *     path="/api/zones",
@@ -31,7 +32,7 @@ class ZoneController extends BaseController
      */
     public function index()
     {
-        return ZoneResource::collection(Zone::paginate());
+        return ZoneResource::collection(Zone::all());
     }
 
     /**
