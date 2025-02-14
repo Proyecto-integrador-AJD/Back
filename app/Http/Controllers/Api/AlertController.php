@@ -20,9 +20,8 @@ class AlertController extends BaseController
     public function user()
     {
         $userId = auth()->id(); // Obtener ID del usuario autenticado
-    
-        // Obtener las alertas solo de los pacientes asignados al usuario actual
-        $alerts = Alert::whereIn('patientId', Patient::where('userId', $userId)->pluck('id'))->get();
+        $result = Patient::where('userId', $userId)->pluck('id')->toArray();
+        $alerts = Alert::whereIn('patientId', $result)->get();
     
         return $this->sendResponse(AlertResource::collection($alerts), 'Alertas asignadas al usuario recuperadas con éxito', 200);
     }
