@@ -58,7 +58,7 @@ class PatientResource extends JsonResource
 
             // Economic Situation
             'economicSituation' => $this->economicSituation,
-            // 'contacts' => new ContactResource($this->contacts),
+            'contacts' => $this->contacts,
         ];
 
     }
