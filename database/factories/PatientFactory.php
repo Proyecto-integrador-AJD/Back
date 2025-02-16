@@ -3,8 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Enums\PrefixPhone;
-use App\Models\{Patient, Zone};
+use App\Models\{Patient, Zone, User, Prefix, Language};
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Patient>
@@ -66,6 +65,7 @@ class PatientFactory extends Factory
 
             'name' => $this->faker->name(),
             'lastName' => $this->faker->lastName(),
+            'userId' => User::where('role', 'operator')->get()->random()->id,
             'birthDate' => $this->faker->dateTimeBetween('-80 years', '-40 years')->format('Y-m-d'),
             'addressStreet' => $this->faker->streetName(),
             'addressNumber' => $this->faker->buildingNumber(),
@@ -77,9 +77,10 @@ class PatientFactory extends Factory
             'addressCountry' => $this->faker->country(),
             'dni' => $this->faker->unique()->numerify('#########A'),
             'healthCardNumber' => $this->faker->unique()->bothify('???#########'),
-            'prefix' => $this->faker->randomElement(PrefixPhone::getValues())->value,
+            'prefix' => Prefix::all()->random()->prefix,
             'phone' => $this->faker->numerify('#########'),
             'email' => $this->faker->unique()->safeEmail(),
+            'language' => Language::all()->random()->name,
             'zoneId' => Zone::all()->random()->id,
             'situationPersonalFamily' => $this->faker->sentence(),
             'healthSituation' => $this->faker->sentence(),

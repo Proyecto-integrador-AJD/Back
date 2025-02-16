@@ -1,0 +1,24 @@
+{
+  "btn.new": "Crear Nuevo",
+  "btn.crear": "Crear",
+  "btn.edit": "Editar",
+  "btn.show": "Mostrar",
+  "btn.borrar": "Borrar",
+  "btn.guardar": "Guardar",
+  "btn.actualitzar": "Actualizar",
+  "btn.cancelar": "Cancelar",
+  "btn.volver": "Volver",
+  "btn.login": "Iniciar Sesión",
+  "btn.logout": "Cerrar Sesión",
+  "btn.register": "Registrarse",
+
+  "fields.actions": "Acciones",
+
+  "zones.title": "Panel Zonas",
+  "zones.title.creacion": "Creación de Zonas",
+  "zones.title.edit": "Modificación de Zonas",
+
+  "zones.fields.name": "Nombre",
+  "zones.fields.description": "Descripción",
+  "zones.fields.location": "Ubicación"
+}

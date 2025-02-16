@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\Alerts\RecurrenceType;
 
 return new class extends Migration
 {
@@ -15,11 +14,11 @@ return new class extends Migration
         Schema::create('alerts', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('patientId')->constrained('patients');
+            $table->foreignId('patientId')->constrained('patients')->onDelete('cascade');
             $table->string('type');
-            $table->string('subType');
+            $table->string('subType')->nullable();
             $table->string('description');
-            $table->date('startDate');
+            $table->datetime('startDate');
             $table->boolean('isRecurring');
             $table->string('recurrenceType')->nullable();
             $table->integer('recurrence')->nullable();

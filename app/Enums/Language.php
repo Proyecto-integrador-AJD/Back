@@ -15,4 +15,21 @@ enum Language: string
     case PORTUGUESE = 'Portugués'; // Portugués
     case DUTCH = 'Neerlandès';    // Neerlandés
     case RUSSIAN = 'Rus';         // Ruso
+
+    public static function getValues(): array
+    {
+        return [
+            self::SPANISH,
+            self::CATALAN,
+            self::GALICIAN,
+            self::BASQUE,
+            self::ENGLISH,
+            self::FRENCH,
+            self::GERMAN,
+            self::ITALIAN,
+            self::PORTUGUESE,
+            self::DUTCH,
+            self::RUSSIAN,
+        ];
+    }
 }

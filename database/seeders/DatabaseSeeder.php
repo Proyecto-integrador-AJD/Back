@@ -21,11 +21,19 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            UserSeeder::class,
             ZoneSeeder::class,
-            PatientSeeder::class,
-            AlertSeeder::class,
+            PrefixSeeder::class,
+            AlertTypeSeeder::class,
+            AlertSubtypeSeeder::class,
+            AlertSubtypeSeeder::class,
+            LanguageSeeder::class,
+            UserSeeder::class,
+            RelationshipSeeder::class,
+            RecurrenceTypeSeeder::class,
             UsersZonesSeeder::class,
+            PatientSeeder::class,
+            ContactSeeder::class,
+            AlertSeeder::class,
             CallSeeder::class,
         ]);
     }

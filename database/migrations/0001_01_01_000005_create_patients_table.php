@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('lastName');
 
+            $table->foreignId('userId')->nullable()->constrained('users')->onDelete('cascade');
 
             //! Fecha de Nacimiento
             $table->date('birthDate');
@@ -33,7 +34,7 @@ return new class extends Migration
             // Puerta de direccion
             $table->string('addressDoor');
             // Codigo Postal
-            $table->integer('addressPostalCode');
+            $table->string('addressPostalCode');
             // Ciudad
             $table->string('addressCity');
             // Provincia
@@ -47,15 +48,17 @@ return new class extends Migration
             $table->string('healthCardNumber')->unique();
 
             //! Telefono
-            $table->enum('prefix', array_column(PrefixPhone::cases(), 'value'))
-                ->default(PrefixPhone::SPAIN->value);
+            $table->string('prefix');
             $table->integer('phone');
             
             //! Email
             $table->string('email')->unique();
 
+            //! Idioma
+            $table->string('language');
+
             //! Foreing Key Zona
-            $table->foreignId('zoneId')->constrained('zones');
+            $table->foreignId('zoneId')->constrained('zones')->onDelete('cascade');
                         
             //! Sitauion
             // Situacion Personal y Familiar

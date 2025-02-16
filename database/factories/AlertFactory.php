@@ -3,8 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\{Alert, Patient};
-use App\Enums\Alerts\{TypeAndSubtipe, RecurrenceType};
+use App\Models\{Alert, Patient, RecurrenceType, AlertType};
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Alert>
@@ -18,16 +17,23 @@ class AlertFactory extends Factory
      */
     public function definition(): array
     {
-        $type = $this->faker->randomElement(TypeAndSubtipe::getValues());
+        $dbType = AlertType::all()->random();
+        $type = $dbType->name;
+        try {
+            $subType = $dbType->subtypes->random()->name;
+        } catch (\Exception $e) {
+            $subType = null;
+        }
+
         $isRecurring = $this->faker->boolean;
         return [
             'patientId' => Patient::all()->random()->id,
-            'type' => $type->getCategory(),
-            'subType' => $type->value,
+            'type' => $type,
+            'subType' => $subType,
             'description' => $this->faker->sentence,
-            'startDate' => $this->faker->date,
+            'startDate' => $this->faker->dateTimeBetween('-30 days', 'now')->format('Y-m-d H:i:s'),
             'isRecurring' => $isRecurring,
-            'recurrenceType' => ($isRecurring) ? $this->faker->randomElement(RecurrenceType::getValues()) : null,
+            'recurrenceType' => ($isRecurring) ? RecurrenceType::all()->random()->name : null,
             'recurrence' => ($isRecurring) ? $this->faker->numberBetween(1, 10) : null,
         ];
     }

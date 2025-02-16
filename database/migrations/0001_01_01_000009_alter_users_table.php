@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\{PrefixPhone, Language};
+use App\Models\Prefix;
 
 return new class extends Migration
 {
@@ -16,11 +16,12 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('role')->default('operador');
             $table->string('lastName');
-            $table->string('prefix')->default(PrefixPhone::SPAIN);
+            $table->string('prefix');
             $table->integer('phone');
 
             
-            $table->json('language');
+            // $table->json('language');
+            $table->string('language');
 
             $table->date('dateHire');
             $table->date('dateTermination')->nullable();
