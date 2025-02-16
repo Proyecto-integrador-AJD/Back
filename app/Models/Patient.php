@@ -83,9 +83,4 @@ class Patient extends Model
     {
         return $this->hasMany(Call::class, 'patientId');
     }
-
-    public function prefix()
-    {
-        return $this->belongsTo(Prefix::class, 'prefixId', 'id');
-    }
 }

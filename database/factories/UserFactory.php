@@ -42,7 +42,7 @@ class UserFactory extends Factory
             'name' => $this->faker->name(),
             'lastName' => $this->faker->lastName(),
             'username' => $this->faker->userName(),
-            'prefixId' => Prefix::all()->random()->id,
+            'prefix' => Prefix::all()->random()->prefix,
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
