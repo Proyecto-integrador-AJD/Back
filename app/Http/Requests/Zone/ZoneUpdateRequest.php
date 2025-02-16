@@ -23,8 +23,10 @@ class ZoneUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $current = $this->route('zone');
+
         return [
-            'name' => 'string|unique:zones,name|max:255',
+            'name' => 'string|unique:zones,name,'. $current->name .',name|max:255',
             'description' => 'string|max:255',
             'location' => 'string|max:255',
         ];
