@@ -50,7 +50,7 @@ class PatientStoreRequest extends FormRequest
             'phone' => 'required|integer',
             'email' => 'required|email|unique:patients,email|max:255',
             'language' => 'required|array',
-            'language.*' => 'string|max:255',
+            'language.*' => 'string|exists:languages,name|max:255',
             'zoneId' => 'required|exists:zones,id',
             'situationPersonalFamily' => 'required|string|max:255',
             'healthSituation' => 'required|string|max:255',

@@ -34,7 +34,7 @@ class UserUpdateRequest extends FormRequest
             'phone' => 'integer',
             'role' => 'string',
             'language' => 'array',
-            'language.*' => 'string|max:255',
+            'language.*' => 'string|exists:languages,name|max:255',
             'dateHire' => 'date',
             'dateTermination' => 'nullable|date',
             'username' => 'required|string|max:255|unique:users,username,'. $current->username .',username',

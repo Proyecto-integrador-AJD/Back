@@ -58,7 +58,7 @@ return new class extends Migration
             $table->string('language');
 
             //! Foreing Key Zona
-            $table->foreignId('zoneId')->constrained('zones');
+            $table->foreignId('zoneId')->constrained('zones')->onDelete('cascade');
                         
             //! Sitauion
             // Situacion Personal y Familiar

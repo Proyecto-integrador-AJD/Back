@@ -47,7 +47,7 @@ class PatientUpdateRequest extends FormRequest
             'phone' => 'integer',
             'email' => 'email|unique:patients,email,'. $currentEmail .',email|max:255',
             'language' => 'array',
-            'language.*' => 'string|max:255',
+            'language.*' => 'string|exists:languages,name|max:255',
             'zoneId' => 'exists:zones,id',
             'situationPersonalFamily' => 'string|max:255',
             'healthSituation' => 'string|max:255',

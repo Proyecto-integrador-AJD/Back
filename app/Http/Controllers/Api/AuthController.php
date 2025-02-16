@@ -147,7 +147,7 @@ class AuthController extends BaseController
     {
         $user = $request->user(); // or Auth::user()
         $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
-        $success['name'] = $user->name;
+        $success['name'] = $user->username;
 
         return $this->sendResponse($success, 'User successfully signed out.');
     }
