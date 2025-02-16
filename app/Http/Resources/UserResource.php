@@ -36,7 +36,7 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'lastName' => $this->lastName,
             'email' => $this->email,
-            'prefix' => $this->prefix->prefix,
+            'prefix' => $this->prefix,
             'phone' => $this->phone,
             // 'zones' => new ZoneResource($this->zones),
             'language' => $this->language,
