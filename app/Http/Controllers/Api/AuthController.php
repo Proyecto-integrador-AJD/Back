@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Http\Resources\UserResource;
+use App\Http\Requests\User\UserStoreRequest;
 
 class AuthController extends BaseController
 {
@@ -49,14 +50,14 @@ class AuthController extends BaseController
      */
     public function login(Request $request)
     {
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             $authUser = Auth::user();
             $result['token'] = $authUser->createToken('MyAuthApp')->plainTextToken;
             $result['name'] = $authUser->name;
 
             return $this->sendResponse($result, 'User signed in');
         }
-        return $this->sendError('Unauthorised.', ['error' => 'incorrect Email/Password']);
+        return $this->sendError('Unauthorised.', ['error' => 'incorrect Username/Password']);
     }
 
     /**
@@ -97,23 +98,21 @@ class AuthController extends BaseController
      *     )
      * )
      */
-    public function register(Request $request)
+    public function register(UserStoreRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'confirm_password' => 'required|same:password',
-        ]);
-
-        if ($validator->fails()) {
-            return $this->sendError('Error validation', $validator->errors());
-        }
 
         try {
-            $input = $request->all();
-            $input['password'] = bcrypt($input['password']);
-            $user = User::create($input);
+            $validatedData = $request->validated();
+
+            // Verifica que 'confirm_password' sea igual a 'password'
+            if ($validatedData['password'] !== $request->input('confirm_password')) {
+                return $this->sendError('Error validation', ['confirm_password' => 'La confirmación de contraseña no coincide.']);
+            }
+
+            $validatedData['password'] = bcrypt($validatedData['password']);
+            $validatedData['role'] = 'operator';
+
+            $user = User::create($validatedData);
             $result['token'] = $user->createToken('MyAuthApp')->plainTextToken;
             $result['name'] = $user->name;
 
@@ -122,6 +121,7 @@ class AuthController extends BaseController
             return $this->sendError('Registration Error', $e->getMessage());
         }
     }
+
 
     /**
      * @OA\Post(
@@ -147,7 +147,7 @@ class AuthController extends BaseController
     {
         $user = $request->user(); // or Auth::user()
         $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
-        $success['name'] = $user->name;
+        $success['name'] = $user->username;
 
         return $this->sendResponse($success, 'User successfully signed out.');
     }

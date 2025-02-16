@@ -14,7 +14,7 @@ class UserStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->hasAnyRole(['admintrator', 'operator']);
+        return true;
     }
 
     /**
@@ -32,7 +32,7 @@ class UserStoreRequest extends FormRequest
             'phone' => 'required|integer',
             'role' => 'string',
             'language' => 'required|array',
-            'language.*' => 'string|max:255',
+            'language.*' => 'string|exists:languages,name|max:255',
             'dateHire' => 'required|date',
             'dateTermination' => 'nullable|date',
             'username' => 'required|string|max:255|unique:users,username',

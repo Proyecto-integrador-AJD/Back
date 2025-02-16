@@ -30,7 +30,7 @@ class AlertStoreRequest extends FormRequest
             'startDate' => 'required|date_format:Y-m-d H:i:s',
             'isRecurring' => 'required|boolean',
             'description' => 'nullable|string|max:255',
-            'recurrenceType' => 'nullable|string',
+            'recurrenceType' => 'nullable|string|exists:recurrenceTypes,name|max:255',
             'recurrence' => 'nullable|integer', // no se para que es
         ];
 
@@ -68,6 +68,8 @@ class AlertStoreRequest extends FormRequest
             'isRecurring.boolean' => 'El campo "Es recurrente" debe ser un booleano.',
             'description.max' => 'La descripción no puede superar los 255 caracteres.',
             'recurrenceType.string' => 'El campo "Tipo de recurrencia" debe ser una cadena de caracteres.',
+            'recurrenceType.exists' => 'El tipo de recurrencia seleccionado no es válido.',
+            'recurrenceType.max' => 'El campo "Tipo de recurrencia" no puede superar los 255 caracteres.',
             'recurrence.integer' => 'El campo "Recurrencia" debe ser un número entero.',
         ];
     }

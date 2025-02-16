@@ -19,7 +19,7 @@ return new class extends Migration
             $table->boolean('incoming');
             $table->string('type');
             $table->string('subType');
-            $table->foreignId('alertId')->constrained('alerts')->onDelete('cascade');
+            $table->foreignId('alertId')->nullable()->constrained('alerts')->onDelete('cascade');
             $table->integer('duration');
             $table->text('description');
             $table->timestamps();

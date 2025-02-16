@@ -14,18 +14,18 @@ class RelationshipSeeder extends Seeder
     public function run(): void
     {
         $relationships = [
-            ['name' => 'FATHER', 'spanishName' => 'Padre', 'valencianName' => 'Pare'],
-            ['name' => 'MOTHER', 'spanishName' => 'Madre', 'valencianName' => 'Mare'],
-            ['name' => 'SON', 'spanishName' => 'Hijo', 'valencianName' => 'Fill'],
-            ['name' => 'DAUGHTER', 'spanishName' => 'Hija', 'valencianName' => 'Filla'],
-            ['name' => 'BROTHER', 'spanishName' => 'Hermano', 'valencianName' => 'Germà'],
-            ['name' => 'SISTER', 'spanishName' => 'Hermana', 'valencianName' => 'Germana'],
-            ['name' => 'GRANDFATHER', 'spanishName' => 'Abuelo', 'valencianName' => 'Avi'],
-            ['name' => 'GRANDMOTHER', 'spanishName' => 'Abuela', 'valencianName' => 'Àvia'],
-            ['name' => 'UNCLE', 'spanishName' => 'Tío', 'valencianName' => 'Oncle'],
-            ['name' => 'AUNT', 'spanishName' => 'Tía', 'valencianName' => 'Tia'],
-            ['name' => 'COUSIN', 'spanishName' => 'Primo', 'valencianName' => 'Cosí/Cosina'],
-            ['name' => 'FRIEND', 'spanishName' => 'Amigo', 'valencianName' => 'Amic/Amiga'],
+            ['name' => 'father', 'spanishName' => 'padre', 'valencianName' => 'pare'],
+            ['name' => 'mother', 'spanishName' => 'madre', 'valencianName' => 'mare'],
+            ['name' => 'son', 'spanishName' => 'hijo', 'valencianName' => 'fill'],
+            ['name' => 'daughter', 'spanishName' => 'hija', 'valencianName' => 'filla'],
+            ['name' => 'brother', 'spanishName' => 'hermano', 'valencianName' => 'germà'],
+            ['name' => 'sister', 'spanishName' => 'hermana', 'valencianName' => 'germana'],
+            ['name' => 'grandfather', 'spanishName' => 'abuelo', 'valencianName' => 'avi'],
+            ['name' => 'grandmother', 'spanishName' => 'abuela', 'valencianName' => 'àvia'],
+            ['name' => 'uncle', 'spanishName' => 'tío', 'valencianName' => 'oncle'],
+            ['name' => 'aunt', 'spanishName' => 'tía', 'valencianName' => 'tia'],
+            ['name' => 'cousin', 'spanishName' => 'primo', 'valencianName' => 'cosí/cosina'],
+            ['name' => 'friend', 'spanishName' => 'amigo', 'valencianName' => 'amic/amiga'],
         ];
 
         foreach ($relationships as $relationship) {
