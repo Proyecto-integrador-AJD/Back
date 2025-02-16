@@ -110,6 +110,7 @@ class AuthController extends BaseController
             }
 
             $validatedData['password'] = bcrypt($validatedData['password']);
+            $validatedData['role'] = 'operator';
 
             $user = User::create($validatedData);
             $result['token'] = $user->createToken('MyAuthApp')->plainTextToken;
