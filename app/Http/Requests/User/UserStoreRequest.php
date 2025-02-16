@@ -14,7 +14,7 @@ class UserStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->hasAnyRole(['admintrator', 'operator']);
+        return true;
     }
 
     /**
