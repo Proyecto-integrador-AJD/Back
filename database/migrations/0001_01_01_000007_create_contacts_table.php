@@ -5,7 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 use App\Enums\PrefixPhone;
-use App\Enums\Contat\Relationship;
 
 return new class extends Migration
 {
@@ -21,13 +20,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('lastName');
             $table->string('email')->unique();
-            $table->enum('prefix', array_column(PrefixPhone::cases(), 'value'))
-                ->default(PrefixPhone::SPAIN->value);
+            $table->string('prefix');
             $table->integer('phone');
 
             // Foreing Key Patient
-            $table->unsignedBigInteger('patientId')->onDelete('cascade');
-            $table->enum('relationship', array_column(Relationship::cases(), 'value'));
+            $table->foreignId('patientId')->constrained('patients')->onDelete('cascade');
+            $table->string('relationship');
             $table->timestamps();
         });
     }

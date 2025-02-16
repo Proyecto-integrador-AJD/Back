@@ -20,6 +20,7 @@ class PatientResource extends JsonResource
             'name' => $this->name,
             'lastName' => $this->lastName,
             'birthDate' => $this->birthDate,
+            'userId' => $this->userId,
 
             // Address fields
             'addressStreet' => $this->addressStreet,
@@ -40,6 +41,7 @@ class PatientResource extends JsonResource
             'phone' => $this->phone,
 
             'email' => $this->email,
+            'language' => $this->language,
 
             // Foreign Key - Zone
             'zoneId' => $this->zoneId,
@@ -56,6 +58,7 @@ class PatientResource extends JsonResource
 
             // Economic Situation
             'economicSituation' => $this->economicSituation,
+            'contacts' => $this->contacts,
         ];
 
     }

@@ -31,7 +31,7 @@ class UserController extends BaseController
      */
     public function index()
     {
-        return UserResource::collection(User::paginate());
+        return UserResource::collection(User::all());
     }
 
     /**

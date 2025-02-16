@@ -24,16 +24,20 @@ class UserUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $current = $this->route('user');
+
         return [
             'name' => 'string|max:255',
             'lastName' => 'string|max:255',
-            'prefix' => 'string|max:255',
+            'email' => 'email|max:255|unique:users,email,'. $current->email .',email',
+            'prefix' => 'exists:prefixes,prefix',
             'phone' => 'integer',
             'role' => 'string',
             'language' => 'array',
-            'language.*' => 'string|max:255',
+            'language.*' => 'string|exists:languages,name|max:255',
             'dateHire' => 'date',
             'dateTermination' => 'nullable|date',
+            'username' => 'required|string|max:255|unique:users,username,'. $current->username .',username',
             'password' => 'string|max:255',
         ];
     }
@@ -50,8 +54,7 @@ class UserUpdateRequest extends FormRequest
             'name.max' => 'El campo nombre no puede tener más de 255 caracteres.',
             'lastName.string' => 'El campo apellido debe ser una cadena de texto.',
             'lastName.max' => 'El campo apellido no puede tener más de 255 caracteres.',
-            'prefix.string' => 'El campo prefijo debe ser una cadena de texto.',
-            'prefix.max' => 'El campo prefijo no puede tener más de 255 caracteres.',
+            'prefix.exists' => 'El prefijo seleccionado no es válido.',
             'phone.integer' => 'El campo teléfono debe ser un número entero.',
             'role.string' => 'El campo rol debe ser una cadena de texto.',
             'language.array' => 'El campo idioma debe ser un array.',

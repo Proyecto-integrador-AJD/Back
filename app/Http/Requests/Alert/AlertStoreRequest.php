@@ -27,12 +27,29 @@ class AlertStoreRequest extends FormRequest
             'patientId' => 'required|exists:patients,id',
             'type' => 'required|string|max:255',
             'subType' => 'required|string|max:255',
-            'startDate' => 'required|datetime',
+            'startDate' => 'required|date_format:Y-m-d H:i:s',
             'isRecurring' => 'required|boolean',
             'description' => 'nullable|string|max:255',
-            'recurrenceType' => 'nullable|string',
+            'recurrenceType' => 'nullable|string|exists:recurrenceTypes,name|max:255',
             'recurrence' => 'nullable|integer', // no se para que es
         ];
+
+
+                // 'type' => [
+                //     'required',
+                //     'exists:alertTypes,name',
+                // ],
+                // 'subtype' => [
+                //     'required',
+                //     'exists:alertSubtypes,name',
+                //     function ($attribute, $value, $fail) {
+                //         $type = $this->input('type');
+                //         $name = $this->input('name');
+                //         if (!AlertSubtype::where('name', $name)->where('alertType', $type)->exists()) {
+                //             $fail('El subtipo seleccionado no pertenece al tipo proporcionado.');
+                //         }
+                //     },
+                // ],
     }
 
     public function messages(){
@@ -46,11 +63,13 @@ class AlertStoreRequest extends FormRequest
             'subType.string' => 'El campo "Subtipo" debe ser una cadena de caracteres.',
             'subType.max' => 'El campo "Subtipo" no puede superar los 255 caracteres.',
             'startDate.required' => 'El campo "Fecha de inicio" es obligatorio.',
-            'startDate.datetime' => 'El campo "Fecha de inicio" debe ser una fecha y hora.',
+            'startDate.date_format' => 'El campo "Fecha de inicio" debe tener el formato Y-m-d H:i:s.',
             'isRecurring.required' => 'El campo "Es recurrente" es obligatorio.',
             'isRecurring.boolean' => 'El campo "Es recurrente" debe ser un booleano.',
             'description.max' => 'La descripción no puede superar los 255 caracteres.',
             'recurrenceType.string' => 'El campo "Tipo de recurrencia" debe ser una cadena de caracteres.',
+            'recurrenceType.exists' => 'El tipo de recurrencia seleccionado no es válido.',
+            'recurrenceType.max' => 'El campo "Tipo de recurrencia" no puede superar los 255 caracteres.',
             'recurrence.integer' => 'El campo "Recurrencia" debe ser un número entero.',
         ];
     }

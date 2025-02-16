@@ -27,10 +27,10 @@ class ContactUpdateRequest extends FormRequest
             'name' => 'string|max:255',
             'lastName' => 'string|max:255',
             'email' => 'email|max:255',
-            'prefix' => 'string',
+            'prefix' => 'exists:prefixes,prefix',
             'phone' => 'integer',
             'patientId' => 'exists:patients,id',
-            'relationship' => 'string',
+            'relationship' => 'exists:relationships,name',
         ];
     }
 
@@ -48,10 +48,10 @@ class ContactUpdateRequest extends FormRequest
             'lastName.max' => 'El campo "Apellido" no puede tener más de 255 caracteres.',
             'email.email' => 'El campo "Email" debe ser una dirección de correo electrónico válida.',
             'email.max' => 'El campo "Email" no puede tener más de 255 caracteres.',
-            'prefix.string' => 'El campo "Prefijo" debe ser una cadena de caracteres.',
+            'prefix.exists' => 'El campo "Prefijo" seleccionado no es válido.',
             'phone.integer' => 'El campo "Teléfono" debe ser un número entero.',
             'patientId.exists' => 'El campo "ID del paciente" no existe en la tabla de pacientes.',
-            'relationship.string' => 'El campo "Relación" debe ser una cadena de caracteres.',
+            'relationship.exists' => 'El campo "Relación" no existe en la tabla de relaciones.',
         ];
     }
 }

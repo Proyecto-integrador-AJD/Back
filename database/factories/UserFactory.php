@@ -4,6 +4,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Models\Prefix;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -30,7 +31,6 @@ class UserFactory extends Factory
                     },
                     "zoneIds": [1],
                     "language": ["Català"],
-                    "contactIds": [1],
                     "dateHire": "2023-01-01",
                     "dateTermination": null,
                     "username": "admin_anna",
@@ -42,6 +42,7 @@ class UserFactory extends Factory
             'name' => $this->faker->name(),
             'lastName' => $this->faker->lastName(),
             'username' => $this->faker->userName(),
+            'prefix' => Prefix::all()->random()->prefix,
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('password'),

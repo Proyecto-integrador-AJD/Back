@@ -27,10 +27,10 @@ class ContactStoreRequest extends FormRequest
             'name' => 'required|string|max:255',
             'lastName' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'prefix' => 'required|string',
+            'prefix' => 'required|string|exists:prefixes,prefix',
             'phone' => 'required|integer',
             'patientId' => 'required|exists:patients,id',
-            'relationship' => 'required|string',
+            'relationship' => 'required|string|exists:relationships,name',
         ];
     }
 
@@ -52,13 +52,13 @@ class ContactStoreRequest extends FormRequest
             'email.email' => 'El campo email debe ser una dirección de correo electrónico válida.',
             'email.max' => 'El campo email no puede tener más de 255 caracteres.',
             'prefix.required' => 'El campo prefijo es obligatorio.',
-            'prefix.string' => 'El campo prefijo debe ser una cadena de caracteres.',
+            'prefix.exists' => 'El prefijo seleccionado no es válido.',
             'phone.required' => 'El campo teléfono es obligatorio.',
             'phone.integer' => 'El campo teléfono debe ser un número entero.',
             'patientId.required' => 'El campo ID del paciente es obligatorio.',
             'patientId.exists' => 'El ID del paciente proporcionado no existe.',
             'relationship.required' => 'El campo relación es obligatorio.',
-            'relationship.string' => 'El campo relación debe ser una cadena de caracteres.',
+            'relationship.exists' => 'La relación proporcionada no existe.',
         ];
     }
 }

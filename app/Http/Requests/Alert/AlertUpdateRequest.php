@@ -27,10 +27,10 @@ class AlertUpdateRequest extends FormRequest
             'patientId' => 'exists:patients,id',
             'type' => 'string|max:255',
             'subType' => 'string|max:255',
-            'startDate' => 'datetime',
+            'startDate' => 'date_format:Y-m-d H:i:s',
             'isRecurring' => 'boolean',
-            'recurrenceType' => 'nullable|string',
             'description' => 'nullable|string|max:255',
+            'recurrenceType' => 'nullable|string|exists:recurrenceTypes,name|max:255',
             'recurrence' => 'nullable|integer', // no se para que es
         ];
     }
@@ -42,10 +42,12 @@ class AlertUpdateRequest extends FormRequest
             'type.max' => 'El campo "Tipo" no puede superar los 255 caracteres.',
             'subType.string' => 'El campo "Subtipo" debe ser una cadena de caracteres.',
             'subType.max' => 'El campo "Subtipo" no puede superar los 255 caracteres.',
-            'startDate.datetime' => 'El campo "Fecha de inicio" debe ser una fecha y hora.',
+            'startDate.date_format' => 'El campo "Fecha de inicio" debe tener el formato Y-m-d H:i:s.',
             'isRecurring.boolean' => 'El campo "Es recurrente" debe ser un booleano.',
             'description.max' => 'La descripción no puede superar los 255 caracteres.',
             'recurrenceType.string' => 'El campo "Tipo de recurrencia" debe ser una cadena de caracteres.',
+            'recurrenceType.exists' => 'El tipo de recurrencia seleccionado no es válido.',
+            'recurrenceType.max' => 'El campo "Tipo de recurrencia" no puede superar los 255 caracteres.',
             'recurrence.integer' => 'El campo "Recurrencia" debe ser un número entero.',
         ];
     }

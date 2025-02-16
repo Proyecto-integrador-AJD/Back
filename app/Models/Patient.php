@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Enums\{Language};
+use App\Casts\CsvToArrayCast;
 
 class Patient extends Model
 {
@@ -27,6 +29,7 @@ class Patient extends Model
         'healthCardNumber',
         'prefix',
         'phone',
+        'language',
         'email',
         'zoneId',
         'situationPersonalFamily',
@@ -39,6 +42,23 @@ class Patient extends Model
         'economicSituation',
     ];
 
+
+    protected function casts(): array
+    {
+        return [
+            'language' => CsvToArrayCast::class,
+        ];
+    }
+
+    protected $attributes = [
+    'language' => Language::SPANISH->value . ',' . Language::CATALAN->value,
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'userId');
+    }
+
     public function zone()
     {
         return $this->belongsTo(Zone::class, 'zoneId');
@@ -46,7 +66,7 @@ class Patient extends Model
 
     public function operator()
     {
-        return $this->belongsTo(User::class, 'operatorId');
+        return $this->belongsTo(User::class, 'userId');
     }
 
     public function contacts()
@@ -57,5 +77,10 @@ class Patient extends Model
     public function alerts()
     {
         return $this->hasMany(Alert::class, 'patientId');
+    }
+
+    public function calls()
+    {
+        return $this->hasMany(Call::class, 'patientId');
     }
 }
