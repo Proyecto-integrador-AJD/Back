@@ -4,43 +4,34 @@ namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
-use App\Models\Zone;
-use App\Http\Requests\ZoneStoreRequest;
-use App\Http\Requests\ZoneUpdateRequest;
+use App\Models\User;
 
-class ZoneController extends Controller
+class UserController extends Controller
 {
 
     use AuthorizesRequests;
     public function index()
     {
-        $zones = Zone::all();
-        return view('zones.index', compact('zones'));
+        $users = User::all();
+        return view('users.index', compact('users'));
     }
     
     public function create()
     {
-        return view('zones.create');
+        return view('users.create');
     }
 
-    public function store(ZoneStoreRequest $request)
+    public function store(Request $request)
     {
-        // $request->validate([
-        //     'name' => 'required',
-        //     'description' => 'required',
-        // ]);
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
 
-        // Zone::create($request->all());
+        Zone::create($request->all());
 
-        // return redirect()->route('zones.index')
-        //     ->with('success', 'Zone created successfully.');
-
-
-            $validated = $request->validated(); 
-        
-            Zone::create($validated);
-        
-            return redirect()->route('zones.index')->with('success', 'Zona creada correctament!');
+        return redirect()->route('zones.index')
+            ->with('success', 'Zone created successfully.');
     }
 
     public function show(Zone $zone)
@@ -81,6 +72,3 @@ class ZoneController extends Controller
             return redirect()->route('zones.index')->with('success', 'Zona eliminada correctament');
         }
     }
-
-
-
