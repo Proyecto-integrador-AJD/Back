@@ -19,10 +19,10 @@ class ContactResource extends JsonResource
             'name' => $this->name,
             'lastName' => $this->lastName,
             'email' => $this->email,
-            'prefix' => new PrefixResource($this->prefix),
+            'prefix' => $this->prefix,
             'phone' => $this->phone,
             'patientId' => $this->patientId,
-            'relationship' => new RelationshipResource($this->relationship),
+            'relationship' => $this->relationship,
         ];
     }
 }
