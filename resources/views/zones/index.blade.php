@@ -6,6 +6,11 @@
     <!-- Crear -->
     <button>{{ __('btn.new') }}</button>
 </a>
+@if (session('success'))
+    <div class="bg-green-500 text-black p-4 mb-6 rounded-lg">
+        {{ session('success') }}
+    </div>
+@endif
 <table class="w-full border-collapse border border-gray-300">
     <thead class="bg-gray-200">
         <tr>

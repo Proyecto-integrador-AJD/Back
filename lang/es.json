@@ -20,6 +20,21 @@
 
   "zones.fields.name": "Nombre",
   "zones.fields.description": "Descripción",
-  "zones.fields.location": "Ubicación"
+  "zones.fields.location": "Ubicación",
+
+
+  "users.title": "Panel Teleoperadores",
+  "users.title.creacion": "Creación de Teleoperadores",
+  "users.title.edit": "Modificación de Teleoperadores",
+
+  "users.fields.name": "Nombre",
+  "users.fields.lastName": "Apellido",
+  "users.fields.email": "Correo",
+  "users.fields.phone": "Telefono",
+  "users.fields.prefix": "Prefijo",
+  "users.fields.password": "Contraseña",
+  "users.fields.username": "Nombre de Usuario",
+  "users.fields.dateHire": "Fecha de Inicio",
+  "users.fields.language": "Idioma"
 
 }
