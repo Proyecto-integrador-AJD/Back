@@ -14,6 +14,7 @@ class SubTypeCall extends Model
         'name',
         'spanishName',
         'valencianName',
+        'incoming',
         'typecall_id',
     ];
 

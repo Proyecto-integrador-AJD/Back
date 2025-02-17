@@ -17,7 +17,10 @@ class SubTypeCallFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->word(),
+            'spanishName' => $this->faker->word(),
+            'valencianName' => $this->faker->word(),
+            'typecall_id' => Typecall::inRandomOrder()->first()->id,
         ];
     }
 }
