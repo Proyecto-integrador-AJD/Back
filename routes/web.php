@@ -2,7 +2,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\{Route, App};
 use App\Http\Controllers\{
-    ZoneController
+    ZoneController,
+    UserController
 };
 use App\Models\{Partit, User};
 use App\Mail\CalendarioArbitros;
@@ -30,6 +31,10 @@ Route::get('/', function () {
 
 Route::middleware(['auth', RoleMiddleware::class.':administrator' ])->group(function (){
     Route::resource('/zones', ZoneController::class);
+
+    Route::resource('/users', UserController::class);
+   
+
 });
 
 
