@@ -24,7 +24,19 @@ class TypeCallSeeder extends Seeder
                 'spanishName' => 'Comunicaciones no urgentes',
                 'valencianName' => 'Comunicacions no urgents',
                 'incoming' => true,
-            ]
+            ],
+            [
+                'name' => 'Planned or Scheduled',
+                'spanishName' => 'Planificada o agendada',
+                'valencianName' => 'Planificada o agendada',
+                'incoming' => false,
+            ],
+            [
+                'name' => 'Not Planned',
+                'spanishName' => 'No planificadas',
+                'valencianName' => 'No planificades',
+                'incoming' => false,
+            ],
         ];
 
         foreach ($typeCalls as $typeCall) {

@@ -14,13 +14,12 @@ class SubTypeCall extends Model
         'name',
         'spanishName',
         'valencianName',
-        'incoming',
         'typecall_id',
     ];
 
     public function typecall()
     {
-        return $this->belongsTo(Typecall::class, 'typecall_id');
+        return $this->belongsTo(TypeCall::class, 'typecall_id');
     }
 }
 ?>

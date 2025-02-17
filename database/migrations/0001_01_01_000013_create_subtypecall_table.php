@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('spanishName');
             $table->string('valencianName');
-            $table->boolean('incoming');
             $table->foreignId('typecall_id')->constrained('typecall');
             $table->timestamps();
         });

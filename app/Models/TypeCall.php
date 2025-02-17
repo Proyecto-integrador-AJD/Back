@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
 
 class TypeCall extends Model
@@ -18,5 +19,10 @@ class TypeCall extends Model
         'valencianName',
         'incoming',
     ];
+
+    public function subtypes(): HasMany
+    {
+        return $this->hasMany(SubTypeCall::class, 'typecall_id');
+    }
 }
 ?>
