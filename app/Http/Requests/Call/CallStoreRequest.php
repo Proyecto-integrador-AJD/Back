@@ -29,8 +29,8 @@ class CallStoreRequest extends FormRequest
             'userId' => 'required|exists:users,id',
             'incoming' => 'required|boolean',
             'type' => 'required|string',
-            'subType' => 'required|string',
-            'alertId' => 'exists:alerts,id',
+            'subType' => 'nullable|string',
+            'alertId' => 'nullable|exists:alerts,id',
             'duration' => 'required|integer',
             'description' => 'required|string',
         ];

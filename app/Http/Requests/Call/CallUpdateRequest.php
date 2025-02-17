@@ -30,7 +30,7 @@ class CallUpdateRequest extends FormRequest
             'incoming' => 'boolean',
             'type' => 'string',
             'subType' => 'string',
-            'alertId' => 'exists:alerts,id',
+            'alertId' => 'nullable|exists:alerts,id',
             'duration' => 'integer',
             'description' => 'string',
         ];
