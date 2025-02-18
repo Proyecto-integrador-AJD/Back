@@ -108,11 +108,29 @@
   "contacts.fields.email": "Correo",
   "contacts.fields.prefix": "Prefijo",
   "contacts.fields.telefono": "Telefono",
-  "contacts.fields.relationship": "Relacion"
+  "contacts.fields.relationship": "Relacion",
 
 
   
-      
+  "pdf.reportCalls.title": "Informe de Llamadas",
+  "pdf.reportCalls.subTitle": "Informe generado el dia",
+  "pdf.reportCalls.titleFilter": "Filtros usados",
+  "pdf.reportCalls.noPrevistas.title": "Llamadas no previstas",
+  "pdf.reportCalls.previstas.title": "Llamadas previstas",
+  
+  "pdf.reportCalls.filterTableHeader.dateInit": "Fecha Inicio",
+  "pdf.reportCalls.filterTableHeader.dateEnd": "Fecha Fin",
+  "pdf.reportCalls.filterTableHeader.zone": "Zona",
+  "pdf.reportCalls.filterTableHeader.type": "Tipo de Llamadas",
+
+  "pdf.reportCalls.tableHeader.date": "Fecha",
+  "pdf.reportCalls.tableHeader.operator": "Operador",
+  "pdf.reportCalls.tableHeader.patient": "Paciente",
+  "pdf.reportCalls.tableHeader.zone": "Zona",
+  "pdf.reportCalls.tableHeader.type": "Tipo",
+  "pdf.reportCalls.tableHeader.subType": "SubTipo",
+  "pdf.reportCalls.tableHeader.duration": "Duración",
+  "pdf.reportCalls.tableHeader.description": "Descripción"
 
 
 

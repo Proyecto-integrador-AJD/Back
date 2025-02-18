@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Alert;
 use Illuminate\Http\Request;
 use App\Models\Call;
 use App\Models\Patient;
 use App\Http\Resources\CallResource;
 use App\Http\Resources\PatientResource;
 use App\Http\Controllers\Api\BaseController;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class ReportController extends BaseController
 {
@@ -69,5 +71,106 @@ class ReportController extends BaseController
         }
 
         return $this->sendResponse(CallResource::collection($calls), 'Historial de llamadas del paciente recuperado con éxito', 200);
+    }
+
+
+    public function getReportHistoric(Request $request)
+    {
+
+    }
+    
+    /**
+     * tiene que sacar o un pdf o csv con todas las llamadas previstas i realizadas las previstas son las alertas, y si tienen una llamada es que han sido realizadas
+     * se puede filtrar por date, zona i type de call
+     * la date sera un reango de fechas, la zona sera una id, i el type sera un string
+     */
+    private function getReportCalls($dateInit, $dateEnd, $zoneId, $type)
+    {
+
+        //! LLamadas sin alerta
+        $query = Call::select('calls.date', 'zones.name as zone', 'calls.type', 'calls.subType', 'calls.duration', 'calls.description')
+            ->join('patients', 'calls.patientId', '=', 'patients.id')
+            ->join('users', 'calls.userId', '=', 'users.id')
+            ->join('zones', 'patients.zoneId', '=', 'zones.id');
+
+        $query->selectRaw("CONCAT(users.name, ' ', users.lastName) as operator");
+        $query->selectRaw("CONCAT(patients.name, ' ', patients.lastName) as patient");
+
+
+        $query->whereNull('calls.alertId');
+
+        if ($dateInit != null) {
+            $query->whereBetween('calls.date', [$dateInit, $dateEnd]);
+        }
+        
+        if ($zoneId) {
+            $query->where('patients.zoneId', $zoneId);
+        }
+
+        if ($type) {
+            $query->where('calls.type', 'LIKE', "%$type%");
+        }
+        //! LLamadas sin alerta
+        $noCalls = $query->get();
+
+
+        //! LLamadas con alerta
+        $query = Call::select('calls.*', 'patients.zoneId', 
+            'alerts.type as alertType', 'alerts.subType as alertSubType',
+            'alerts.description as alertDescription', 'alerts.startDate as alertStartDate', 'alerts.recurrenceType as alertRecurrenceType')
+            ->join('patients', 'calls.patientId', '=', 'patients.id')
+            ->join('alerts', 'calls.alertId', '=', 'alerts.id');
+
+        if ($dateInit != null) {
+            $query->whereBetween('calls.date', [$dateInit, $dateEnd]);
+        }
+
+        if ($zoneId) {
+            $query->where('patients.zoneId', $zoneId);
+        }
+
+        if ($type) {
+            $query->where('calls.type', 'LIKE', "%$type%");
+        }
+
+        //! LLamadas con alerta
+        $calls =$query->get();
+
+        // dd($calls, $dateInit, $dateEnd, $zoneId, $type);
+        return ['calls' => ['previstas' => $calls, 'noPrevistas' => $noCalls], 'filter' => ['dateInit' => $dateInit, 'dateEnd' => $dateEnd, 'zoneId' => $zoneId, 'type' => $type]];
+
+    }
+
+    public function getPDFcalls(Request $request){
+        // hay que generar un pdf mediante DOMPDF en base a la funcion getReportCalls
+        $dateInit = $request->query('dateInit', null);
+        $dateInit = $dateInit ? date('Y-m-d H:i:s', strtotime($dateInit)) : null;
+        $dateEnd = $request->query('dateEnd', now()->toDateString());
+        $dateEnd = $dateEnd ? date('Y-m-d H:i:s', strtotime($dateEnd)) : null;
+
+        $zoneId = $request->query('zoneId', null);
+        $type = $request->query('type', null);
+
+        $result = $this->getReportCalls($dateInit, $dateEnd, $zoneId, $type);
+        $calls = $result['calls'];
+        $filter = $result['filter'];
+        
+        
+        dd($calls);
+
+        $data = [
+            'date' => now()->format('d-m-Y H:i'),
+            'calls' => $calls,
+            'filtros' => $filter,
+        ];
+        
+
+
+
+        $pdf = \Barryvdh\DomPDF\Facade::loadView('pdf.reporteCalls', $data);
+
+
+        return $pdf->download('reporte.pdf'); // O return $pdf->stream(); para verlo en el navegador
+
     }
 }
