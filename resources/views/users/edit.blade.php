@@ -92,6 +92,19 @@
         @enderror
     </div>
 
+    <div class="mb-4">
+        <label for="language" class="block text-sm font-medium text-gray-700 mb-1">{{ __('users.fields.language') }}:</label>
+        <select name="language[]" id="language" multiple required class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            @foreach ($languages as $key => $language)
+                <option value="{{ $key }}" 
+                    @if(in_array($key, old('language', is_array($user->language) ? $user->language : json_decode($user->language ?? '[]', true)))) selected @endif>
+                    {{ $language }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+
+
     <button type="submit"
         class="w-full bg-blue-500 text-white font-medium py-2 px-4 rounded-lg shadow hover:bg-blue-600 focus:ring focus:ring-blue-300">
         {{ __('btn.actualitzar') }} {{ __('users.title.edit') }}

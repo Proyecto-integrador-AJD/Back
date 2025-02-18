@@ -35,6 +35,45 @@
   "users.fields.password": "Contraseña",
   "users.fields.username": "Nombre de Usuario",
   "users.fields.dateHire": "Fecha de Inicio",
-  "users.fields.language": "Idioma"
+  "users.fields.language": "Idioma",
+
+  "patients.title": "Panel Pacientes",
+  "patients.title.creacion": "Creación de Pacientes",
+  "patients.title.edit": "Modificación de Pacientes",
+
+  "patients.fields.name": "Nombre",
+  "patients.fields.lastName": "Apellido",
+  "patients.fields.email": "Correo",
+  "patients.fields.phone": "Telefono",
+  "patients.fields.prefix": "Prefijo",
+  "patients.fields.userId": "Teleoperador",
+  "patients.fields.zoneId": "Zona",
+  "patients.fields.birthDate": "Fecha de Nacimiento",
+  "patients.fields.language": "Idioma",
+  "patients.fields.addressStreet": "Calle",
+  "patients.fields.addressNumber": "Numero",
+  "patients.fields.addressDoor": "Puerta",
+  "patients.fields.addressPostalCode": "Codigo Postal",
+  "patients.fields.addressCity": "Ciudad",
+  "patients.fields.addressProvince": "Provincia",
+  "patients.fields.addressCountry": "Pais",
+  "patients.fields.addressFloor": "Piso",
+  "patients.fields.address": "Direccion",
+  "patients.fields.dni": "DNI",
+  "patients.fields.housing": "Alojamiento",
+  "patients.fields.healthCardNumber": "Targeta Sanitaria",
+  "patients.fields.situationPersonalFamily": "Situacion Personal Familiar",
+  "patients.fields.healthSituation": "Situacion de Salud",
+  "patients.fields.housingSituationType": "Tipo de Alojamiento",
+  "patients.fields.housingSituationStatus": "Estado de la Vivienda",
+  "patients.fields.housingSituationNumberOfRooms": "Numero de Habitaciones",
+  "patients.fields.housingSituationLocation": "Ubicaciond e la Vivienda",
+  "patients.fields.personalAutonomy": "Autonomia",
+  "patients.fields.economicSituation": "Situacion Economica"
+
+      
+
+
+
 
 }
