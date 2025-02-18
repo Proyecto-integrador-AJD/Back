@@ -24,6 +24,8 @@ class UserStoreRequest extends FormRequest
      */
     public function rules(): array
     {
+        // $current=$this->route('user');
+        // dd($current);
         return [
             'name' => 'required|string|max:255',
             'lastName' => 'required|string|max:255',

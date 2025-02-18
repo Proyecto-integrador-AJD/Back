@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Http\Requests\User\UserStoreRequest;
+use App\Http\Requests\User\UserUpdateRequest;
+use App\Models\Language;
+use App\Models\Prefix;
 
 class UserController extends Controller
 {
@@ -18,43 +22,65 @@ class UserController extends Controller
     
     public function create()
     {
-        return view('users.create');
+        $prefixes = Prefix::all();
+        $languages = Language::all()->pluck('spanishName', 'name');  // Obtiene todos los idiomas (nombre en español)
+        return view('users.create', compact('languages', 'prefixes'));
+    }
+    
+
+    public function store(UserStoreRequest $request)
+    {
+        // $request->validate([
+        //     'name' => 'required',
+        //     'description' => 'required',
+        // ]);
+
+        // Zone::create($request->all());
+
+        // return redirect()->route('zones.index')
+        //     ->with('success', 'Zone created successfully.');
+
+
+            $validated = $request->validated(); 
+        
+            User::create($validated);
+        
+            return redirect()->route('users.index')->with('success', 'Usuario creado correctamente!');
     }
 
-    public function store(Request $request)
+    public function show(User $user)
     {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-        ]);
-
-        Zone::create($request->all());
-
-        return redirect()->route('zones.index')
-            ->with('success', 'Zone created successfully.');
+        return view('users.show', compact('user'));
     }
 
-    public function show(Zone $zone)
+    public function edit($id)
     {
-        return view('zones.show', compact('zone'));
+        // return view('users.edit', compact('user'));
+        $user = User::findOrFail($id);
+        $prefixes = Prefix::all();
+        
+        $languages = Language::all()->pluck('spanishName', 'name');  // Obtiene todos los idiomas en su nombre español
+        return view('users.edit', compact('user', 'languages', 'prefixes'));
+
     }
 
-    public function edit(Zone $zone)
+    public function update(UserUpdateRequest $request, User $user)
     {
-        return view('zones.edit', compact('zone'));
-    }
+        // $request->validate([
+        //     'name' => 'required',
+        //     'description' => 'required',
+        // ]);
 
-    public function update(Request $request, Zone $zone)
-    {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-        ]);
+        // $zone->update($request->all());
 
-        $zone->update($request->all());
+        // return redirect()->route('zones.index')
+        //     ->with('success', 'Zone updated successfully');
 
-        return redirect()->route('zones.index')
-            ->with('success', 'Zone updated successfully');
+        $validated = $request->validated();
+
+        $user->update($validated);
+
+        return redirect()->route('users.index')->with('success', 'Usuario actualizado correctamente!');
     }
 
     public function destroy($id)
@@ -64,11 +90,14 @@ class UserController extends Controller
         // return redirect()->route('zones.index')
         //     ->with('success', 'Zone deleted successfully');
 
-            $zone = Zone::findOrFail($id);
+            $user = User::findOrFail($id);
         
            
-            $zone->delete();
+            $user->delete();
             
-            return redirect()->route('zones.index')->with('success', 'Zona eliminada correctament');
+            return redirect()->route('users.index')->with('success', 'Usuario eliminado correctamente');
         }
     }
+
+
+
