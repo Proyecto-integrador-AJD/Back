@@ -4,6 +4,32 @@ namespace App\Http\Requests\Zone;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+
+/**
+ * @OA\Schema(
+ *     schema="StoreEquipRequest",
+ *     type="object",
+ *     required={"name", "description", "location"},
+ *     @OA\Property(
+ *         property="name",
+ *         type="string",
+ *         description="Nombre de la zona",
+ *         example="Ronny Feest"
+ *     ),
+ *     @OA\Property(
+ *         property="description",
+ *         type="string",
+ *         description="Descripcion de la zona",
+ *         example="Veniam neque libero sed sunt aut porro unde."
+ *     ),
+ *     @OA\Property(
+ *         property="location",
+ *         type="string",
+ *         description="Ubicacion de la zona",
+ *         example="A Coruña"
+ *     )
+ * )
+ */
 class ZoneStoreRequest extends FormRequest
 {
     /**

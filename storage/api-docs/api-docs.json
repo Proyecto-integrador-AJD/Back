@@ -1,237 +1,29 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Jugadoras API",
-        "description": "API para gestionar las jugadoras.",
+        "title": "Futbol Femeni API Documentation",
         "version": "1.0.0"
     },
     "paths": {
-        "/api/login": {
-            "post": {
+        "/api": {},
+        "/api/zones": {
+            "get": {
                 "tags": [
-                    "Auth"
+                    "Zones"
                 ],
-                "summary": "Log in a user",
-                "description": "Authenticate user with email and password",
-                "operationId": "222b2625838e3c57e017987f73598fda",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "email",
-                                    "password"
-                                ],
-                                "properties": {
-                                    "email": {
-                                        "type": "string",
-                                        "example": "admin@example.com"
-                                    },
-                                    "password": {
-                                        "type": "string",
-                                        "example": "password"
+                "summary": "Obtener todas las zonas",
+                "description": "Devuelve una lista paginada de zonas.",
+                "operationId": "0f732fe44c20996cd9dd342f722cb156",
+                "responses": {
+                    "200": {
+                        "description": "Lista de zonas devuelta con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "/components/schemas/Zones"
                                     }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "User signed in",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": true
-                                        },
-                                        "data": {
-                                            "properties": {
-                                                "token": {
-                                                    "type": "string",
-                                                    "example": "your_token_here"
-                                                },
-                                                "name": {
-                                                    "type": "string",
-                                                    "example": "John Doe"
-                                                }
-                                            },
-                                            "type": "object"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "User signed in"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorised",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": false
-                                        },
-                                        "error": {
-                                            "type": "string",
-                                            "example": "incorrect Email/Password"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/register": {
-            "post": {
-                "tags": [
-                    "Auth"
-                ],
-                "summary": "Register a new user",
-                "description": "Register a user with name, email, and password",
-                "operationId": "8e4e3cb7b46126f4696379d3c7eeb4ad",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "name",
-                                    "email",
-                                    "password",
-                                    "confirm_password"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "example": "John Doe"
-                                    },
-                                    "email": {
-                                        "type": "string",
-                                        "example": "user@example.com"
-                                    },
-                                    "password": {
-                                        "type": "string",
-                                        "example": "password123"
-                                    },
-                                    "confirm_password": {
-                                        "type": "string",
-                                        "example": "password123"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "User created successfully.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": true
-                                        },
-                                        "data": {
-                                            "properties": {
-                                                "token": {
-                                                    "type": "string",
-                                                    "example": "your_token_here"
-                                                },
-                                                "name": {
-                                                    "type": "string",
-                                                    "example": "John Doe"
-                                                }
-                                            },
-                                            "type": "object"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "User created successfully."
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": false
-                                        },
-                                        "error": {
-                                            "type": "object",
-                                            "example": {
-                                                "email": [
-                                                    "The email field is required."
-                                                ]
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/logout": {
-            "post": {
-                "tags": [
-                    "Auth"
-                ],
-                "summary": "Log out a user",
-                "description": "Invalidate the user's token",
-                "operationId": "ad65cbbd4e9f201619eae184a5961a98",
-                "responses": {
-                    "200": {
-                        "description": "User successfully signed out.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": true
-                                        },
-                                        "data": {
-                                            "properties": {
-                                                "name": {
-                                                    "type": "string",
-                                                    "example": "John Doe"
-                                                }
-                                            },
-                                            "type": "object"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "User successfully signed out."
-                                        }
-                                    },
-                                    "type": "object"
                                 }
                             }
                         }
@@ -239,233 +31,88 @@
                 },
                 "security": [
                     {
-                        "sanctum": []
+                        "bearerAuth": []
                     }
                 ]
-            }
-        },
-        "/api/sendResponse": {
-            "post": {
-                "tags": [
-                    "BaseController"
-                ],
-                "summary": "Enviar respuesta exitosa",
-                "operationId": "158f38c2aa37757760c0da179ddcdb66",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "result": {
-                                        "type": "string",
-                                        "example": "Resultado exitoso"
-                                    },
-                                    "message": {
-                                        "type": "string",
-                                        "example": "Operación exitosa"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Respuesta exitosa",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": true
-                                        },
-                                        "data": {
-                                            "type": "string",
-                                            "example": "Resultado exitoso"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Operación exitosa"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/sendError": {
-            "post": {
-                "tags": [
-                    "BaseController"
-                ],
-                "summary": "Enviar respuesta de error",
-                "operationId": "d1341617eb499d4b3d2c657ea184a8f6",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "error": {
-                                        "type": "string",
-                                        "example": "Error ocurrido"
-                                    },
-                                    "errorMessages": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string"
-                                        }
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Respuesta de error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": false
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Error ocurrido"
-                                        },
-                                        "info": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "string"
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/equips": {
-            "get": {
-                "tags": [
-                    "Equips"
-                ],
-                "summary": "Obtener lista de equipos",
-                "description": "Listar todos los equipos con paginación.",
-                "operationId": "a6032419917db803b21e4784c5d2f27f",
-                "responses": {
-                    "200": {
-                        "description": "Lista de equipos",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/EquipResource"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
             },
             "post": {
                 "tags": [
-                    "Equips"
+                    "Zones"
                 ],
-                "summary": "Crear un nuevo equipo",
-                "description": "Este endpoint permite crear un nuevo equipo.",
-                "operationId": "storeEquip",
+                "summary": "Crear una nueva zona",
+                "description": "Crea una nuevo zona con los datos proporcionados.",
+                "operationId": "253822acdf31d7499579454f17b7fc8b",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/StoreEquipRequest"
+                                "$ref": "/components/schemas/ZoneStoreRequest"
                             }
                         }
                     }
                 },
                 "responses": {
                     "201": {
-                        "description": "Equipo creado con éxito",
+                        "description": "Zona creada con éxito.",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/EquipResource"
+                                    "$ref": "/components/schemas/Zones"
                                 }
                             }
                         }
-                    },
-                    "400": {
-                        "description": "Petición incorrecta"
                     }
                 }
             }
         },
-        "/api/equips/{id}": {
+        "/api/zones/{id}": {
             "get": {
                 "tags": [
-                    "Equips"
+                    "Zones"
                 ],
-                "summary": "Obtener un equipo por ID",
-                "description": "Este endpoint devuelve los detalles de un equipo específico.",
-                "operationId": "getEquipById",
+                "summary": "Obtener un paciente",
+                "description": "Devuelve los datos de una zona específico por su ID.",
+                "operationId": "9fbd7dbdda1909cd7ebc9bb4167293d9",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "ID de la zona",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": 1
+                            "type": "integer"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Equipo encontrado",
+                        "description": "Zona recuperada con éxito.",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/EquipResource"
+                                    "$ref": "/components/schemas/Zones"
                                 }
                             }
                         }
                     },
                     "404": {
-                        "description": "Equipo no encontrado"
-                    },
-                    "400": {
-                        "description": "Petición incorrecta"
+                        "description": "Zona no encontrado."
                     }
                 }
             },
             "put": {
                 "tags": [
-                    "Equips"
+                    "Zones"
                 ],
-                "summary": "Actualizar un equipo existente",
-                "description": "Actualizar un equipo existente.",
-                "operationId": "5b53fa7116250c69d849b993d51a79e0",
+                "summary": "Actualizar una zona",
+                "description": "Actualiza los datos de una zona existente.",
+                "operationId": "28fa1be86dd47c22a90f9db32cdf9481",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "ID del equipo",
+                        "description": "ID de la zona",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -477,18 +124,18 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/requestBodies/UpdateEquipRequest"
+                                "$ref": "/components/schemas/ZoneUpdateRequest"
                             }
                         }
                     }
                 },
                 "responses": {
                     "200": {
-                        "description": "Equipo actualizado con éxito",
+                        "description": "Zona actualizada con éxito.",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/EquipResource"
+                                    "$ref": "/components/schemas/Zones"
                                 }
                             }
                         }
@@ -497,16 +144,16 @@
             },
             "delete": {
                 "tags": [
-                    "Equips"
+                    "Zones"
                 ],
-                "summary": "Eliminar un equipo existente",
-                "description": "Eliminar un equipo existente.",
-                "operationId": "862029cc328cd6adbcd3e5243c9b78bd",
+                "summary": "Eliminar una zona",
+                "description": "Elimina una zona específico por su ID.",
+                "operationId": "357ad6da21048b1eed885132d85c7c01",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "ID del equipo",
+                        "description": "ID de la zona",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -515,482 +162,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Estadi eliminat amb èxit"
+                        "description": "Zona eliminado con éxito."
                     },
                     "404": {
-                        "description": "Estadi no trobat"
-                    }
-                }
-            }
-        },
-        "/api/estadis": {
-            "get": {
-                "tags": [
-                    "Estadi"
-                ],
-                "summary": "Obtenir llistat d'estadis",
-                "description": "Retorna una llista de tots els estadis amb paginació",
-                "operationId": "getEstadis",
-                "responses": {
-                    "200": {
-                        "description": "Llistat d'estadis",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/EstadiResource"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Error en obtenir estadis"
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Estadi"
-                ],
-                "summary": "Crear un nou estadi",
-                "description": "Crea un nou estadi amb la informació proporcionada",
-                "operationId": "storeEstadi",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/StoreEstadiRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Estadi creat amb èxit",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/EstadiResource"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Error en crear estadi"
-                    }
-                }
-            }
-        },
-        "/api/estadis/{equip}": {
-            "get": {
-                "tags": [
-                    "Estadi"
-                ],
-                "summary": "Obtenir un estadi per ID",
-                "description": "Retorna un estadi específic per ID",
-                "operationId": "getEstadi",
-                "parameters": [
-                    {
-                        "name": "equip",
-                        "in": "path",
-                        "description": "ID de l'estadi",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Estadi trobat amb èxit",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/EstadiResource"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Estadi no trobat"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Estadi"
-                ],
-                "summary": "Actualitzar un estadi existent",
-                "description": "Actualitza un estadi existent amb la informació proporcionada",
-                "operationId": "updateEstadi",
-                "parameters": [
-                    {
-                        "name": "equip",
-                        "in": "path",
-                        "description": "ID de l'estadi a actualitzar",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/UpdateEstadiRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Estadi actualitzat amb èxit",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/EstadiResource"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Error en actualitzar l'estadi"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Estadi"
-                ],
-                "summary": "Eliminar un estadi",
-                "description": "Elimina un estadi existent",
-                "operationId": "deleteEstadi",
-                "parameters": [
-                    {
-                        "name": "equip",
-                        "in": "path",
-                        "description": "ID de l'estadi a eliminar",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Estadi eliminat amb èxit"
-                    },
-                    "404": {
-                        "description": "Estadi no trobat"
-                    }
-                }
-            }
-        },
-        "/api/jugadoras": {
-            "get": {
-                "tags": [
-                    "Jugadoras"
-                ],
-                "summary": "Obtener todas las jugadoras",
-                "description": "Devuelve una lista paginada de jugadoras.",
-                "operationId": "1ac392f3948a3ad580a5f3a7fc26eb33",
-                "responses": {
-                    "200": {
-                        "description": "Lista de jugadoras devuelta con éxito.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "/components/schemas/Jugadoras"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Jugadoras"
-                ],
-                "summary": "Crear una nueva jugadora",
-                "description": "Crea una nueva jugadora con los datos proporcionados.",
-                "operationId": "f75afd87f5a97c247cca5caf6977b435",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "/components/schemas/StoreJugadoraRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Jugadora creada con éxito.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "/components/schemas/Jugadoras"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/jugadoras/{id}": {
-            "get": {
-                "tags": [
-                    "Jugadoras"
-                ],
-                "summary": "Obtener una jugadora",
-                "description": "Devuelve los datos de una jugadora específica por su ID.",
-                "operationId": "b935fddc12c0333193615029d33ad5f8",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID de la jugadora",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Jugadora recuperada con éxito.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "/components/schemas/Jugadoras"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Jugadora no encontrada."
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Jugadoras"
-                ],
-                "summary": "Actualizar una jugadoras",
-                "description": "Actualiza los datos de una jugadora existente.",
-                "operationId": "5d0c0f50b71c521bdb97ef7de8c53961",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID de la jugadora",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "/components/schemas/UpdateJugadoraRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Jugadora actualizada con éxito.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "/components/schemas/Jugadoras"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Jugadoras"
-                ],
-                "summary": "Eliminar una jugadora",
-                "description": "Elimina una jugadora específica por su ID.",
-                "operationId": "7919e6e50001440ae48b874e8587fc0b",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID de la jugadora",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Jugadora eliminada con éxito."
-                    },
-                    "404": {
-                        "description": "Jugadora no encontrada."
-                    }
-                }
-            }
-        },
-        "/api/partits": {
-            "get": {
-                "tags": [
-                    "Partit"
-                ],
-                "summary": "Obtenir tots els partits",
-                "operationId": "6b8c77f3ac1ea7b6db6c24f4a2c8b12a",
-                "responses": {
-                    "200": {
-                        "description": "Llista de partits",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Partit"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Partit"
-                ],
-                "summary": "Crear un partit",
-                "operationId": "e279c08fdf686e24c62cdffa9b9ac054",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Partit"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Partit creat amb èxit",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Partit"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/partits/{id}": {
-            "get": {
-                "tags": [
-                    "Partit"
-                ],
-                "summary": "Obtenir un partit per ID",
-                "operationId": "82fff7a0c242af948179019a8a5ba710",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Detalls del partit",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Partit"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Partit"
-                ],
-                "summary": "Actualitzar un partit",
-                "operationId": "69ff9ac77c757b0f318e1307e43951ed",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Partit"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Partit actualitzat amb èxit",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Partit"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Partit"
-                ],
-                "summary": "Eliminar un partit",
-                "operationId": "75f219b51d491af2fec23571b28180de",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Partit eliminat amb èxit"
+                        "description": "Zona no encontrada."
                     }
                 }
             }
@@ -1000,490 +175,83 @@
         "schemas": {
             "StoreEquipRequest": {
                 "required": [
-                    "nom",
-                    "estadi_id"
+                    "name",
+                    "description",
+                    "location"
                 ],
                 "properties": {
-                    "nom": {
-                        "description": "Nombre del equipo",
+                    "name": {
+                        "description": "Nombre de la zona",
                         "type": "string",
-                        "example": "FC Barcelona"
+                        "example": "Ronny Feest"
                     },
-                    "titols": {
-                        "description": "Número de títulos ganados",
-                        "type": "integer",
-                        "example": 10
-                    },
-                    "estadi_id": {
-                        "description": "ID del estadio donde juega el equipo",
-                        "type": "integer",
-                        "example": 1
-                    },
-                    "escut": {
-                        "description": "Escudo del equipo en formato de imagen",
+                    "description": {
+                        "description": "Descripcion de la zona",
                         "type": "string",
-                        "format": "binary",
-                        "example": "escudo.png"
+                        "example": "Veniam neque libero sed sunt aut porro unde."
+                    },
+                    "location": {
+                        "description": "Ubicacion de la zona",
+                        "type": "string",
+                        "example": "A Coruña"
                     }
                 },
                 "type": "object"
             },
-            "StoreEstadiRequest": {
-                "required": [
-                    "nom",
-                    "capacitat",
-                    "ciutat"
-                ],
+            "ZoneUpdateRequest": {
                 "properties": {
-                    "nom": {
-                        "description": "Nombre del estadio",
+                    "name": {
+                        "description": "Nombre de la zona",
                         "type": "string",
                         "maxLength": 255,
-                        "example": "Camp Nou"
+                        "example": "Ronny Feest"
                     },
-                    "capacitat": {
-                        "description": "Capacidad del estadio (debe ser mayor que 0)",
-                        "type": "integer",
-                        "minimum": 1,
-                        "example": 99354
-                    },
-                    "ciutat": {
-                        "description": "Ciudad donde se encuentra el estadio",
+                    "description": {
+                        "description": "Descripcion de la zona",
                         "type": "string",
                         "maxLength": 255,
-                        "example": "Barcelona"
-                    }
-                },
-                "type": "object"
-            },
-            "StoreJugadoraRequest": {
-                "description": "Solicitud para crear una jugadora",
-                "required": [
-                    "nom",
-                    "equip_id"
-                ],
-                "properties": {
-                    "nom": {
-                        "description": "Nombre de la jugadora. Debe ser único.",
-                        "type": "string",
-                        "maxLength": 255
+                        "example": "Veniam neque libero sed sunt aut porro unde."
                     },
-                    "equip_id": {
-                        "description": "ID del equipo al que pertenece la jugadora. Debe existir en la base de datos.",
-                        "type": "integer"
-                    },
-                    "data_naixement": {
-                        "description": "Fecha de nacimiento de la jugadora. Debe ser una fecha válida, anterior a hoy y no mayor a 100 años atrás.",
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "foto": {
-                        "description": "Foto de la jugadora. Debe ser un archivo de imagen (JPEG, PNG, JPG) y no exceder 2MB.",
-                        "type": "string",
-                        "format": "binary"
-                    }
-                },
-                "type": "object"
-            },
-            "StorePartitRequest": {
-                "required": [
-                    "arbitre_id",
-                    "equip_local_id",
-                    "equip_visitant_id",
-                    "data_partit",
-                    "jornada",
-                    "goles_local",
-                    "goles_visitant"
-                ],
-                "properties": {
-                    "arbitre_id": {
-                        "description": "ID del árbitro asignado al partido",
-                        "type": "integer",
-                        "example": 1
-                    },
-                    "equip_local_id": {
-                        "description": "ID del equipo local",
-                        "type": "integer",
-                        "example": 1
-                    },
-                    "equip_visitant_id": {
-                        "description": "ID del equipo visitante",
-                        "type": "integer",
-                        "example": 2
-                    },
-                    "data_partit": {
-                        "description": "Fecha y hora del partido",
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2025-01-30T16:00:00"
-                    },
-                    "jornada": {
-                        "description": "Número de la jornada en la liga",
-                        "type": "integer",
-                        "example": 23
-                    },
-                    "goles_local": {
-                        "description": "Número de goles del equipo local",
-                        "type": "integer",
-                        "example": 3
-                    },
-                    "goles_visitant": {
-                        "description": "Número de goles del equipo visitante",
-                        "type": "integer",
-                        "example": 2
-                    }
-                },
-                "type": "object"
-            },
-            "UpdateEstadiRequest": {
-                "properties": {
-                    "nom": {
-                        "description": "Nombre del estadio",
+                    "location": {
+                        "description": "Ubicacion de la zona",
                         "type": "string",
                         "maxLength": 255,
-                        "example": "Camp Nou"
-                    },
-                    "capacitat": {
-                        "description": "Capacidad del estadio (debe ser mayor que 0)",
-                        "type": "integer",
-                        "minimum": 1,
-                        "example": 99354
-                    },
-                    "ciutat": {
-                        "description": "Ciudad donde se encuentra el estadio",
-                        "type": "string",
-                        "maxLength": 255,
-                        "example": "Barcelona"
+                        "example": "A Coruña"
                     }
                 },
                 "type": "object"
             },
-            "UpdatePartitRequest": {
-                "required": [
-                    "arbitre_id",
-                    "equip_local_id",
-                    "equip_visitant_id",
-                    "data_partit",
-                    "jornada",
-                    "goles_local",
-                    "goles_visitant"
-                ],
+            "Zone": {
+                "description": "Esquema del model Zona",
                 "properties": {
-                    "arbitre_id": {
-                        "description": "ID del árbitro asignado al partido",
-                        "type": "integer",
-                        "example": 1
-                    },
-                    "equip_local_id": {
-                        "description": "ID del equipo local",
-                        "type": "integer",
-                        "example": 1
-                    },
-                    "equip_visitant_id": {
-                        "description": "ID del equipo visitante",
-                        "type": "integer",
-                        "example": 2
-                    },
-                    "data_partit": {
-                        "description": "Fecha y hora del partido",
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2025-01-30T16:00:00"
-                    },
-                    "jornada": {
-                        "description": "Número de la jornada en la liga",
-                        "type": "integer",
-                        "example": 23
-                    },
-                    "goles_local": {
-                        "description": "Número de goles del equipo local",
-                        "type": "integer",
-                        "example": 3
-                    },
-                    "goles_visitant": {
-                        "description": "Número de goles del equipo visitante",
-                        "type": "integer",
-                        "example": 2
-                    }
-                },
-                "type": "object"
-            },
-            "EquipResource": {
-                "title": "Equip Resource",
-                "description": "Representación del recurso Equip",
-                "properties": {
-                    "id": {
-                        "description": "ID único del equipo",
-                        "type": "integer"
-                    },
-                    "nom": {
-                        "description": "Nombre del equipo",
+                    "name": {
+                        "description": "Nombre de la zona",
                         "type": "string"
                     },
-                    "titols": {
-                        "description": "Cantidad de títulos ganados por el equipo",
-                        "type": "integer"
-                    },
-                    "estadi_id": {
-                        "description": "ID del estadio asociado",
-                        "type": "integer"
-                    },
-                    "estadi": {
-                        "description": "Nombre del estadio asociado",
+                    "description": {
+                        "description": "Descripcion de la zona",
                         "type": "string"
                     },
-                    "escut": {
-                        "description": "URL del escudo del equipo",
+                    "location": {
+                        "description": "Ubicacion de la zona",
                         "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "EstadiResource": {
-                "properties": {
-                    "id": {
-                        "description": "ID del estadio",
-                        "type": "integer",
-                        "example": 1
-                    },
-                    "nom": {
-                        "description": "Nombre del estadio",
-                        "type": "string",
-                        "example": "Camp Nou"
-                    },
-                    "capacitat": {
-                        "description": "Capacidad del estadio",
-                        "type": "integer",
-                        "example": 99354
-                    },
-                    "ciutat": {
-                        "description": "Ciudad donde se encuentra el estadio",
-                        "type": "string",
-                        "example": "Barcelona"
-                    }
-                },
-                "type": "object"
-            },
-            "Equip": {
-                "title": "Equip Model",
-                "description": "Modelo que representa un equipo en la base de datos.",
-                "properties": {
-                    "id": {
-                        "description": "ID único del equipo.",
-                        "type": "integer"
-                    },
-                    "nom": {
-                        "description": "Nombre del equipo.",
-                        "type": "string"
-                    },
-                    "estadi_id": {
-                        "description": "ID del estadio al que pertenece el equipo.",
-                        "type": "integer"
-                    },
-                    "titols": {
-                        "description": "Número de títulos ganados por el equipo.",
-                        "type": "integer"
-                    },
-                    "escut": {
-                        "description": "Imagen del escudo del equipo en formato base64.",
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "Estadi": {
-                "title": "Estadi Model",
-                "description": "Modelo que representa un estadio en la base de datos.",
-                "properties": {
-                    "id": {
-                        "description": "ID único del estadio.",
-                        "type": "integer"
-                    },
-                    "nom": {
-                        "description": "Nombre del estadio.",
-                        "type": "string"
-                    },
-                    "capacitat": {
-                        "description": "Capacidad del estadio.",
-                        "type": "integer"
-                    }
-                },
-                "type": "object"
-            },
-            "Jugadoras": {
-                "description": "Modelo de Jugadoras",
-                "properties": {
-                    "id": {
-                        "description": "ID de la jugadoras",
-                        "type": "integer"
-                    },
-                    "nom": {
-                        "description": "Nombre de la jugadoras",
-                        "type": "string"
-                    },
-                    "posicion": {
-                        "description": "Posición en el campo",
-                        "type": "string",
-                        "enum": [
-                            "defensa",
-                            "medio",
-                            "delantera",
-                            "portero"
-                        ]
-                    },
-                    "dorsal": {
-                        "description": "Número de dorsal",
-                        "type": "integer"
-                    },
-                    "equip_id": {
-                        "description": "ID del equipo",
-                        "type": "integer"
-                    },
-                    "foto": {
-                        "description": "URL de la foto",
-                        "type": "string"
-                    },
-                    "data_naixement": {
-                        "description": "Fecha de nacimiento",
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "created_at": {
-                        "description": "Fecha de creación",
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "updated_at": {
-                        "description": "Fecha de actualización",
-                        "type": "string",
-                        "format": "date-time"
-                    }
-                },
-                "type": "object"
-            },
-            "Partit": {
-                "required": [
-                    "equip_local_id",
-                    "equip_visitant_id",
-                    "data_partit",
-                    "jornada",
-                    "estadi_id",
-                    "arbitre_id",
-                    "goles_local",
-                    "goles_visitant"
-                ],
-                "properties": {
-                    "id": {
-                        "description": "ID del partido",
-                        "type": "integer",
-                        "example": 1
-                    },
-                    "equip_local_id": {
-                        "description": "ID del equipo local",
-                        "type": "integer",
-                        "example": 1
-                    },
-                    "equip_visitant_id": {
-                        "description": "ID del equipo visitante",
-                        "type": "integer",
-                        "example": 2
-                    },
-                    "data_partit": {
-                        "description": "Fecha y hora del partido",
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2025-01-30T16:00:00"
-                    },
-                    "jornada": {
-                        "description": "Número de la jornada en la liga",
-                        "type": "integer",
-                        "example": 23
-                    },
-                    "estadi_id": {
-                        "description": "ID del estadio donde se juega el partido",
-                        "type": "integer",
-                        "example": 1
-                    },
-                    "arbitre_id": {
-                        "description": "ID del árbitro del partido",
-                        "type": "integer",
-                        "example": 5
-                    },
-                    "goles_local": {
-                        "description": "Goles del equipo local",
-                        "type": "integer",
-                        "example": 3
-                    },
-                    "goles_visitant": {
-                        "description": "Goles del equipo visitante",
-                        "type": "integer",
-                        "example": 2
                     }
                 },
                 "type": "object"
             }
         },
-        "requestBodies": {
-            "UpdateEquipRequest": {
-                "description": "Request per actualitzar un equip existent",
-                "required": true,
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "required": [
-                                "nom",
-                                "estadi_id"
-                            ],
-                            "properties": {
-                                "nom": {
-                                    "description": "Nom actualitzat de l'equip. Ha de ser únic, excepte per a l'equip actual.",
-                                    "type": "string"
-                                },
-                                "titols": {
-                                    "description": "Número de títols guanyats. Opcional, però ha de ser un número enter igual o superior a 0.",
-                                    "type": "integer"
-                                },
-                                "estadi_id": {
-                                    "description": "ID de l'estadi associat. Ha de correspondre a un estadi existent.",
-                                    "type": "integer"
-                                },
-                                "escut": {
-                                    "description": "Imatge opcional que representa l'escut de l'equip. Formats acceptats: jpeg, png, jpg. Màxim 2 MB.",
-                                    "type": "string",
-                                    "format": "binary"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
             }
         }
     },
     "tags": [
         {
-            "name": "Estadi",
-            "description": "Operacions per gestionar els estadis"
-        },
-        {
-            "name": "Partit",
-            "description": "Operacions relacionades amb els partits"
-        },
-        {
-            "name": "Auth",
-            "description": "Auth"
-        },
-        {
-            "name": "BaseController",
-            "description": "BaseController"
-        },
-        {
-            "name": "Equips",
-            "description": "Equips"
-        },
-        {
-            "name": "Jugadoras",
-            "description": "Jugadoras"
+            "name": "Zones",
+            "description": "Zones"
         }
     ]
 }
