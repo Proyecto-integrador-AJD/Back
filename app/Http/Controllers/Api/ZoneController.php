@@ -21,7 +21,7 @@ class ZoneController extends BaseController
      *     @OA\Response(
      *         response=200,
      *         description="Lista de zonas devuelta con éxito.",
-     *         @OA\JsonContent(type="array", @OA\Items(ref="/components/schemas/Zones"))
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/ZoneResource"))
      *     )
      * )
      */
@@ -46,7 +46,7 @@ class ZoneController extends BaseController
      *     @OA\Response(
      *         response=200,
      *         description="Zona recuperada con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Zones")
+     *         @OA\JsonContent(ref="#/components/schemas/ZoneResource")
      *     ),
      *     @OA\Response(
      *         response=404,
@@ -67,12 +67,12 @@ class ZoneController extends BaseController
      *     tags={"Zones"},
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(ref="/components/schemas/ZoneStoreRequest")
+     *         @OA\JsonContent(ref="#/components/schemas/ZoneStoreRequest")
      *     ),
      *     @OA\Response(
      *         response=201,
      *         description="Zona creada con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Zones")
+     *         @OA\JsonContent(ref="#/components/schemas/ZoneResource")
      *     )
      * )
      */
@@ -97,12 +97,12 @@ class ZoneController extends BaseController
      *     ),
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(ref="/components/schemas/ZoneUpdateRequest")
+     *         @OA\JsonContent(ref="#/components/schemas/ZoneUpdateRequest")
      *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Zona actualizada con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Zones")
+     *         @OA\JsonContent(ref="#/components/schemas/ZoneResource")
      *     )
      * )
      */

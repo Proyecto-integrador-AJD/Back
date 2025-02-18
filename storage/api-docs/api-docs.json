@@ -22,7 +22,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "/components/schemas/Zones"
+                                        "$ref": "#/components/schemas/ZoneResource"
                                     }
                                 }
                             }
@@ -47,7 +47,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "/components/schemas/ZoneStoreRequest"
+                                "$ref": "#/components/schemas/ZoneStoreRequest"
                             }
                         }
                     }
@@ -58,7 +58,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "/components/schemas/Zones"
+                                    "$ref": "#/components/schemas/ZoneResource"
                                 }
                             }
                         }
@@ -91,7 +91,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "/components/schemas/Zones"
+                                    "$ref": "#/components/schemas/ZoneResource"
                                 }
                             }
                         }
@@ -124,7 +124,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "/components/schemas/ZoneUpdateRequest"
+                                "$ref": "#/components/schemas/ZoneUpdateRequest"
                             }
                         }
                     }
@@ -135,7 +135,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "/components/schemas/Zones"
+                                    "$ref": "#/components/schemas/ZoneResource"
                                 }
                             }
                         }
@@ -173,7 +173,7 @@
     },
     "components": {
         "schemas": {
-            "StoreEquipRequest": {
+            "ZoneStoreRequest": {
                 "required": [
                     "name",
                     "description",
@@ -217,6 +217,28 @@
                         "type": "string",
                         "maxLength": 255,
                         "example": "A Coruña"
+                    }
+                },
+                "type": "object"
+            },
+            "ZoneResource": {
+                "description": "Respuestas de la zona",
+                "properties": {
+                    "id": {
+                        "description": "ID de la zona",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nombre de la zona",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Descripcion de la zona",
+                        "type": "string"
+                    },
+                    "location": {
+                        "description": "Ubicacion de la zona",
+                        "type": "string"
                     }
                 },
                 "type": "object"

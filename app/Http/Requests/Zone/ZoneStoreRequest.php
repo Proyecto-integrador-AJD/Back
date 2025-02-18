@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * @OA\Schema(
- *     schema="StoreEquipRequest",
+ *     schema="ZoneStoreRequest",
  *     type="object",
  *     required={"name", "description", "location"},
  *     @OA\Property(
