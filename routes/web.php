@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\{Route, App};
 use App\Http\Controllers\{
     ZoneController,
     UserController,
-    PatientController
+    PatientController, 
+    CallController
 };
 use App\Models\{Partit, User};
 use App\Mail\CalendarioArbitros;
@@ -36,6 +37,9 @@ Route::middleware(['auth', RoleMiddleware::class.':administrator' ])->group(func
     Route::resource('/users', UserController::class);
 
     Route::resource('/patients', PatientController::class);
+
+
+    Route::resource('/calls', CallController::class);
    
 
 });

@@ -69,8 +69,24 @@
   "patients.fields.housingSituationNumberOfRooms": "Numero de Habitaciones",
   "patients.fields.housingSituationLocation": "Ubicaciond e la Vivienda",
   "patients.fields.personalAutonomy": "Autonomia",
-  "patients.fields.economicSituation": "Situacion Economica"
+  "patients.fields.economicSituation": "Situacion Economica",
 
+  "calls.title": "Panel Llamadas",
+  "calls.title.creacion": "Creación de Llamadas",
+  "calls.title.edit": "Modificación de Llamadas",
+
+  "calls.fields.patientId": "Paciente",
+  "calls.fields.userId": "Teleoperador",
+  "calls.fields.date": "Fecha",
+  "calls.fields.incoming": "Entrante/Saliente",
+  "calls.fields.type": "Tipo",
+  "calls.fields.subType": "Subtipo",
+  "calls.fields.description": "Descripcion",
+  "calls.fields.duration": "Duracion",
+  "calls.fields.incoming_option_1": "Entrante",
+  "calls.fields.incoming_option_0": "Saliente",
+  "calls.fields.alertId": "Alerta"
+  
       
 
 
