@@ -17,6 +17,7 @@ class AlertResource extends JsonResource
         return [
             'id' => $this->id,
             'patientId' => $this->patientId,
+            'patient' => new PatientResource($this->patient ),
             'type' => $this->type,
             'subType' => $this->subType,
             'description' => $this->description,
