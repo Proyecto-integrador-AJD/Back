@@ -23,11 +23,13 @@ class AlertStoreRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
             'patientId' => 'required|exists:patients,id',
             'type' => 'required|string|max:255',
-            'subType' => 'required|string|max:255',
-            'startDate' => 'required|date_format:Y-m-d H:i:s',
+            'subType' => 'nullable|string|max:255',
+            //'startDate' => 'required|date_format:Y-m-d H:i:s',
+            'startDate' => 'required|date_format:Y-m-d\TH:i',
             'isRecurring' => 'required|boolean',
             'description' => 'nullable|string|max:255',
             'recurrenceType' => 'nullable|string|exists:recurrenceTypes,name|max:255',
@@ -59,7 +61,6 @@ class AlertStoreRequest extends FormRequest
             'type.required' => 'El campo "Tipo" es obligatorio.',
             'type.string' => 'El campo "Tipo" debe ser una cadena de caracteres.',
             'type.max' => 'El campo "Tipo" no puede superar los 255 caracteres.',
-            'subType.required' => 'El campo "Subtipo" es obligatorio.',
             'subType.string' => 'El campo "Subtipo" debe ser una cadena de caracteres.',
             'subType.max' => 'El campo "Subtipo" no puede superar los 255 caracteres.',
             'startDate.required' => 'El campo "Fecha de inicio" es obligatorio.',

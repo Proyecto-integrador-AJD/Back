@@ -26,7 +26,7 @@
 
     <div class="mb-3">
         <label for="date" class="form-label">{{ __('calls.fields.date') }}:</label>
-        <input type="date" name="locadatetion" id="locatdateion" required class="form-control">
+        <input type="date" name="date" id="date" required class="form-control">
     </div>
 
  

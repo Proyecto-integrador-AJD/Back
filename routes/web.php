@@ -5,7 +5,9 @@ use App\Http\Controllers\{
     ZoneController,
     UserController,
     PatientController, 
-    CallController
+    CallController,
+    AlertController,
+   AlertTypeController
 };
 use App\Models\{Partit, User};
 use App\Mail\CalendarioArbitros;
@@ -38,8 +40,11 @@ Route::middleware(['auth', RoleMiddleware::class.':administrator' ])->group(func
 
     Route::resource('/patients', PatientController::class);
 
-
     Route::resource('/calls', CallController::class);
+
+    Route::resource('/alerts', AlertController::class);
+
+    Route::get('/alert-types', [AlertTypeController::class, 'index']);
    
 
 });

@@ -26,8 +26,9 @@ class AlertUpdateRequest extends FormRequest
         return [
             'patientId' => 'exists:patients,id',
             'type' => 'string|max:255',
-            'subType' => 'string|max:255',
-            'startDate' => 'date_format:Y-m-d H:i:s',
+            'subType' => 'nullable|string|max:255',
+            //'startDate' => 'date_format:Y-m-d H:i:s',
+            'startDate' => 'required|date_format:Y-m-d\TH:i',
             'isRecurring' => 'boolean',
             'description' => 'nullable|string|max:255',
             'recurrenceType' => 'nullable|string|exists:recurrenceTypes,name|max:255',

@@ -85,7 +85,20 @@
   "calls.fields.duration": "Duracion",
   "calls.fields.incoming_option_1": "Entrante",
   "calls.fields.incoming_option_0": "Saliente",
-  "calls.fields.alertId": "Alerta"
+  "calls.fields.alertId": "Alerta",
+
+  "alerts.title": "Panel Alertas",
+  "alerts.title.creacion": "Creación de Alertas",
+  "alerts.title.edit": "Modificación de Alertas",
+
+  "alerts.fields.patientId": "Paciente",
+  "alerts.fields.type": "Tipo",
+  "alerts.fields.startDate": "Fecha de Inicio",
+  "alerts.fields.isRecurring": "Es Recurrente",
+  "alerts.fields.description": "Descripcion",
+  "alerts.fields.subType": "SubTipo",
+  "alerts.fields.recurrenceType": "Tipo de Recurrencia"
+
   
       
 

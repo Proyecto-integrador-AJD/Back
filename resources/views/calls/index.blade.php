@@ -3,8 +3,7 @@
 <!-- Titulo -->
 <h1 class="text-3xl font-bold text-blue-800 mb-6">{{ __('calls.title') }}</h1>
 <a href="{{ route('calls.create') }}" class="bg-blue-500 text-blue font-medium">
-    <!-- Crear -->
-    <button>{{ __('btn.new') }}</button>
+ 
 </a>
 @if (session('success'))
     <div class="bg-green-500 text-black p-4 mb-6 rounded-lg">
