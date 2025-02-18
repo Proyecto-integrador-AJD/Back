@@ -97,7 +97,19 @@
   "alerts.fields.isRecurring": "Es Recurrente",
   "alerts.fields.description": "Descripcion",
   "alerts.fields.subType": "SubTipo",
-  "alerts.fields.recurrenceType": "Tipo de Recurrencia"
+  "alerts.fields.recurrenceType": "Tipo de Recurrencia",
+
+  "contacts.title": "Panel Contactos",
+  "contacts.title.creacion": "Creación de Contactos",
+  "contacts.title.edit": "Modificación de Contactos",
+
+  "contacts.fields.name": "Nombre",
+  "contacts.fields.lastName": "Apellido",
+  "contacts.fields.email": "Correo",
+  "contacts.fields.prefix": "Prefijo",
+  "contacts.fields.telefono": "Telefono",
+  "contacts.fields.relationship": "Relacion"
+
 
   
       

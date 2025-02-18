@@ -47,7 +47,7 @@ class AlertController extends Controller
         
             Alert::create($validated);
         
-            return redirect()->route('alerts.index')->with('success', 'Laerta creada correctamente!');
+            return redirect()->route('alerts.index')->with('success', 'Alerta creada correctamente!');
     }
 
     public function show(Alert $alert)
