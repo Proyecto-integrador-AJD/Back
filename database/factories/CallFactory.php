@@ -35,7 +35,7 @@ class CallFactory extends Factory
 
         $subtipe = $this->faker->randomElement(IncomingTypeAndSubtipe::getValues());
         return [
-            'date' => '2021-01-01 00:00:00',
+            'date' => $this->faker->dateTimeBetween('-1 month', 'now')->format('Y-m-d H:i:s'),
             'patientId' => Patient::all()->random()->id,
             'userId' => User::where('role', 'operator')->get()->random()->id,
             'incoming' => true,
