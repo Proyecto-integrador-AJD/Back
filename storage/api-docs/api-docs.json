@@ -6,6 +6,250 @@
     },
     "paths": {
         "/api": {},
+        "/api/alerts/user": {
+            "get": {
+                "tags": [
+                    "Alerts"
+                ],
+                "summary": "Obtener alertas asignadas al usuario",
+                "description": "Devuelve una lista de alertas asignadas al usuario autenticado.",
+                "operationId": "9e52292218c89e986d0ac1cde073a585",
+                "responses": {
+                    "200": {
+                        "description": "Alertas asignadas al usuario recuperadas con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AlertResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/alerts/unassigned": {
+            "get": {
+                "tags": [
+                    "Alerts"
+                ],
+                "summary": "Obtener alertas sin llamadas asignadas",
+                "description": "Devuelve las alertas que no están asociadas a ninguna llamada.",
+                "operationId": "7aa6db8541652bc9317e88cffeaf1411",
+                "responses": {
+                    "200": {
+                        "description": "Alertas sin llamadas asignadas recuperadas con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AlertResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/alerts": {
+            "get": {
+                "tags": [
+                    "Alerts"
+                ],
+                "summary": "Obtener todas las alertas",
+                "description": "Devuelve una lista de todas las alertas.",
+                "operationId": "4478ffd7354aa9ca6132fb9e74bdde0b",
+                "responses": {
+                    "200": {
+                        "description": "Lista de alertas devuelta con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AlertResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Alerts"
+                ],
+                "summary": "Crear una nueva alerta",
+                "description": "Crea una nueva alerta con los datos proporcionados.",
+                "operationId": "42b5297a4f4f281e294bf8339a0a80d8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AlertStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Alerta creada con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AlertResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/alerts/{id}": {
+            "get": {
+                "tags": [
+                    "Alerts"
+                ],
+                "summary": "Obtener una alerta específica",
+                "description": "Devuelve los datos de una alerta específica por su ID.",
+                "operationId": "48e65a8f03a14c0b36563c5284e726a3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la alerta",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Alerta recuperada con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AlertResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Alerta no encontrada."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Alerts"
+                ],
+                "summary": "Actualizar una alerta",
+                "description": "Actualiza los datos de una alerta existente.",
+                "operationId": "037adc62bb0d80e7c7a153cf2445e337",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la alerta",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AlertUpdateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Alerta actualizada con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AlertResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Alerts"
+                ],
+                "summary": "Eliminar una alerta",
+                "description": "Elimina una alerta específica por su ID.",
+                "operationId": "6dea41ff5a0bbf10775b84b2275d50e0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la alerta",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Alerta eliminada con éxito."
+                    },
+                    "404": {
+                        "description": "Alerta no encontrada."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/calls/patient/{id}": {
             "get": {
                 "tags": [
@@ -857,6 +1101,108 @@
     },
     "components": {
         "schemas": {
+            "AlertStoreRequest": {
+                "required": [
+                    "patientId",
+                    "type",
+                    "startDate",
+                    "isRecurring"
+                ],
+                "properties": {
+                    "patientId": {
+                        "description": "ID del paciente asociado a la alerta",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "type": {
+                        "description": "Tipo de alerta",
+                        "type": "string",
+                        "example": "Alerta médica"
+                    },
+                    "subType": {
+                        "description": "Subtipo de alerta",
+                        "type": "string",
+                        "example": "Alerta de seguimiento"
+                    },
+                    "startDate": {
+                        "description": "Fecha de inicio de la alerta, en formato ISO 8601 (Y-m-d\\TH:i)",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-02-19T10:30"
+                    },
+                    "isRecurring": {
+                        "description": "Indica si la alerta es recurrente",
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "description": {
+                        "description": "Descripción de la alerta",
+                        "type": "string",
+                        "example": "La alerta es para recordar la toma de medicamentos."
+                    },
+                    "recurrenceType": {
+                        "description": "Tipo de recurrencia para la alerta",
+                        "type": "string",
+                        "example": "Diaria"
+                    },
+                    "recurrence": {
+                        "description": "Número de veces que se repetirá la alerta",
+                        "type": "integer",
+                        "example": 5
+                    }
+                },
+                "type": "object"
+            },
+            "AlertUpdateRequest": {
+                "properties": {
+                    "patientId": {
+                        "description": "ID del paciente asociado a la alerta",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "type": {
+                        "description": "Tipo de alerta",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Alerta médica"
+                    },
+                    "subType": {
+                        "description": "Subtipo de alerta",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Alerta de seguimiento"
+                    },
+                    "startDate": {
+                        "description": "Fecha de inicio de la alerta, en formato ISO 8601 (Y-m-d\\TH:i)",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-02-19T10:30"
+                    },
+                    "isRecurring": {
+                        "description": "Indica si la alerta es recurrente",
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "description": {
+                        "description": "Descripción de la alerta",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "La alerta es para recordar la toma de medicamentos."
+                    },
+                    "recurrenceType": {
+                        "description": "Tipo de recurrencia para la alerta",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Diaria"
+                    },
+                    "recurrence": {
+                        "description": "Número de veces que se repetirá la alerta",
+                        "type": "integer",
+                        "example": 5
+                    }
+                },
+                "type": "object"
+            },
             "CallStoreRequest": {
                 "required": [
                     "date",
@@ -1410,6 +1756,52 @@
                         "type": "string",
                         "maxLength": 255,
                         "example": "A Coruña"
+                    }
+                },
+                "type": "object"
+            },
+            "AlertResource": {
+                "description": "Respuesta de la alerta",
+                "properties": {
+                    "id": {
+                        "description": "ID de la alerta",
+                        "type": "integer"
+                    },
+                    "patientId": {
+                        "description": "ID del paciente asociado a la alerta",
+                        "type": "integer"
+                    },
+                    "patient": {
+                        "$ref": "#/components/schemas/PatientResource"
+                    },
+                    "type": {
+                        "description": "Tipo de alerta",
+                        "type": "string"
+                    },
+                    "subType": {
+                        "description": "Subtipo de alerta",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Descripción de la alerta",
+                        "type": "string"
+                    },
+                    "startDate": {
+                        "description": "Fecha de inicio de la alerta",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "isRecurring": {
+                        "description": "Indica si la alerta es recurrente",
+                        "type": "boolean"
+                    },
+                    "recurrenceType": {
+                        "description": "Tipo de recurrencia de la alerta",
+                        "type": "string"
+                    },
+                    "recurrence": {
+                        "description": "Número de recurrencias",
+                        "type": "integer"
                     }
                 },
                 "type": "object"
@@ -2107,6 +2499,10 @@
         {
             "name": "Calls",
             "description": "Operaciones relacionadas con las llamadas"
+        },
+        {
+            "name": "Alerts",
+            "description": "Alerts"
         },
         {
             "name": "Patients",
