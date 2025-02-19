@@ -20,12 +20,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('lastName');
             $table->string('email')->unique();
-            $table->foreignId('prefixId')->constrained('prefixes')->onDelete('cascade');
+            $table->string('prefix');
             $table->integer('phone');
 
             // Foreing Key Patient
             $table->foreignId('patientId')->constrained('patients')->onDelete('cascade');
-            $table->foreignId('relationshipId')->constrained('relationships')->onDelete('cascade');
+            $table->string('relationship');
             $table->timestamps();
         });
     }

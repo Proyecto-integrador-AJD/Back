@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\Alerts\RecurrenceType;
 
 return new class extends Migration
 {
@@ -17,7 +16,7 @@ return new class extends Migration
 
             $table->foreignId('patientId')->constrained('patients')->onDelete('cascade');
             $table->string('type');
-            $table->string('subType');
+            $table->string('subType')->nullable();
             $table->string('description');
             $table->datetime('startDate');
             $table->boolean('isRecurring');

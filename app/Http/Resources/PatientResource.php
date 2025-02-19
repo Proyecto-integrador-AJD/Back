@@ -37,10 +37,11 @@ class PatientResource extends JsonResource
             'healthCardNumber' => $this->healthCardNumber,
 
             // Phone
-            'prefix' => new PrefixResource($this->prefix),
+            'prefix' => $this->prefix,
             'phone' => $this->phone,
 
             'email' => $this->email,
+            'language' => $this->language,
 
             // Foreign Key - Zone
             'zoneId' => $this->zoneId,
@@ -57,7 +58,7 @@ class PatientResource extends JsonResource
 
             // Economic Situation
             'economicSituation' => $this->economicSituation,
-            // 'contacts' => new ContactResource($this->contacts),
+            'contacts' => $this->contacts,
         ];
 
     }

@@ -14,7 +14,7 @@ class Contact extends Model
         'name',
         'lastName',
         'email',
-        'prefixId',
+        'prefix',
         'phone',
         'patientId',
         'relationship',
@@ -25,13 +25,5 @@ class Contact extends Model
         return $this->belongsTo(Patient::class, 'patientId');
     }
 
-    public function relationship()
-    {
-        return $this->belongsTo(Relationship::class, 'relationshipId');
-    }
-
-    public function prefix()
-    {
-        return $this->belongsTo(Prefix::class, 'prefixId');
-    }
+    
 }

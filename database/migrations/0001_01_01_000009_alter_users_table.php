@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('role')->default('operador');
             $table->string('lastName');
-            $table->foreignId('prefixId')->constrained('prefixes')->onDelete('cascade');
+            $table->string('prefix');
             $table->integer('phone');
 
             
@@ -39,8 +39,7 @@ return new class extends Migration
             $table->dropColumn('username');
             $table->dropColumn('role');
             $table->dropColumn('lastName');
-            $table->dropForeign(['prefixId']);
-            $table->dropColumn('prefixId');
+            $table->dropColumn('prefix');
             $table->dropColumn('phone');
             $table->dropColumn('language');
             $table->dropColumn('dateHire');

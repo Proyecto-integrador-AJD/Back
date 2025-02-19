@@ -7,76 +7,72 @@ use App\Http\Requests\Zone\{ZoneStoreRequest, ZoneUpdateRequest};
 use App\Http\Resources\ZoneResource;
 use App\Http\Controllers\Api\BaseController;
 
-/**
- * @OA\Info(
- *     title="Zones API",
- *     version="1.0.0",
- *     description="API para gestionar los pacientes."
- * )
- */
+
 class ZoneController extends BaseController
-{
+{  
+
     /**
      * @OA\Get(
      *     path="/api/zones",
-     *     summary="Obtener todos los pacientes",
-     *     description="Devuelve una lista paginada de pacientes.",
+     *     summary="Obtener todas las zonas",
+     *     description="Devuelve una lista paginada de zonas.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Zones"},
      *     @OA\Response(
      *         response=200,
-     *         description="Lista de pacientes devuelta con éxito.",
-     *         @OA\JsonContent(type="array", @OA\Items(ref="/components/schemas/Zones"))
+     *         description="Lista de zonas devuelta con éxito.",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/ZoneResource"))
      *     )
      * )
      */
     public function index()
     {
-        return ZoneResource::collection(Zone::paginate());
+        return ZoneResource::collection(Zone::all());
     }
 
     /**
      * @OA\Get(
      *     path="/api/zones/{id}",
      *     summary="Obtener un paciente",
-     *     description="Devuelve los datos de un paciente específico por su ID.",
+     *     description="Devuelve los datos de una zona específico por su ID.",
      *     tags={"Zones"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="ID del paciente",
+     *         description="ID de la zona",
      *         required=true,
      *         @OA\Schema(type="integer")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Paciente recuperado con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Zones")
+     *         description="Zona recuperada con éxito.",
+     *         @OA\JsonContent(ref="#/components/schemas/ZoneResource")
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Paciente no encontrado."
+     *         description="Zona no encontrado."
      *     )
      * )
      */
     public function show(Zone $zone)
     {
-        return $this->sendResponse(new ZoneResource($zone), 'Paciente recuperado con éxito', 200);
+        return $this->sendResponse(new ZoneResource($zone), 'Zona recuperada con éxito', 200);
     }
 
     /**
      * @OA\Post(
      *     path="/api/zones",
-     *     summary="Crear un nuevo paciente",
-     *     description="Crea un nuevo paciente con los datos proporcionados.",
+     *     summary="Crear una nueva zona",
+     *     description="Crea una nuevo zona con los datos proporcionados.",
      *     tags={"Zones"},
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(ref="/components/schemas/StoreZoneRequest")
+     *         @OA\JsonContent(ref="#/components/schemas/ZoneStoreRequest")
      *     ),
      *     @OA\Response(
      *         response=201,
-     *         description="Paciente creado con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Zones")
+     *         description="Zona creada con éxito.",
+     *         @OA\JsonContent(ref="#/components/schemas/ZoneResource")
      *     )
      * )
      */
@@ -89,24 +85,24 @@ class ZoneController extends BaseController
     /**
      * @OA\Put(
      *     path="/api/zones/{id}",
-     *     summary="Actualizar un paciente",
-     *     description="Actualiza los datos de un paciente existente.",
+     *     summary="Actualizar una zona",
+     *     description="Actualiza los datos de una zona existente.",
      *     tags={"Zones"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="ID del paciente",
+     *         description="ID de la zona",
      *         required=true,
      *         @OA\Schema(type="integer")
      *     ),
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(ref="/components/schemas/UpdateZoneRequest")
+     *         @OA\JsonContent(ref="#/components/schemas/ZoneUpdateRequest")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Paciente actualizado con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Zones")
+     *         description="Zona actualizada con éxito.",
+     *         @OA\JsonContent(ref="#/components/schemas/ZoneResource")
      *     )
      * )
      */
@@ -119,23 +115,23 @@ class ZoneController extends BaseController
     /**
      * @OA\Delete(
      *     path="/api/zones/{id}",
-     *     summary="Eliminar un paciente",
-     *     description="Elimina un paciente específico por su ID.",
+     *     summary="Eliminar una zona",
+     *     description="Elimina una zona específico por su ID.",
      *     tags={"Zones"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="ID del paciente",
+     *         description="ID de la zona",
      *         required=true,
      *         @OA\Schema(type="integer")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Paciente eliminado con éxito."
+     *         description="Zona eliminado con éxito."
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Paciente no encontrado."
+     *         description="Zona no encontrada."
      *     )
      * )
      */

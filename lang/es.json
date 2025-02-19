@@ -20,5 +20,124 @@
 
   "zones.fields.name": "Nombre",
   "zones.fields.description": "Descripción",
-  "zones.fields.location": "Ubicación"
+  "zones.fields.location": "Ubicación",
+
+
+  "users.title": "Panel Teleoperadores",
+  "users.title.creacion": "Creación de Teleoperadores",
+  "users.title.edit": "Modificación de Teleoperadores",
+
+  "users.fields.name": "Nombre",
+  "users.fields.lastName": "Apellido",
+  "users.fields.email": "Correo",
+  "users.fields.phone": "Telefono",
+  "users.fields.prefix": "Prefijo",
+  "users.fields.password": "Contraseña",
+  "users.fields.username": "Nombre de Usuario",
+  "users.fields.dateHire": "Fecha de Inicio",
+  "users.fields.language": "Idioma",
+
+  "patients.title": "Panel Pacientes",
+  "patients.title.creacion": "Creación de Pacientes",
+  "patients.title.edit": "Modificación de Pacientes",
+
+  "patients.fields.name": "Nombre",
+  "patients.fields.lastName": "Apellido",
+  "patients.fields.email": "Correo",
+  "patients.fields.phone": "Telefono",
+  "patients.fields.prefix": "Prefijo",
+  "patients.fields.userId": "Teleoperador",
+  "patients.fields.zoneId": "Zona",
+  "patients.fields.birthDate": "Fecha de Nacimiento",
+  "patients.fields.language": "Idioma",
+  "patients.fields.addressStreet": "Calle",
+  "patients.fields.addressNumber": "Numero",
+  "patients.fields.addressDoor": "Puerta",
+  "patients.fields.addressPostalCode": "Codigo Postal",
+  "patients.fields.addressCity": "Ciudad",
+  "patients.fields.addressProvince": "Provincia",
+  "patients.fields.addressCountry": "Pais",
+  "patients.fields.addressFloor": "Piso",
+  "patients.fields.address": "Direccion",
+  "patients.fields.dni": "DNI",
+  "patients.fields.housing": "Alojamiento",
+  "patients.fields.healthCardNumber": "Targeta Sanitaria",
+  "patients.fields.situationPersonalFamily": "Situacion Personal Familiar",
+  "patients.fields.healthSituation": "Situacion de Salud",
+  "patients.fields.housingSituationType": "Tipo de Alojamiento",
+  "patients.fields.housingSituationStatus": "Estado de la Vivienda",
+  "patients.fields.housingSituationNumberOfRooms": "Numero de Habitaciones",
+  "patients.fields.housingSituationLocation": "Ubicaciond e la Vivienda",
+  "patients.fields.personalAutonomy": "Autonomia",
+  "patients.fields.economicSituation": "Situacion Economica",
+
+  "calls.title": "Panel Llamadas",
+  "calls.title.creacion": "Creación de Llamadas",
+  "calls.title.edit": "Modificación de Llamadas",
+
+  "calls.fields.patientId": "Paciente",
+  "calls.fields.userId": "Teleoperador",
+  "calls.fields.date": "Fecha",
+  "calls.fields.incoming": "Entrante/Saliente",
+  "calls.fields.type": "Tipo",
+  "calls.fields.subType": "Subtipo",
+  "calls.fields.description": "Descripcion",
+  "calls.fields.duration": "Duracion",
+  "calls.fields.incoming_option_1": "Entrante",
+  "calls.fields.incoming_option_0": "Saliente",
+  "calls.fields.alertId": "Alerta",
+
+  "alerts.title": "Panel Alertas",
+  "alerts.title.creacion": "Creación de Alertas",
+  "alerts.title.edit": "Modificación de Alertas",
+
+  "alerts.fields.patientId": "Paciente",
+  "alerts.fields.type": "Tipo",
+  "alerts.fields.startDate": "Fecha de Inicio",
+  "alerts.fields.isRecurring": "Es Recurrente",
+  "alerts.fields.description": "Descripcion",
+  "alerts.fields.subType": "SubTipo",
+  "alerts.fields.recurrenceType": "Tipo de Recurrencia",
+
+  "contacts.title": "Panel Contactos",
+  "contacts.title.creacion": "Creación de Contactos",
+  "contacts.title.edit": "Modificación de Contactos",
+
+  "contacts.fields.name": "Nombre",
+  "contacts.fields.lastName": "Apellido",
+  "contacts.fields.email": "Correo",
+  "contacts.fields.prefix": "Prefijo",
+  "contacts.fields.telefono": "Telefono",
+  "contacts.fields.relationship": "Relacion",
+
+
+  
+  "pdf.reportCalls.title": "Informe de Llamadas",
+  "pdf.reportCalls.subTitle": "Informe generado el dia",
+  "pdf.reportCalls.titleFilter": "Filtros usados",
+  "pdf.reportCalls.noPrevistas.title": "Llamadas no previstas",
+  "pdf.reportCalls.previstas.title": "Llamadas previstas",
+  
+  "pdf.reportCalls.filterTableHeader.dateInit": "Fecha Inicio",
+  "pdf.reportCalls.filterTableHeader.dateEnd": "Fecha Fin",
+  "pdf.reportCalls.filterTableHeader.zone": "Zona",
+  "pdf.reportCalls.filterTableHeader.type": "Tipo de Llamadas",
+
+  "pdf.reportCalls.tableHeader.date": "Fecha",
+  "pdf.reportCalls.tableHeader.operator": "Operador",
+  "pdf.reportCalls.tableHeader.patient": "Paciente",
+  "pdf.reportCalls.tableHeader.zone": "Zona",
+  "pdf.reportCalls.tableHeader.type": "Tipo",
+  "pdf.reportCalls.tableHeader.subType": "SubTipo",
+  "pdf.reportCalls.tableHeader.duration": "Duración",
+  "pdf.reportCalls.tableHeader.description": "Descripción",
+  "pdf.reportCalls.table.min": "min",
+
+  "pdf.reportCalls.tableHeader.alertType": "Tipo de Alerta",
+  "pdf.reportCalls.tableHeader.alertSubType": "SubTipo de Alerta",
+  "pdf.reportCalls.tableHeader.alertDescription": "Descripcion de Alerta"
+
+
+
+
 }

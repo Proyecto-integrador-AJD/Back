@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@example.com',
             'password' => Hash::make('password'),
             'role' => 'admintrator',
-            'prefixId' => 1,
+            'prefix' => '+34',
             'phone' => 666777888,
             'dateHire' => '2025-01-01',
 
@@ -32,13 +32,24 @@ class UserSeeder extends Seeder
             'email' => 'adminMalo@example.com',
             'password' => Hash::make('password'),
             'role' => 'operator',
-            'prefixId' => 1,
+            'prefix' => '+34',
             'phone' => 666777888,
             'dateHire' => '2025-01-01',
 
         ]);
+        User::create([
+            'name' => 'AdminParaBorrar',
+            'lastName' => 'AdminParaBorrar',
+            'username' => 'AdminParaBorrar',
+            'email' => 'AdminParaBorrar@example.com',
+            'password' => Hash::make('password'),
+            'role' => 'admintrator',
+            'prefix' => '+34',
+            'phone' => 666777888,
+            'dateHire' => '2025-01-01',
 
+        ]);
         // Crear 30 árbitros
-        User::factory()->count(30)->create();
+        User::factory()->count(5)->create();
     }
 }

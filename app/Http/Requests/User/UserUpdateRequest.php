@@ -24,16 +24,20 @@ class UserUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $current = $this->route('user');
+
         return [
             'name' => 'string|max:255',
             'lastName' => 'string|max:255',
+            'email' => 'email|max:255|unique:users,email,'. $current->email .',email',
             'prefix' => 'exists:prefixes,prefix',
             'phone' => 'integer',
             'role' => 'string',
             'language' => 'array',
-            'language.*' => 'string|max:255',
+            'language.*' => 'string|exists:languages,name|max:255',
             'dateHire' => 'date',
             'dateTermination' => 'nullable|date',
+            'username' => 'required|string|max:255|unique:users,username,'. $current->username .',username',
             'password' => 'string|max:255',
         ];
     }

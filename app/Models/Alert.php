@@ -20,4 +20,9 @@ class Alert extends Model
         'recurrenceType',
         'recurrence',
     ];
+
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class, 'patientId');
+    }
 }

@@ -24,13 +24,13 @@ class CallStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'date' => 'required|date',
+            'date' => 'required|date_format:Y-m-d H:i:s',
             'patientId' => 'required|exists:patients,id',
             'userId' => 'required|exists:users,id',
             'incoming' => 'required|boolean',
             'type' => 'required|string',
-            'subType' => 'required|string',
-            'alertId' => 'required|exists:alerts,id',
+            'subType' => 'nullable|string',
+            'alertId' => 'nullable|exists:alerts,id',
             'duration' => 'required|integer',
             'description' => 'required|string',
         ];

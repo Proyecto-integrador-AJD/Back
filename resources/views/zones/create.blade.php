@@ -1,35 +1,26 @@
 @extends('layouts.app')
 
-@section('title', __('equips.titulo.creacion'))
+@section('title', __('zones.titulo.creacion'))
 
 @section('content')
-<form action="{{ route('equips.store') }}" method="POST" class="bg-white p-4 rounded shadow-sm mx-auto" style="max-width: 500px;" enctype="multipart/form-data">
+<form action="{{ route('zones.store') }}" method="POST" class="bg-white p-4 rounded shadow-sm mx-auto" style="max-width: 500px;" enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
-        <label for="nom" class="form-label">{{ __('equips.campos.nombre') }}:</label>
-        <input type="text" name="nom" id="nom" required
+        <label for="name" class="form-label">{{ __('zones.fields.name') }}:</label>
+        <input type="text" name="name" id="name" required class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label for="description" class="form-label">{{ __('zones.fields.description') }}:</label>
+        <input type="text" name="description" id="description" required class="form-control">
+    </div>
+
+    <div class="mb-3">
+    <label for="location" class="form-label">{{ __('zones.fields.location') }}:</label>
+        <input type="text" name="location" id="location" required
             class="form-control">
     </div>
 
-    <div class="mb-3">
-        <label for="titols" class="form-label">{{ __('equips.campos.titulos') }}:</label>
-        <input type="number" name="titols" id="titols" required
-            class="form-control">
-    </div>
-
-    <div class="mb-3">
-        <label for="estadi_id" class="form-label">{{ __('equips.campos.estadio') }}:</label>
-        <select name="estadi_id" id="estadi_id" required class="form-select">
-            @foreach ($estadis as $estadi)
-                <option value="{{ $estadi->id }}">{{ $estadi->nom }}</option>
-            @endforeach
-        </select>
-    </div>
-
-    <div class="mb-3">
-        <label for="escut" class="form-label">{{ __('equips.campos.escudo') }}:</label>
-        <input type="file" name="escut" id="escut" class="form-control">
-    </div>
 
     <button type="submit" class="btn btn-primary w-100">{{ __('btn.crear') }}</button>
 </form>
