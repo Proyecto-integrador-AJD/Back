@@ -148,7 +148,13 @@ Route::middleware(['auth:sanctum','api'])->group( function () {
     Route::get('user',  [AuthController::class, 'user']);
 
     Route::middleware(['auth', AdminPermissionsMiddleware::class])->group(function (){
-        Route::apiResource('users',  UserController::class);
+        Route::apiResource('users', UserController::class)->names([
+            'index'   => 'api.users.list',
+            'store'   => 'api.users.store',
+            'show'    => 'api.users.show',
+            'update'  => 'api.users.update',
+            'destroy' => 'api.users.delete',
+        ]);
     });
 
     Route::post('logout', [AuthController::class, 'logout']);

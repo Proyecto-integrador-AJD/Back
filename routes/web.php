@@ -17,8 +17,6 @@ use App\Http\Middleware\RoleMiddleware;
 
 App::setLocale('es');
 
-
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
