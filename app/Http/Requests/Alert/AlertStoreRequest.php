@@ -49,7 +49,7 @@ use Illuminate\Foundation\Http\FormRequest;
  *         property="recurrenceType",
  *         type="string",
  *         description="Tipo de recurrencia para la alerta",
- *         example="Diaria"
+ *         example="yearly"
  *     ),
  *     @OA\Property(
  *         property="recurrence",

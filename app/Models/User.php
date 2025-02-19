@@ -19,7 +19,6 @@ use App\Casts\CsvToArrayCast;
  *     @OA\Property(property="lastName", type="string", description="Apellido del usuario"),
  *     @OA\Property(property="email", type="string", description="Correo electrónico del usuario"),
  *     @OA\Property(property="password", type="string", description="Contraseña del usuario"),
- *     @OA\Property(property="role", type="string", description="Rol del usuario (e.g., admin, user)"),
  *     @OA\Property(property="phone", type="string", description="Número de teléfono del usuario"),
  *     @OA\Property(property="dateHire", type="string", format="date", description="Fecha de contratación"),
  *     @OA\Property(property="dateTermination", type="string", format="date", description="Fecha de terminación (si aplica)"),

@@ -17,12 +17,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *         example=1
  *     ),
  *     @OA\Property(
- *         property="role",
- *         type="string",
- *         description="Rol del usuario",
- *         example="admin"
- *     ),
- *     @OA\Property(
  *         property="name",
  *         type="string",
  *         description="Nombre del usuario",
@@ -76,7 +70,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *         property="username",
  *         type="string",
  *         description="Nombre de usuario",
- *         example="admin_anna"
+ *         example="operator_anna"
  *     )
  * )
  */
@@ -92,17 +86,17 @@ class UserResource extends JsonResource
 
         /*
         "id": 1,
-            "role": "admin",
+            "role": "operator",
             "name": "Anna",
             "lastName": "Martínez",
-            "email": "anna.martinez@example.com",
+            "email": "anna.martinez@exple.com",
             "prefix": "34",
             "phone": "666777888",
             "zoneIds": [1],
             "language": ["Català"],
             "dateHire": "2023-01-01",
             "dateTermination": null,
-            "username": "admin_anna",
+            "username": "operadoranna",
             "passwordHash": "hashed_password"
         */
         return [

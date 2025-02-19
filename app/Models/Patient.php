@@ -29,7 +29,7 @@ use App\Casts\CsvToArrayCast;
  *     @OA\Property(property="prefix", type="string", description="Prefijo del paciente"),
  *     @OA\Property(property="phone", type="string", description="Número de teléfono del paciente"),
  *     @OA\Property(property="language", type="array", 
- *         @OA\Items(type="string", enum={"Castellano", "Valenciano"}, description="Lenguas del paciente"),
+ *         @OA\Items(type="string", enum={"english"}, description="Lenguas del paciente"),
  *         description="Idiomas hablados por el paciente"),
  *     @OA\Property(property="email", type="string", description="Correo electrónico del paciente"),
  *     @OA\Property(property="zoneId", type="integer", description="ID de la zona asociada al paciente"),

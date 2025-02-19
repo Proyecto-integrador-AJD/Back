@@ -44,12 +44,6 @@ use App\Enums\Language;
  *         example=123456789
  *     ),
  *     @OA\Property(
- *         property="role",
- *         type="string",
- *         description="Rol del usuario",
- *         example="admin"
- *     ),
- *     @OA\Property(
  *         property="language",
  *         type="array",
  *         description="Idiomas del usuario",

@@ -32,7 +32,7 @@ use Illuminate\Foundation\Http\FormRequest;
  *     @OA\Property(property="prefix", type="string", description="Prefijo del teléfono", example="+34"),
  *     @OA\Property(property="phone", type="integer", description="Número de teléfono", example=600123456),
  *     @OA\Property(property="email", type="string", format="email", description="Correo electrónico del paciente", example="example@gmail.com"),
- *     @OA\Property(property="language", type="array", @OA\Items(type="string"), description="Idiomas del paciente", example={"Español", "Catalán"}),
+ *     @OA\Property(property="language", type="array", @OA\Items(type="string"), description="Idiomas del paciente", example={"english"}),
  *     @OA\Property(property="zoneId", type="integer", description="ID de la zona", example=1),
  *     @OA\Property(property="situationPersonalFamily", type="string", description="Situación personal y familiar", example="Viviendo con familia"),
  *     @OA\Property(property="healthSituation", type="string", description="Situación de salud", example="Salud estable"),

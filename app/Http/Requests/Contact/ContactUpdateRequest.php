@@ -51,7 +51,7 @@ use Illuminate\Foundation\Http\FormRequest;
  *         property="relationship",
  *         type="string",
  *         description="Relación del contacto con el paciente",
- *         example="Madre"
+ *         example="sister"
  *     )
  * )
  */

@@ -40,21 +40,16 @@ use App\Enums\Language;
  *         description="Número de teléfono del usuario",
  *         example="123456789"
  *     ),
- *     @OA\Property(
- *         property="role",
- *         type="string",
- *         description="Rol del usuario",
- *         example="admin"
- *     ),
+
  *     @OA\Property(
  *         property="language",
  *         type="array",
  *         description="Idiomas del usuario",
  *         @OA\Items(
  *             type="string",
- *             example="Castellano"
+ *             example="english"
  *         ),
- *         example={"Castellano", "Valenciano"}
+ *         example={"english"}
  *     ),
  *     @OA\Property(
  *         property="dateHire",

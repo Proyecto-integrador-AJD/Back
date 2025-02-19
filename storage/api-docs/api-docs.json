@@ -250,6 +250,209 @@
                 ]
             }
         },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Iniciar sesión",
+                "description": "Permite iniciar sesión a un usuario con nombre de usuario y contraseña.",
+                "operationId": "222b2625838e3c57e017987f73598fda",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "username",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "username": {
+                                        "description": "Nombre de usuario del usuario.",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "Contraseña del usuario.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Usuario autenticado con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "description": "Token de acceso.",
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "description": "Nombre del usuario.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Credenciales no válidas."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Registrar un nuevo usuario",
+                "description": "Registra un nuevo usuario con un rol predeterminado de 'operator'.",
+                "operationId": "8e4e3cb7b46126f4696379d3c7eeb4ad",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "username",
+                                    "password",
+                                    "confirm_password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Nombre del usuario.",
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "description": "Correo electrónico del usuario.",
+                                        "type": "string"
+                                    },
+                                    "username": {
+                                        "description": "Nombre de usuario único.",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "Contraseña.",
+                                        "type": "string"
+                                    },
+                                    "confirm_password": {
+                                        "description": "Confirmación de la contraseña.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuario registrado con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "description": "Token de acceso.",
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "description": "Nombre del usuario.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación de la contraseña."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Cerrar sesión",
+                "description": "Finaliza la sesión del usuario autenticado.",
+                "operationId": "ad65cbbd4e9f201619eae184a5961a98",
+                "responses": {
+                    "200": {
+                        "description": "Usuario cerrado sesión con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "description": "Nombre del usuario que cerró la sesión.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/user": {
+            "get": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Obtener la información del usuario autenticado",
+                "description": "Devuelve la información del usuario actualmente autenticado.",
+                "operationId": "961ad57987905b44ae2e2f40b82e76de",
+                "responses": {
+                    "200": {
+                        "description": "Información del usuario recuperada con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/calls/patient/{id}": {
             "get": {
                 "tags": [
@@ -1327,7 +1530,7 @@
                     "recurrenceType": {
                         "description": "Tipo de recurrencia para la alerta",
                         "type": "string",
-                        "example": "Diaria"
+                        "example": "yearly"
                     },
                     "recurrence": {
                         "description": "Número de veces que se repetirá la alerta",
@@ -1377,7 +1580,7 @@
                         "description": "Tipo de recurrencia para la alerta",
                         "type": "string",
                         "maxLength": 255,
-                        "example": "Diaria"
+                        "example": "yearly"
                     },
                     "recurrence": {
                         "description": "Número de veces que se repetirá la alerta",
@@ -1542,7 +1745,7 @@
                     "relationship": {
                         "description": "Relación del contacto con el paciente",
                         "type": "string",
-                        "example": "Madre"
+                        "example": "sister"
                     }
                 },
                 "type": "object"
@@ -1585,7 +1788,7 @@
                     "relationship": {
                         "description": "Relación del contacto con el paciente",
                         "type": "string",
-                        "example": "Madre"
+                        "example": "sister"
                     }
                 },
                 "type": "object"
@@ -1706,8 +1909,7 @@
                             "type": "string"
                         },
                         "example": [
-                            "Español",
-                            "Catalán"
+                            "english"
                         ]
                     },
                     "zoneId": {
@@ -1822,7 +2024,7 @@
                         "items": {
                             "description": "Idioma preferido",
                             "type": "string",
-                            "example": "Español"
+                            "example": "english"
                         }
                     },
                     "economicSituation": {
@@ -1872,21 +2074,15 @@
                         "type": "integer",
                         "example": "123456789"
                     },
-                    "role": {
-                        "description": "Rol del usuario",
-                        "type": "string",
-                        "example": "admin"
-                    },
                     "language": {
                         "description": "Idiomas del usuario",
                         "type": "array",
                         "items": {
                             "type": "string",
-                            "example": "Castellano"
+                            "example": "english"
                         },
                         "example": [
-                            "Castellano",
-                            "Valenciano"
+                            "english"
                         ]
                     },
                     "dateHire": {
@@ -1943,11 +2139,6 @@
                         "description": "Número de teléfono del usuario",
                         "type": "integer",
                         "example": 123456789
-                    },
-                    "role": {
-                        "description": "Rol del usuario",
-                        "type": "string",
-                        "example": "admin"
                     },
                     "language": {
                         "description": "Idiomas del usuario",
@@ -2311,11 +2502,6 @@
                         "type": "integer",
                         "example": 1
                     },
-                    "role": {
-                        "description": "Rol del usuario",
-                        "type": "string",
-                        "example": "admin"
-                    },
                     "name": {
                         "description": "Nombre del usuario",
                         "type": "string",
@@ -2364,7 +2550,7 @@
                     "username": {
                         "description": "Nombre de usuario",
                         "type": "string",
-                        "example": "admin_anna"
+                        "example": "operator_anna"
                     }
                 },
                 "type": "object"
@@ -2610,8 +2796,7 @@
                             "description": "Lenguas del paciente",
                             "type": "string",
                             "enum": [
-                                "Castellano",
-                                "Valenciano"
+                                "english"
                             ]
                         }
                     },
@@ -2718,10 +2903,6 @@
                         "description": "Contraseña del usuario",
                         "type": "string"
                     },
-                    "role": {
-                        "description": "Rol del usuario (e.g., admin, user)",
-                        "type": "string"
-                    },
                     "phone": {
                         "description": "Número de teléfono del usuario",
                         "type": "string"
@@ -2810,6 +2991,10 @@
         }
     },
     "tags": [
+        {
+            "name": "Authentication",
+            "description": "Autenticación"
+        },
         {
             "name": "Calls",
             "description": "Calls"

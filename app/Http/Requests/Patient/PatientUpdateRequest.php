@@ -81,7 +81,7 @@ use Illuminate\Foundation\Http\FormRequest;
  *         @OA\Items(
  *             type="string",
  *             description="Idioma preferido",
- *             example="Español"
+ *             example="english"
  *         )
  *     ),
  *     @OA\Property(

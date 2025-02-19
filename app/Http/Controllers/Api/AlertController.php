@@ -103,7 +103,7 @@ class AlertController extends BaseController
    
     public function show(Alert $alert)
     {
-        return $this->sendResponse(new AlertResource($alert), 'Paciente recuperado con éxito', 200);
+        return $this->sendResponse(new AlertResource($alert), 'Alerta recuperada con éxito', 200);
     }
 
    /**
@@ -127,7 +127,7 @@ class AlertController extends BaseController
     public function store(AlertStoreRequest $request)
     {
         $alert = Alert::create($request->validated());
-        return $this->sendResponse($alert, 'Paciente creado con éxito', 201);
+        return $this->sendResponse($alert, 'Alerta creada con éxito', 201);
     }
   /**
      * @OA\Put(
@@ -158,7 +158,7 @@ class AlertController extends BaseController
     public function update(Alert $alert, AlertUpdateRequest $request)
     {
         $alert->update($request->validated());
-        return $this->sendResponse($alert, 'Paciente actualizado con éxito', 200);
+        return $this->sendResponse($alert, 'Alerta actualizada con éxito', 200);
     }
  /**
      * @OA\Delete(
@@ -188,6 +188,6 @@ class AlertController extends BaseController
     public function destroy(Alert $alert)
     {
         $alert->delete();
-        return $this->sendResponse(null, 'Paciente eliminado con éxito', 200);
+        return $this->sendResponse(null, 'Alerta eliminado con éxito', 200);
     }
 }
