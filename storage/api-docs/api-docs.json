@@ -6,6 +6,1301 @@
     },
     "paths": {
         "/api": {},
+        "/api/alerts/user": {
+            "get": {
+                "tags": [
+                    "Alerts"
+                ],
+                "summary": "Obtener alertas asignadas al usuario",
+                "description": "Devuelve una lista de alertas asignadas al usuario autenticado.",
+                "operationId": "9e52292218c89e986d0ac1cde073a585",
+                "responses": {
+                    "200": {
+                        "description": "Alertas asignadas al usuario recuperadas con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AlertResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/alerts/unassigned": {
+            "get": {
+                "tags": [
+                    "Alerts"
+                ],
+                "summary": "Obtener alertas sin llamadas asignadas",
+                "description": "Devuelve las alertas que no están asociadas a ninguna llamada.",
+                "operationId": "7aa6db8541652bc9317e88cffeaf1411",
+                "responses": {
+                    "200": {
+                        "description": "Alertas sin llamadas asignadas recuperadas con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AlertResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/alerts": {
+            "get": {
+                "tags": [
+                    "Alerts"
+                ],
+                "summary": "Obtener todas las alertas",
+                "description": "Devuelve una lista de todas las alertas.",
+                "operationId": "4478ffd7354aa9ca6132fb9e74bdde0b",
+                "responses": {
+                    "200": {
+                        "description": "Lista de alertas devuelta con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AlertResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Alerts"
+                ],
+                "summary": "Crear una nueva alerta",
+                "description": "Crea una nueva alerta con los datos proporcionados.",
+                "operationId": "42b5297a4f4f281e294bf8339a0a80d8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AlertStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Alerta creada con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AlertResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/alerts/{id}": {
+            "get": {
+                "tags": [
+                    "Alerts"
+                ],
+                "summary": "Obtener una alerta específica",
+                "description": "Devuelve los datos de una alerta específica por su ID.",
+                "operationId": "48e65a8f03a14c0b36563c5284e726a3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la alerta",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Alerta recuperada con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AlertResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Alerta no encontrada."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Alerts"
+                ],
+                "summary": "Actualizar una alerta",
+                "description": "Actualiza los datos de una alerta existente.",
+                "operationId": "037adc62bb0d80e7c7a153cf2445e337",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la alerta",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AlertUpdateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Alerta actualizada con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AlertResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Alerts"
+                ],
+                "summary": "Eliminar una alerta",
+                "description": "Elimina una alerta específica por su ID.",
+                "operationId": "6dea41ff5a0bbf10775b84b2275d50e0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la alerta",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Alerta eliminada con éxito."
+                    },
+                    "404": {
+                        "description": "Alerta no encontrada."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Iniciar sesión",
+                "description": "Permite iniciar sesión a un usuario con nombre de usuario y contraseña.",
+                "operationId": "222b2625838e3c57e017987f73598fda",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "username",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "username": {
+                                        "description": "Nombre de usuario del usuario.",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "Contraseña del usuario.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Usuario autenticado con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "description": "Token de acceso.",
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "description": "Nombre del usuario.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Credenciales no válidas."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Registrar un nuevo usuario",
+                "description": "Registra un nuevo usuario con un rol predeterminado de 'operator'.",
+                "operationId": "8e4e3cb7b46126f4696379d3c7eeb4ad",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "username",
+                                    "password",
+                                    "confirm_password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Nombre del usuario.",
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "description": "Correo electrónico del usuario.",
+                                        "type": "string"
+                                    },
+                                    "username": {
+                                        "description": "Nombre de usuario único.",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "Contraseña.",
+                                        "type": "string"
+                                    },
+                                    "confirm_password": {
+                                        "description": "Confirmación de la contraseña.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuario registrado con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "description": "Token de acceso.",
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "description": "Nombre del usuario.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación de la contraseña."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Cerrar sesión",
+                "description": "Finaliza la sesión del usuario autenticado.",
+                "operationId": "ad65cbbd4e9f201619eae184a5961a98",
+                "responses": {
+                    "200": {
+                        "description": "Usuario cerrado sesión con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "description": "Nombre del usuario que cerró la sesión.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/user": {
+            "get": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Obtener la información del usuario autenticado",
+                "description": "Devuelve la información del usuario actualmente autenticado.",
+                "operationId": "961ad57987905b44ae2e2f40b82e76de",
+                "responses": {
+                    "200": {
+                        "description": "Información del usuario recuperada con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/calls/patient/{id}": {
+            "get": {
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Obtener todas las llamadas de un paciente",
+                "description": "Devuelve una lista de llamadas asociadas a un paciente específico.",
+                "operationId": "6a59d990424701cba0d10a1b1645394d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del paciente",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de llamadas del paciente devuelta con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CallResource"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Paciente no encontrado."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/calls": {
+            "get": {
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Obtener todas las llamadas",
+                "description": "Devuelve una lista paginada de llamadas.",
+                "operationId": "9a23d14f999134958731dd0346155df0",
+                "responses": {
+                    "200": {
+                        "description": "Lista de llamadas devuelta con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CallResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Crear una nueva llamada",
+                "description": "Crea una nueva llamada con los datos proporcionados.",
+                "operationId": "db4e93d17f5ef9ad4a6f3a161cf30a45",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CallStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Llamada creada con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CallResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/calls/{id}": {
+            "get": {
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Obtener una llamada",
+                "description": "Devuelve los datos de una llamada específica por su ID.",
+                "operationId": "e72c3e9ae2eed11b9dce29f58032517b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la llamada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Llamada recuperada con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CallResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Llamada no encontrada."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Actualizar una llamada",
+                "description": "Actualiza los datos de una llamada existente.",
+                "operationId": "0104abb19faaa5bca335c22b0762e2d6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la llamada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CallUpdateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Llamada actualizada con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CallResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Eliminar una llamada",
+                "description": "Elimina una llamada específica por su ID.",
+                "operationId": "7ea28db82b97c7b3fe159f3c394be63d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la llamada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Llamada eliminada con éxito."
+                    },
+                    "404": {
+                        "description": "Llamada no encontrada."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/contacts": {
+            "get": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Obtener todos los contactos",
+                "description": "Devuelve una lista de todos los contactos.",
+                "operationId": "bc39494d59500e2d75e6f6648b43c8de",
+                "responses": {
+                    "200": {
+                        "description": "Lista de contactos devuelta con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ContactResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Crear un nuevo contacto",
+                "description": "Crea un nuevo contacto con los datos proporcionados.",
+                "operationId": "779a1f2268bae1138e7ea7843dd88d90",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ContactStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Contacto creado con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ContactResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/contacts/{id}": {
+            "get": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Obtener un contacto",
+                "description": "Devuelve los detalles de un contacto específico por su ID.",
+                "operationId": "2a2c193f37e667891b7a6bc95e8e4132",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del contacto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Contacto recuperado con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ContactResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Contacto no encontrado."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Actualizar un contacto",
+                "description": "Actualiza los datos de un contacto existente.",
+                "operationId": "45636eb97c78bd0e474d5507fde18f1a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del contacto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ContactUpdateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Contacto actualizado con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ContactResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Eliminar un contacto",
+                "description": "Elimina un contacto específico por su ID.",
+                "operationId": "a4fa6d0e82512d1fac868a7b61e6a2e7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del contacto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Contacto eliminado con éxito."
+                    },
+                    "404": {
+                        "description": "Contacto no encontrado."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/patients/zone/{id}": {
+            "get": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Obtener pacientes por zona",
+                "description": "Devuelve una lista de pacientes de una zona específica.",
+                "operationId": "99bbe15643ec7928c2f01d2aeb805b35",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la zona",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pacientes de la zona devueltos con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PatientResource"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No se encontraron pacientes en la zona."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/patients/current": {
+            "get": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Obtener pacientes del usuario autenticado",
+                "description": "Devuelve la lista de pacientes asignados al usuario autenticado.",
+                "operationId": "406f7892715c90dc16053e5ed099a6ab",
+                "responses": {
+                    "200": {
+                        "description": "Pacientes devueltos con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PatientResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/patients": {
+            "get": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Obtener todos los pacientes",
+                "description": "Devuelve una lista de todos los pacientes.",
+                "operationId": "0df0d65f049161931654c3e188ca8f93",
+                "responses": {
+                    "200": {
+                        "description": "Lista de pacientes devuelta con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PatientResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Crear un nuevo paciente",
+                "description": "Crea un nuevo paciente con los datos proporcionados.",
+                "operationId": "2149729f1bf1af8877352f04be3a683f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PatientStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Paciente creado con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PatientResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/patients/{id}": {
+            "get": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Obtener un paciente por ID",
+                "description": "Devuelve los datos de un paciente por su ID.",
+                "operationId": "900a000f9712c06fdf96fa64333bbaff",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del paciente",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Paciente recuperado con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PatientResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Actualizar un paciente",
+                "description": "Actualiza los datos de un paciente existente.",
+                "operationId": "49d64723ad7c62df6eddc6fa8a778755",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del paciente",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PatientUpdateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Paciente actualizado con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PatientResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Eliminar un paciente",
+                "description": "Elimina un paciente por su ID.",
+                "operationId": "0187379ab8f57fd78eeb510643be993b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del paciente",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Paciente eliminado con éxito."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Obtener todos los usuarios",
+                "description": "Devuelve una lista de todos los usuarios.",
+                "operationId": "566aed8efb436ca506e0ef51a032ecd9",
+                "responses": {
+                    "200": {
+                        "description": "Lista de usuarios devuelta con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/UserResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Crear un nuevo usuario",
+                "description": "Crea un nuevo usuario con los datos proporcionados.",
+                "operationId": "be551c1d694a01c164966f58bfa77013",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuario creado con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/users/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Obtener un usuario",
+                "description": "Devuelve los datos de un usuario por su ID.",
+                "operationId": "6f51bd5fa2dddcd25e44cfa53dcbd10a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuario recuperado con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuario no encontrado."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Actualizar un usuario",
+                "description": "Actualiza los datos de un usuario existente.",
+                "operationId": "070e37fc9aff78ae73860751bc990ed3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserUpdateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Usuario actualizado con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Eliminar un usuario",
+                "description": "Elimina un usuario por su ID.",
+                "operationId": "0b4133ed462528a5e648b88ead11e929",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuario eliminado con éxito."
+                    },
+                    "404": {
+                        "description": "Usuario no encontrado."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/zones": {
             "get": {
                 "tags": [
@@ -63,7 +1358,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/zones/{id}": {
@@ -99,7 +1399,12 @@
                     "404": {
                         "description": "Zona no encontrado."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -140,7 +1445,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -167,12 +1477,708 @@
                     "404": {
                         "description": "Zona no encontrada."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         }
     },
     "components": {
         "schemas": {
+            "AlertStoreRequest": {
+                "required": [
+                    "patientId",
+                    "type",
+                    "startDate",
+                    "isRecurring"
+                ],
+                "properties": {
+                    "patientId": {
+                        "description": "ID del paciente asociado a la alerta",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "type": {
+                        "description": "Tipo de alerta",
+                        "type": "string",
+                        "example": "Alerta médica"
+                    },
+                    "subType": {
+                        "description": "Subtipo de alerta",
+                        "type": "string",
+                        "example": "Alerta de seguimiento"
+                    },
+                    "startDate": {
+                        "description": "Fecha de inicio de la alerta, en formato ISO 8601 (Y-m-d\\TH:i)",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-02-19T10:30"
+                    },
+                    "isRecurring": {
+                        "description": "Indica si la alerta es recurrente",
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "description": {
+                        "description": "Descripción de la alerta",
+                        "type": "string",
+                        "example": "La alerta es para recordar la toma de medicamentos."
+                    },
+                    "recurrenceType": {
+                        "description": "Tipo de recurrencia para la alerta",
+                        "type": "string",
+                        "example": "yearly"
+                    },
+                    "recurrence": {
+                        "description": "Número de veces que se repetirá la alerta",
+                        "type": "integer",
+                        "example": 5
+                    }
+                },
+                "type": "object"
+            },
+            "AlertUpdateRequest": {
+                "properties": {
+                    "patientId": {
+                        "description": "ID del paciente asociado a la alerta",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "type": {
+                        "description": "Tipo de alerta",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Alerta médica"
+                    },
+                    "subType": {
+                        "description": "Subtipo de alerta",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Alerta de seguimiento"
+                    },
+                    "startDate": {
+                        "description": "Fecha de inicio de la alerta, en formato ISO 8601 (Y-m-d\\TH:i)",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-02-19T10:30"
+                    },
+                    "isRecurring": {
+                        "description": "Indica si la alerta es recurrente",
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "description": {
+                        "description": "Descripción de la alerta",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "La alerta es para recordar la toma de medicamentos."
+                    },
+                    "recurrenceType": {
+                        "description": "Tipo de recurrencia para la alerta",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "yearly"
+                    },
+                    "recurrence": {
+                        "description": "Número de veces que se repetirá la alerta",
+                        "type": "integer",
+                        "example": 5
+                    }
+                },
+                "type": "object"
+            },
+            "CallStoreRequest": {
+                "required": [
+                    "date",
+                    "patientId",
+                    "userId",
+                    "incoming",
+                    "type",
+                    "duration",
+                    "description"
+                ],
+                "properties": {
+                    "date": {
+                        "description": "Fecha y hora de la llamada (formato Y-m-d H:i:s)",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-02-19 15:30:00"
+                    },
+                    "patientId": {
+                        "description": "ID del paciente al que se le realizó la llamada",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "userId": {
+                        "description": "ID del usuario que realizó la llamada",
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "incoming": {
+                        "description": "Indica si la llamada fue entrante (true) o saliente (false)",
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "type": {
+                        "description": "Tipo de la llamada",
+                        "type": "string",
+                        "example": "emergency"
+                    },
+                    "subType": {
+                        "description": "Subtipo de la llamada (opcional)",
+                        "type": "string",
+                        "example": "heart attack"
+                    },
+                    "alertId": {
+                        "description": "ID de la alerta asociada a la llamada (opcional)",
+                        "type": "integer",
+                        "example": 3
+                    },
+                    "duration": {
+                        "description": "Duración de la llamada en segundos",
+                        "type": "integer",
+                        "example": 120
+                    },
+                    "description": {
+                        "description": "Descripción adicional de la llamada",
+                        "type": "string",
+                        "example": "Paciente con dificultad respiratoria"
+                    }
+                },
+                "type": "object"
+            },
+            "CallUpdateRequest": {
+                "properties": {
+                    "date": {
+                        "description": "Fecha y hora de la llamada (formato Y-m-d H:i:s)",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-02-19 15:30:00"
+                    },
+                    "patientId": {
+                        "description": "ID del paciente al que se le realizó la llamada",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "userId": {
+                        "description": "ID del usuario que realizó la llamada",
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "incoming": {
+                        "description": "Indica si la llamada fue entrante (true) o saliente (false)",
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "type": {
+                        "description": "Tipo de la llamada",
+                        "type": "string",
+                        "example": "emergency"
+                    },
+                    "subType": {
+                        "description": "Subtipo de la llamada (opcional)",
+                        "type": "string",
+                        "example": "heart attack"
+                    },
+                    "alertId": {
+                        "description": "ID de la alerta asociada a la llamada (opcional)",
+                        "type": "integer",
+                        "example": 3
+                    },
+                    "duration": {
+                        "description": "Duración de la llamada en segundos",
+                        "type": "integer",
+                        "example": 120
+                    },
+                    "description": {
+                        "description": "Descripción adicional de la llamada",
+                        "type": "string",
+                        "example": "Paciente con dificultad respiratoria"
+                    }
+                },
+                "type": "object"
+            },
+            "ContactStoreRequest": {
+                "required": [
+                    "name",
+                    "lastName",
+                    "email",
+                    "prefix",
+                    "phone",
+                    "patientId",
+                    "relationship"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Nombre del contacto",
+                        "type": "string",
+                        "example": "Juan"
+                    },
+                    "lastName": {
+                        "description": "Apellido del contacto",
+                        "type": "string",
+                        "example": "Pérez"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del contacto",
+                        "type": "string",
+                        "example": "juan.perez@example.com"
+                    },
+                    "prefix": {
+                        "description": "Prefijo telefónico del contacto",
+                        "type": "string",
+                        "example": "+34"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono del contacto",
+                        "type": "integer",
+                        "example": "612345678"
+                    },
+                    "patientId": {
+                        "description": "ID del paciente asociado al contacto",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "relationship": {
+                        "description": "Relación del contacto con el paciente",
+                        "type": "string",
+                        "example": "sister"
+                    }
+                },
+                "type": "object"
+            },
+            "ContactUpdateRequest": {
+                "properties": {
+                    "name": {
+                        "description": "Nombre del contacto",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Juan"
+                    },
+                    "lastName": {
+                        "description": "Apellido del contacto",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Pérez"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del contacto",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "juan.perez@example.com"
+                    },
+                    "prefix": {
+                        "description": "Prefijo telefónico del contacto",
+                        "type": "string",
+                        "example": "+34"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono del contacto",
+                        "type": "integer",
+                        "example": "612345678"
+                    },
+                    "patientId": {
+                        "description": "ID del paciente asociado al contacto",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "relationship": {
+                        "description": "Relación del contacto con el paciente",
+                        "type": "string",
+                        "example": "sister"
+                    }
+                },
+                "type": "object"
+            },
+            "PatientStoreRequest": {
+                "required": [
+                    "name",
+                    "lastName",
+                    "birthDate",
+                    "addressStreet",
+                    "addressNumber",
+                    "addressPostalCode",
+                    "addressCity",
+                    "addressProvince",
+                    "addressCountry",
+                    "dni",
+                    "healthCardNumber",
+                    "phone",
+                    "email",
+                    "language",
+                    "zoneId",
+                    "situationPersonalFamily",
+                    "healthSituation",
+                    "housingSituationType",
+                    "housingSituationStatus",
+                    "housingSituationNumberOfRooms",
+                    "housingSituationLocation",
+                    "personalAutonomy",
+                    "economicSituation"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Nombre del paciente",
+                        "type": "string",
+                        "example": "John"
+                    },
+                    "lastName": {
+                        "description": "Apellido del paciente",
+                        "type": "string",
+                        "example": "Doe"
+                    },
+                    "birthDate": {
+                        "description": "Fecha de nacimiento del paciente",
+                        "type": "string",
+                        "format": "date",
+                        "example": "1990-05-15"
+                    },
+                    "addressStreet": {
+                        "description": "Calle de la dirección del paciente",
+                        "type": "string",
+                        "example": "Calle Principal"
+                    },
+                    "addressNumber": {
+                        "description": "Número de la dirección",
+                        "type": "integer",
+                        "example": 123
+                    },
+                    "addressFloor": {
+                        "description": "Piso de la dirección",
+                        "type": "string",
+                        "example": "2A"
+                    },
+                    "addressDoor": {
+                        "description": "Puerta de la dirección",
+                        "type": "string",
+                        "example": "B"
+                    },
+                    "addressPostalCode": {
+                        "description": "Código postal",
+                        "type": "string",
+                        "example": "08001"
+                    },
+                    "addressCity": {
+                        "description": "Ciudad de residencia",
+                        "type": "string",
+                        "example": "Barcelona"
+                    },
+                    "addressProvince": {
+                        "description": "Provincia de residencia",
+                        "type": "string",
+                        "example": "Barcelona"
+                    },
+                    "addressCountry": {
+                        "description": "País de residencia",
+                        "type": "string",
+                        "example": "España"
+                    },
+                    "dni": {
+                        "description": "DNI del paciente",
+                        "type": "string",
+                        "example": "12345678X"
+                    },
+                    "healthCardNumber": {
+                        "description": "Número de la tarjeta sanitaria",
+                        "type": "string",
+                        "example": "TSC123456"
+                    },
+                    "prefix": {
+                        "description": "Prefijo del teléfono",
+                        "type": "string",
+                        "example": "+34"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono",
+                        "type": "integer",
+                        "example": 600123456
+                    },
+                    "email": {
+                        "description": "Correo electrónico del paciente",
+                        "type": "string",
+                        "format": "email",
+                        "example": "example@gmail.com"
+                    },
+                    "language": {
+                        "description": "Idiomas del paciente",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "example": [
+                            "english"
+                        ]
+                    },
+                    "zoneId": {
+                        "description": "ID de la zona",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "situationPersonalFamily": {
+                        "description": "Situación personal y familiar",
+                        "type": "string",
+                        "example": "Viviendo con familia"
+                    },
+                    "healthSituation": {
+                        "description": "Situación de salud",
+                        "type": "string",
+                        "example": "Salud estable"
+                    },
+                    "housingSituationType": {
+                        "description": "Tipo de vivienda",
+                        "type": "string",
+                        "example": "Apartamento"
+                    },
+                    "housingSituationStatus": {
+                        "description": "Estado de la vivienda",
+                        "type": "string",
+                        "example": "Propiedad"
+                    },
+                    "housingSituationNumberOfRooms": {
+                        "description": "Número de habitaciones en la vivienda",
+                        "type": "integer",
+                        "example": 3
+                    },
+                    "housingSituationLocation": {
+                        "description": "Ubicación de la vivienda",
+                        "type": "string",
+                        "example": "Centro de la ciudad"
+                    },
+                    "personalAutonomy": {
+                        "description": "Autonomía personal",
+                        "type": "string",
+                        "example": "Independiente"
+                    },
+                    "economicSituation": {
+                        "description": "Situación económica",
+                        "type": "string",
+                        "example": "Estable"
+                    }
+                },
+                "type": "object"
+            },
+            "PatientUpdateRequest": {
+                "properties": {
+                    "name": {
+                        "description": "Nombre del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Juan"
+                    },
+                    "lastName": {
+                        "description": "Apellido del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Pérez"
+                    },
+                    "birthDate": {
+                        "description": "Fecha de nacimiento del paciente",
+                        "type": "string",
+                        "format": "date",
+                        "example": "1980-05-15"
+                    },
+                    "addressStreet": {
+                        "description": "Calle de la dirección del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Calle Mayor"
+                    },
+                    "addressNumber": {
+                        "description": "Número de la dirección del paciente",
+                        "type": "integer",
+                        "example": 123
+                    },
+                    "addressPostalCode": {
+                        "description": "Código postal de la dirección del paciente",
+                        "type": "integer",
+                        "example": 28001
+                    },
+                    "email": {
+                        "description": "Correo electrónico del paciente",
+                        "type": "string",
+                        "format": "email",
+                        "maxLength": 255,
+                        "example": "juan.perez@example.com"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono del paciente",
+                        "type": "integer",
+                        "example": 600123456
+                    },
+                    "healthCardNumber": {
+                        "description": "Número de la tarjeta sanitaria del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "1234567890"
+                    },
+                    "zoneId": {
+                        "description": "ID de la zona asignada al paciente",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "language": {
+                        "type": "array",
+                        "items": {
+                            "description": "Idioma preferido",
+                            "type": "string",
+                            "example": "english"
+                        }
+                    },
+                    "economicSituation": {
+                        "description": "Situación económica del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Ingresos bajos"
+                    }
+                },
+                "type": "object"
+            },
+            "UserStoreRequest": {
+                "required": [
+                    "name",
+                    "lastName",
+                    "email",
+                    "prefix",
+                    "phone",
+                    "language",
+                    "dateHire",
+                    "username",
+                    "password"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Nombre del usuario",
+                        "type": "string",
+                        "example": "Juan"
+                    },
+                    "lastName": {
+                        "description": "Apellido del usuario",
+                        "type": "string",
+                        "example": "Pérez"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del usuario",
+                        "type": "string",
+                        "example": "juan.perez@example.com"
+                    },
+                    "prefix": {
+                        "description": "Prefijo telefónico del usuario",
+                        "type": "string",
+                        "example": "+34"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono del usuario",
+                        "type": "integer",
+                        "example": "123456789"
+                    },
+                    "language": {
+                        "description": "Idiomas del usuario",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "example": "english"
+                        },
+                        "example": [
+                            "english"
+                        ]
+                    },
+                    "dateHire": {
+                        "description": "Fecha de contratación del usuario",
+                        "type": "string",
+                        "format": "date",
+                        "example": "2025-02-19"
+                    },
+                    "dateTermination": {
+                        "description": "Fecha de terminación del usuario",
+                        "type": "string",
+                        "format": "date",
+                        "example": "2026-02-19"
+                    },
+                    "username": {
+                        "description": "Nombre de usuario",
+                        "type": "string",
+                        "example": "juanperez"
+                    },
+                    "password": {
+                        "description": "Contraseña del usuario",
+                        "type": "string",
+                        "example": "password123"
+                    }
+                },
+                "type": "object"
+            },
+            "UserUpdateRequest": {
+                "properties": {
+                    "name": {
+                        "description": "Nombre del usuario",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Juan"
+                    },
+                    "lastName": {
+                        "description": "Apellido del usuario",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Pérez"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del usuario",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "juan.perez@example.com"
+                    },
+                    "prefix": {
+                        "description": "Prefijo telefónico del usuario",
+                        "type": "string",
+                        "example": "+34"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono del usuario",
+                        "type": "integer",
+                        "example": 123456789
+                    },
+                    "language": {
+                        "description": "Idiomas del usuario",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "example": "Castellano"
+                        },
+                        "example": [
+                            "Castellano",
+                            "Inglés"
+                        ]
+                    },
+                    "dateHire": {
+                        "description": "Fecha de contratación del usuario",
+                        "type": "string",
+                        "format": "date",
+                        "example": "2025-02-19"
+                    },
+                    "dateTermination": {
+                        "description": "Fecha de terminación del usuario",
+                        "type": "string",
+                        "format": "date",
+                        "example": "2026-02-19"
+                    },
+                    "username": {
+                        "description": "Nombre de usuario",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "juanperez"
+                    },
+                    "password": {
+                        "description": "Contraseña del usuario",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "password123"
+                    }
+                },
+                "type": "object"
+            },
             "ZoneStoreRequest": {
                 "required": [
                     "name",
@@ -221,6 +2227,334 @@
                 },
                 "type": "object"
             },
+            "AlertResource": {
+                "description": "Respuesta de la alerta",
+                "properties": {
+                    "id": {
+                        "description": "ID de la alerta",
+                        "type": "integer"
+                    },
+                    "patientId": {
+                        "description": "ID del paciente asociado a la alerta",
+                        "type": "integer"
+                    },
+                    "patient": {
+                        "$ref": "#/components/schemas/PatientResource"
+                    },
+                    "type": {
+                        "description": "Tipo de alerta",
+                        "type": "string"
+                    },
+                    "subType": {
+                        "description": "Subtipo de alerta",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Descripción de la alerta",
+                        "type": "string"
+                    },
+                    "startDate": {
+                        "description": "Fecha de inicio de la alerta",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "isRecurring": {
+                        "description": "Indica si la alerta es recurrente",
+                        "type": "boolean"
+                    },
+                    "recurrenceType": {
+                        "description": "Tipo de recurrencia de la alerta",
+                        "type": "string"
+                    },
+                    "recurrence": {
+                        "description": "Número de recurrencias",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "CallResource": {
+                "description": "Respuestas de la llamada",
+                "properties": {
+                    "id": {
+                        "description": "ID de la llamada",
+                        "type": "integer"
+                    },
+                    "date": {
+                        "description": "Fecha y hora de la llamada",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-02-19 15:30:00"
+                    },
+                    "patientId": {
+                        "description": "ID del paciente relacionado con la llamada",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "userId": {
+                        "description": "ID del usuario que realizó la llamada",
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "incoming": {
+                        "description": "Indica si la llamada fue entrante",
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "type": {
+                        "description": "Tipo de llamada",
+                        "type": "string",
+                        "example": "emergency"
+                    },
+                    "subType": {
+                        "description": "Subtipo de llamada (opcional)",
+                        "type": "string",
+                        "example": "heart attack"
+                    },
+                    "alertId": {
+                        "description": "ID de la alerta asociada (opcional)",
+                        "type": "integer",
+                        "example": 3
+                    },
+                    "duration": {
+                        "description": "Duración de la llamada en segundos",
+                        "type": "integer",
+                        "example": 120
+                    },
+                    "description": {
+                        "description": "Descripción de la llamada",
+                        "type": "string",
+                        "example": "Paciente con dificultad respiratoria"
+                    }
+                },
+                "type": "object"
+            },
+            "ContactResource": {
+                "description": "Respuestas del contacto",
+                "properties": {
+                    "id": {
+                        "description": "ID del contacto",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nombre del contacto",
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "description": "Apellido del contacto",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del contacto",
+                        "type": "string"
+                    },
+                    "prefix": {
+                        "description": "Prefijo telefónico del contacto",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono del contacto",
+                        "type": "integer"
+                    },
+                    "patientId": {
+                        "description": "ID del paciente asociado al contacto",
+                        "type": "integer"
+                    },
+                    "relationship": {
+                        "description": "Relación del contacto con el paciente",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "PatientResource": {
+                "description": "Recurso de paciente",
+                "properties": {
+                    "id": {
+                        "description": "ID del paciente",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nombre del paciente",
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "description": "Apellido del paciente",
+                        "type": "string"
+                    },
+                    "birthDate": {
+                        "description": "Fecha de nacimiento del paciente",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "userId": {
+                        "description": "ID del usuario asociado al paciente",
+                        "type": "integer"
+                    },
+                    "addressStreet": {
+                        "description": "Calle de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressNumber": {
+                        "description": "Número de la dirección del paciente",
+                        "type": "integer"
+                    },
+                    "addressFloor": {
+                        "description": "Piso de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressDoor": {
+                        "description": "Puerta de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressPostalCode": {
+                        "description": "Código postal de la dirección del paciente",
+                        "type": "integer"
+                    },
+                    "addressCity": {
+                        "description": "Ciudad de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressProvince": {
+                        "description": "Provincia de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressCountry": {
+                        "description": "País de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "dni": {
+                        "description": "DNI del paciente",
+                        "type": "string"
+                    },
+                    "healthCardNumber": {
+                        "description": "Número de la tarjeta sanitaria del paciente",
+                        "type": "string"
+                    },
+                    "prefix": {
+                        "description": "Prefijo del teléfono del paciente",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono del paciente",
+                        "type": "integer"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del paciente",
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "language": {
+                        "description": "Idioma preferido del paciente",
+                        "type": "string"
+                    },
+                    "zoneId": {
+                        "description": "ID de la zona asignada al paciente",
+                        "type": "integer"
+                    },
+                    "healthSituation": {
+                        "description": "Situación de salud del paciente",
+                        "type": "string"
+                    },
+                    "situationPersonalFamily": {
+                        "description": "Situación personal/familiar del paciente",
+                        "type": "string"
+                    },
+                    "housingSituationType": {
+                        "description": "Tipo de situación de vivienda del paciente",
+                        "type": "string"
+                    },
+                    "housingSituationStatus": {
+                        "description": "Estado de situación de vivienda del paciente",
+                        "type": "string"
+                    },
+                    "housingSituationNumberOfRooms": {
+                        "description": "Número de habitaciones en la vivienda del paciente",
+                        "type": "integer"
+                    },
+                    "housingSituationLocation": {
+                        "description": "Ubicación de la vivienda del paciente",
+                        "type": "string"
+                    },
+                    "personalAutonomy": {
+                        "description": "Autonomía personal del paciente",
+                        "type": "string"
+                    },
+                    "economicSituation": {
+                        "description": "Situación económica del paciente",
+                        "type": "string"
+                    },
+                    "contacts": {
+                        "description": "Contactos del paciente",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "UserResource": {
+                "description": "Respuesta de los datos del usuario",
+                "properties": {
+                    "id": {
+                        "description": "ID del usuario",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "description": "Nombre del usuario",
+                        "type": "string",
+                        "example": "Anna"
+                    },
+                    "lastName": {
+                        "description": "Apellido del usuario",
+                        "type": "string",
+                        "example": "Martínez"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del usuario",
+                        "type": "string",
+                        "example": "anna.martinez@example.com"
+                    },
+                    "prefix": {
+                        "description": "Prefijo telefónico del usuario",
+                        "type": "string",
+                        "example": "34"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono del usuario",
+                        "type": "string",
+                        "example": "666777888"
+                    },
+                    "language": {
+                        "description": "Idiomas preferidos del usuario",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "example": "Català"
+                        }
+                    },
+                    "dateHire": {
+                        "description": "Fecha de contratación del usuario",
+                        "type": "string",
+                        "format": "date",
+                        "example": "2023-01-01"
+                    },
+                    "dateTermination": {
+                        "description": "Fecha de terminación del usuario (puede ser nula)",
+                        "type": "string",
+                        "format": "date",
+                        "example": null
+                    },
+                    "username": {
+                        "description": "Nombre de usuario",
+                        "type": "string",
+                        "example": "operator_anna"
+                    }
+                },
+                "type": "object"
+            },
             "ZoneResource": {
                 "description": "Respuestas de la zona",
                 "properties": {
@@ -239,6 +2573,392 @@
                     "location": {
                         "description": "Ubicacion de la zona",
                         "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Alert": {
+                "description": "Esquema del modelo Alerta",
+                "properties": {
+                    "id": {
+                        "description": "ID de la alerta",
+                        "type": "integer"
+                    },
+                    "patientId": {
+                        "description": "ID del paciente asociado a la alerta",
+                        "type": "integer"
+                    },
+                    "type": {
+                        "description": "Tipo de alerta",
+                        "type": "string"
+                    },
+                    "subType": {
+                        "description": "Subtipo de alerta",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Descripción de la alerta",
+                        "type": "string"
+                    },
+                    "startDate": {
+                        "description": "Fecha de inicio de la alerta",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "isRecurring": {
+                        "description": "Indica si la alerta es recurrente",
+                        "type": "boolean"
+                    },
+                    "recurrenceType": {
+                        "description": "Tipo de recurrencia de la alerta (por ejemplo, diaria, semanal, etc.)",
+                        "type": "string"
+                    },
+                    "recurrence": {
+                        "description": "Frecuencia de la recurrencia de la alerta en días",
+                        "type": "integer"
+                    },
+                    "patient": {
+                        "$ref": "#/components/schemas/Patient"
+                    }
+                },
+                "type": "object"
+            },
+            "Call": {
+                "description": "Esquema del modelo Call",
+                "properties": {
+                    "date": {
+                        "description": "Fecha de la llamada",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "patientId": {
+                        "description": "ID del paciente asociado a la llamada",
+                        "type": "integer"
+                    },
+                    "userId": {
+                        "description": "ID del usuario que realiza la llamada",
+                        "type": "integer"
+                    },
+                    "incoming": {
+                        "description": "Indica si la llamada es entrante",
+                        "type": "boolean"
+                    },
+                    "type": {
+                        "description": "Tipo de la llamada",
+                        "type": "string"
+                    },
+                    "subType": {
+                        "description": "Subtipo de la llamada",
+                        "type": "string"
+                    },
+                    "alertId": {
+                        "description": "ID de la alerta asociada",
+                        "type": "integer"
+                    },
+                    "duration": {
+                        "description": "Duración de la llamada en minutos",
+                        "type": "integer"
+                    },
+                    "description": {
+                        "description": "Descripción de la llamada",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Contact": {
+                "description": "Esquema del modelo Contacto",
+                "properties": {
+                    "id": {
+                        "description": "ID del contacto",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nombre del contacto",
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "description": "Apellido del contacto",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del contacto",
+                        "type": "string"
+                    },
+                    "prefix": {
+                        "description": "Prefijo del contacto",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono del contacto",
+                        "type": "string"
+                    },
+                    "patientId": {
+                        "description": "ID del paciente asociado al contacto",
+                        "type": "integer"
+                    },
+                    "relationship": {
+                        "description": "Relación con el paciente",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "Fecha de creación del contacto",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Fecha de actualización del contacto",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "patient": {
+                        "$ref": "#/components/schemas/Patient"
+                    }
+                },
+                "type": "object"
+            },
+            "Patient": {
+                "description": "Esquema del modelo Paciente",
+                "properties": {
+                    "id": {
+                        "description": "ID del paciente",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nombre del paciente",
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "description": "Apellido del paciente",
+                        "type": "string"
+                    },
+                    "userId": {
+                        "description": "ID del usuario asociado al paciente",
+                        "type": "integer"
+                    },
+                    "birthDate": {
+                        "description": "Fecha de nacimiento del paciente",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "addressStreet": {
+                        "description": "Calle de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressNumber": {
+                        "description": "Número de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressFloor": {
+                        "description": "Piso de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressDoor": {
+                        "description": "Puerta de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressPostalCode": {
+                        "description": "Código postal de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressCity": {
+                        "description": "Ciudad de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressProvince": {
+                        "description": "Provincia de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressCountry": {
+                        "description": "País de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "dni": {
+                        "description": "DNI del paciente",
+                        "type": "string"
+                    },
+                    "healthCardNumber": {
+                        "description": "Número de tarjeta sanitaria del paciente",
+                        "type": "string"
+                    },
+                    "prefix": {
+                        "description": "Prefijo del paciente",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono del paciente",
+                        "type": "string"
+                    },
+                    "language": {
+                        "description": "Idiomas hablados por el paciente",
+                        "type": "array",
+                        "items": {
+                            "description": "Lenguas del paciente",
+                            "type": "string",
+                            "enum": [
+                                "english"
+                            ]
+                        }
+                    },
+                    "email": {
+                        "description": "Correo electrónico del paciente",
+                        "type": "string"
+                    },
+                    "zoneId": {
+                        "description": "ID de la zona asociada al paciente",
+                        "type": "integer"
+                    },
+                    "situationPersonalFamily": {
+                        "description": "Situación personal y familiar del paciente",
+                        "type": "string"
+                    },
+                    "healthSituation": {
+                        "description": "Situación de salud del paciente",
+                        "type": "string"
+                    },
+                    "housingSituationType": {
+                        "description": "Tipo de situación de la vivienda del paciente",
+                        "type": "string"
+                    },
+                    "housingSituationStatus": {
+                        "description": "Estado de la situación de vivienda del paciente",
+                        "type": "string"
+                    },
+                    "housingSituationNumberOfRooms": {
+                        "description": "Número de habitaciones de la vivienda del paciente",
+                        "type": "integer"
+                    },
+                    "housingSituationLocation": {
+                        "description": "Ubicación de la vivienda del paciente",
+                        "type": "string"
+                    },
+                    "personalAutonomy": {
+                        "description": "Autonomía personal del paciente",
+                        "type": "string"
+                    },
+                    "economicSituation": {
+                        "description": "Situación económica del paciente",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "Fecha de creación del registro del paciente",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Fecha de actualización del registro del paciente",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    "zone": {
+                        "$ref": "#/components/schemas/Zone"
+                    },
+                    "contacts": {
+                        "description": "Contactos asociados al paciente",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Contact"
+                        }
+                    },
+                    "alerts": {
+                        "description": "Alertas asociadas al paciente",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Alert"
+                        }
+                    },
+                    "calls": {
+                        "description": "Llamadas asociadas al paciente",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Call"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "description": "Esquema del modelo Usuario",
+                "properties": {
+                    "id": {
+                        "description": "ID del usuario",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nombre del usuario",
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "description": "Apellido del usuario",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del usuario",
+                        "type": "string"
+                    },
+                    "password": {
+                        "description": "Contraseña del usuario",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono del usuario",
+                        "type": "string"
+                    },
+                    "dateHire": {
+                        "description": "Fecha de contratación",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "dateTermination": {
+                        "description": "Fecha de terminación (si aplica)",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "username": {
+                        "description": "Nombre de usuario para autenticación",
+                        "type": "string"
+                    },
+                    "language": {
+                        "description": "Idiomas hablados por el usuario",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "prefix": {
+                        "description": "Prefijo asociado al usuario",
+                        "type": "string"
+                    },
+                    "zones": {
+                        "description": "Zonas asignadas al usuario",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Zone"
+                        }
+                    },
+                    "patients": {
+                        "description": "Pacientes asignados al usuario",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Patient"
+                        }
+                    },
+                    "calls": {
+                        "description": "Llamadas realizadas por el usuario",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Call"
+                        }
+                    },
+                    "alerts": {
+                        "description": "Alertas asociadas al usuario",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Alert"
+                        }
                     }
                 },
                 "type": "object"
@@ -271,6 +2991,30 @@
         }
     },
     "tags": [
+        {
+            "name": "Authentication",
+            "description": "Autenticación"
+        },
+        {
+            "name": "Calls",
+            "description": "Calls"
+        },
+        {
+            "name": "Alerts",
+            "description": "Alerts"
+        },
+        {
+            "name": "Contacts",
+            "description": "Contacts"
+        },
+        {
+            "name": "Patients",
+            "description": "Patients"
+        },
+        {
+            "name": "Users",
+            "description": "Users"
+        },
         {
             "name": "Zones",
             "description": "Zones"

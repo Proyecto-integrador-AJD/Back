@@ -3,6 +3,62 @@
 namespace App\Http\Requests\Alert;
 
 use Illuminate\Foundation\Http\FormRequest;
+/**
+ * @OA\Schema(
+ *     schema="AlertStoreRequest",
+ *     type="object",
+ *     required={"patientId", "type", "startDate", "isRecurring"},
+ *     @OA\Property(
+ *         property="patientId",
+ *         type="integer",
+ *         description="ID del paciente asociado a la alerta",
+ *         example=1
+ *     ),
+ *     @OA\Property(
+ *         property="type",
+ *         type="string",
+ *         description="Tipo de alerta",
+ *         example="Alerta médica"
+ *     ),
+ *     @OA\Property(
+ *         property="subType",
+ *         type="string",
+ *         description="Subtipo de alerta",
+ *         example="Alerta de seguimiento"
+ *     ),
+ *     @OA\Property(
+ *         property="startDate",
+ *         type="string",
+ *         format="date-time",
+ *         description="Fecha de inicio de la alerta, en formato ISO 8601 (Y-m-d\TH:i)",
+ *         example="2025-02-19T10:30"
+ *     ),
+ *     @OA\Property(
+ *         property="isRecurring",
+ *         type="boolean",
+ *         description="Indica si la alerta es recurrente",
+ *         example=true
+ *     ),
+ *     @OA\Property(
+ *         property="description",
+ *         type="string",
+ *         description="Descripción de la alerta",
+ *         example="La alerta es para recordar la toma de medicamentos."
+ *     ),
+ *     @OA\Property(
+ *         property="recurrenceType",
+ *         type="string",
+ *         description="Tipo de recurrencia para la alerta",
+ *         example="yearly"
+ *     ),
+ *     @OA\Property(
+ *         property="recurrence",
+ *         type="integer",
+ *         description="Número de veces que se repetirá la alerta",
+ *         example=5
+ *     )
+ * )
+ */
 
 class AlertStoreRequest extends FormRequest
 {
