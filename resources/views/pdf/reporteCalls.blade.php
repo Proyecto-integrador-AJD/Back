@@ -4,20 +4,57 @@
 <head>
     <title>{{ __('pdf.reportCalls.title') }}</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
+    body {
+        font-family: Arial, sans-serif;
+        color: #2C3E50;
+    }
 
-        h1 {
-            color: #333;
-        }
-    </style>
+    h2 {
+        text-align: center;
+        border-bottom: 2px solid #3498DB;
+        padding-bottom: 5px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
+    thead tr {
+        background-color: #3498DB;
+        color: white;
+        text-align: left;
+    }
+
+    th, td {
+        padding: 10px;
+        border: 1px solid #ddd;
+    }
+
+    tbody tr {
+        background-color: #ECF0F1;
+        color: #2C3E50;
+    }
+
+    th:first-child, td:first-child {
+        border-radius: 5px 0 0 5px;
+    }
+
+    th:last-child, td:last-child {
+        border-radius: 0 5px 5px 0;
+    }
+</style>
 </head>
 
 <body>
-    <h1>{{ __('pdf.reportCalls.title') }}</h1>
-    <p>{{ __('pdf.reportCalls.subTitle') }}: {{ $date['date'] }}</p>
+    <header>
+        <img src="{{ $data['pathLogo'] }}" width="150">
+
+        <h1>{{ __('pdf.reportCalls.title') }}</h1>
+        <p>{{ __('pdf.reportCalls.subTitle') }}: {{ $data['date'] }}</p>
+    </header>
 
 
     <!-- //! Filtro -->
@@ -25,40 +62,40 @@
     <table>
         <thead>
             <tr>
-                @if ($date['filtros']['dateInit'] != null)
+                @if ($data['filtros']['dateInit'] != null)
                     <th>{{ __('pdf.reportCalls.filterTableHeader.dateInit') }}</th>
 
                 @endif 
 
-                @if ($date['filtros']['dateEnd'] != null)
+                @if ($data['filtros']['dateEnd'] != null)
                     <th>{{ __('pdf.reportCalls.filterTableHeader.dateEnd') }}</th>
                 @endif 
                 
-                @if ($date['filtros']['zoneId'] != null)
+                @if ($data['filtros']['zoneId'] != null)
                     <th>{{ __('pdf.reportCalls.filterTableHeader.zone') }}</th>
                 @endif 
                 
-                @if ($date['filtros']['type'] != null)
+                @if ($data['filtros']['type'] != null)
                     <th>{{ __('pdf.reportCalls.filterTableHeader.type') }}</th>
                 @endif 
             </tr>
         </thead>
         <tbody>
             <tr>
-                @if ($date['filtros']['dateInit'] != null)
-                    <td>{{ $date['filtros']['dateInit'] }}</td>
+                @if ($data['filtros']['dateInit'] != null)
+                    <td>{{ $data['filtros']['dateInit'] }}</td>
                 @endif 
 
-                @if ($date['filtros']['dateEnd'] != null)
-                    <td>{{ $date['filtros']['dateEnd'] }}</td>
+                @if ($data['filtros']['dateEnd'] != null)
+                    <td>{{ $data['filtros']['dateEnd'] }}</td>
                 @endif 
                 
-                @if ($date['filtros']['zoneId'] != null)
-                    <td>{{ $date['filtros']['zoneId'] }}</td>
+                @if ($data['filtros']['zoneId'] != null)
+                    <td>{{ $data['filtros']['zoneId'] }}</td>
                 @endif 
                 
-                @if ($date['filtros']['type'] != null)
-                    <td>{{ $date['filtros']['type'] }}</td>
+                @if ($data['filtros']['type'] != null)
+                    <td>{{ $data['filtros']['type'] }}</td>
                 @endif
             </tr>
         </tbody>
@@ -67,7 +104,7 @@
 
     <!-- //! LLamadas no previstas -->
     <h2>{{ __('pdf.reportCalls.noPrevistas.title') }}</h2>
-    <table border="1" style="width: 100%; border-collapse: collapse;">
+    <table>
         <thead>
             <tr>
                 <th>{{ __('pdf.reportCalls.tableHeader.date') }}</th>
@@ -81,7 +118,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($date['calls']['noPrevistas'] as $call)
+            @foreach ($data['calls']['noPrevistas'] as $call)
                 <tr>
                     <td>{{ $call->date }}</td>
                     <td>{{ $call->operator }}</td>
