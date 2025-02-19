@@ -6,6 +6,234 @@
     },
     "paths": {
         "/api": {},
+        "/api/calls/patient/{id}": {
+            "get": {
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Obtener todas las llamadas de un paciente",
+                "description": "Devuelve una lista de llamadas asociadas a un paciente específico.",
+                "operationId": "6a59d990424701cba0d10a1b1645394d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del paciente",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de llamadas del paciente devuelta con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CallResource"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Paciente no encontrado."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/calls": {
+            "get": {
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Obtener todas las llamadas",
+                "description": "Devuelve una lista paginada de llamadas.",
+                "operationId": "9a23d14f999134958731dd0346155df0",
+                "responses": {
+                    "200": {
+                        "description": "Lista de llamadas devuelta con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CallResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Crear una nueva llamada",
+                "description": "Crea una nueva llamada con los datos proporcionados.",
+                "operationId": "db4e93d17f5ef9ad4a6f3a161cf30a45",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CallStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Llamada creada con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CallResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/calls/{id}": {
+            "get": {
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Obtener una llamada",
+                "description": "Devuelve los datos de una llamada específica por su ID.",
+                "operationId": "e72c3e9ae2eed11b9dce29f58032517b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la llamada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Llamada recuperada con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CallResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Llamada no encontrada."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Actualizar una llamada",
+                "description": "Actualiza los datos de una llamada existente.",
+                "operationId": "0104abb19faaa5bca335c22b0762e2d6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la llamada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CallUpdateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Llamada actualizada con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CallResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Eliminar una llamada",
+                "description": "Elimina una llamada específica por su ID.",
+                "operationId": "7ea28db82b97c7b3fe159f3c394be63d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la llamada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Llamada eliminada con éxito."
+                    },
+                    "404": {
+                        "description": "Llamada no encontrada."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/zones": {
             "get": {
                 "tags": [
@@ -63,7 +291,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/zones/{id}": {
@@ -99,7 +332,12 @@
                     "404": {
                         "description": "Zona no encontrado."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -140,7 +378,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -167,12 +410,128 @@
                     "404": {
                         "description": "Zona no encontrada."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         }
     },
     "components": {
         "schemas": {
+            "CallStoreRequest": {
+                "required": [
+                    "date",
+                    "patientId",
+                    "userId",
+                    "incoming",
+                    "type",
+                    "duration",
+                    "description"
+                ],
+                "properties": {
+                    "date": {
+                        "description": "Fecha y hora de la llamada (formato Y-m-d H:i:s)",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-02-19 15:30:00"
+                    },
+                    "patientId": {
+                        "description": "ID del paciente al que se le realizó la llamada",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "userId": {
+                        "description": "ID del usuario que realizó la llamada",
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "incoming": {
+                        "description": "Indica si la llamada fue entrante (true) o saliente (false)",
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "type": {
+                        "description": "Tipo de la llamada",
+                        "type": "string",
+                        "example": "emergency"
+                    },
+                    "subType": {
+                        "description": "Subtipo de la llamada (opcional)",
+                        "type": "string",
+                        "example": "heart attack"
+                    },
+                    "alertId": {
+                        "description": "ID de la alerta asociada a la llamada (opcional)",
+                        "type": "integer",
+                        "example": 3
+                    },
+                    "duration": {
+                        "description": "Duración de la llamada en segundos",
+                        "type": "integer",
+                        "example": 120
+                    },
+                    "description": {
+                        "description": "Descripción adicional de la llamada",
+                        "type": "string",
+                        "example": "Paciente con dificultad respiratoria"
+                    }
+                },
+                "type": "object"
+            },
+            "CallUpdateRequest": {
+                "properties": {
+                    "date": {
+                        "description": "Fecha y hora de la llamada (formato Y-m-d H:i:s)",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-02-19 15:30:00"
+                    },
+                    "patientId": {
+                        "description": "ID del paciente al que se le realizó la llamada",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "userId": {
+                        "description": "ID del usuario que realizó la llamada",
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "incoming": {
+                        "description": "Indica si la llamada fue entrante (true) o saliente (false)",
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "type": {
+                        "description": "Tipo de la llamada",
+                        "type": "string",
+                        "example": "emergency"
+                    },
+                    "subType": {
+                        "description": "Subtipo de la llamada (opcional)",
+                        "type": "string",
+                        "example": "heart attack"
+                    },
+                    "alertId": {
+                        "description": "ID de la alerta asociada a la llamada (opcional)",
+                        "type": "integer",
+                        "example": 3
+                    },
+                    "duration": {
+                        "description": "Duración de la llamada en segundos",
+                        "type": "integer",
+                        "example": 120
+                    },
+                    "description": {
+                        "description": "Descripción adicional de la llamada",
+                        "type": "string",
+                        "example": "Paciente con dificultad respiratoria"
+                    }
+                },
+                "type": "object"
+            },
             "ZoneStoreRequest": {
                 "required": [
                     "name",
@@ -221,6 +580,62 @@
                 },
                 "type": "object"
             },
+            "CallResource": {
+                "description": "Respuestas de la llamada",
+                "properties": {
+                    "id": {
+                        "description": "ID de la llamada",
+                        "type": "integer"
+                    },
+                    "date": {
+                        "description": "Fecha y hora de la llamada",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-02-19 15:30:00"
+                    },
+                    "patientId": {
+                        "description": "ID del paciente relacionado con la llamada",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "userId": {
+                        "description": "ID del usuario que realizó la llamada",
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "incoming": {
+                        "description": "Indica si la llamada fue entrante",
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "type": {
+                        "description": "Tipo de llamada",
+                        "type": "string",
+                        "example": "emergency"
+                    },
+                    "subType": {
+                        "description": "Subtipo de llamada (opcional)",
+                        "type": "string",
+                        "example": "heart attack"
+                    },
+                    "alertId": {
+                        "description": "ID de la alerta asociada (opcional)",
+                        "type": "integer",
+                        "example": 3
+                    },
+                    "duration": {
+                        "description": "Duración de la llamada en segundos",
+                        "type": "integer",
+                        "example": 120
+                    },
+                    "description": {
+                        "description": "Descripción de la llamada",
+                        "type": "string",
+                        "example": "Paciente con dificultad respiratoria"
+                    }
+                },
+                "type": "object"
+            },
             "ZoneResource": {
                 "description": "Respuestas de la zona",
                 "properties": {
@@ -238,6 +653,49 @@
                     },
                     "location": {
                         "description": "Ubicacion de la zona",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Call": {
+                "description": "Esquema del modelo Call",
+                "properties": {
+                    "date": {
+                        "description": "Fecha de la llamada",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "patientId": {
+                        "description": "ID del paciente asociado a la llamada",
+                        "type": "integer"
+                    },
+                    "userId": {
+                        "description": "ID del usuario que realiza la llamada",
+                        "type": "integer"
+                    },
+                    "incoming": {
+                        "description": "Indica si la llamada es entrante",
+                        "type": "boolean"
+                    },
+                    "type": {
+                        "description": "Tipo de la llamada",
+                        "type": "string"
+                    },
+                    "subType": {
+                        "description": "Subtipo de la llamada",
+                        "type": "string"
+                    },
+                    "alertId": {
+                        "description": "ID de la alerta asociada",
+                        "type": "integer"
+                    },
+                    "duration": {
+                        "description": "Duración de la llamada en minutos",
+                        "type": "integer"
+                    },
+                    "description": {
+                        "description": "Descripción de la llamada",
                         "type": "string"
                     }
                 },
@@ -271,6 +729,10 @@
         }
     },
     "tags": [
+        {
+            "name": "Calls",
+            "description": "Operaciones relacionadas con las llamadas"
+        },
         {
             "name": "Zones",
             "description": "Zones"

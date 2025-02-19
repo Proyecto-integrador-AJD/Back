@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\{AuthController, AlertSubtypeController, PatientCon
 use App\Http\Middleware\AdminPermissionsMiddleware;
 
 
+
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
@@ -55,3 +56,6 @@ Route::middleware(['auth:sanctum','api'])->group( function () {
 
     Route::post('logout', [AuthController::class, 'logout']);
 });
+
+// Define una nueva ruta para obtener las llamadas de un paciente específico
+Route::get('calls/patient/{id}', [CallController::class, 'getCallsByPatient']);

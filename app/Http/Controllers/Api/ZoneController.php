@@ -35,6 +35,7 @@ class ZoneController extends BaseController
      *     path="/api/zones/{id}",
      *     summary="Obtener un paciente",
      *     description="Devuelve los datos de una zona específico por su ID.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Zones"},
      *     @OA\Parameter(
      *         name="id",
@@ -64,6 +65,7 @@ class ZoneController extends BaseController
      *     path="/api/zones",
      *     summary="Crear una nueva zona",
      *     description="Crea una nuevo zona con los datos proporcionados.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Zones"},
      *     @OA\RequestBody(
      *         required=true,
@@ -87,6 +89,7 @@ class ZoneController extends BaseController
      *     path="/api/zones/{id}",
      *     summary="Actualizar una zona",
      *     description="Actualiza los datos de una zona existente.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Zones"},
      *     @OA\Parameter(
      *         name="id",
@@ -117,6 +120,7 @@ class ZoneController extends BaseController
      *     path="/api/zones/{id}",
      *     summary="Eliminar una zona",
      *     description="Elimina una zona específico por su ID.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Zones"},
      *     @OA\Parameter(
      *         name="id",
