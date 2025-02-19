@@ -9,15 +9,34 @@ use App\Http\Controllers\Api\BaseController;
 use Request;
 use Illuminate\Support\Facades\Auth;
 
-/**
- * @OA\Info(
- *     title="Patients API",
- *     version="1.0.0",
- *     description="API para gestionar los pacientes."
- * )
- */
+
 class PatientController extends BaseController
 {
+     /**
+     * @OA\Get(
+     *     path="/api/patients/zone/{id}",
+     *     summary="Obtener pacientes por zona",
+     *     description="Devuelve una lista de pacientes de una zona específica.",
+     *     security={{"bearerAuth": {}}},
+     *     tags={"Patients"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID de la zona",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Pacientes de la zona devueltos con éxito.",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/PatientResource"))
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="No se encontraron pacientes en la zona."
+     *     )
+     * )
+     */
     public function getPatientsByZone($id)
     {
         // Buscar los pacientes de la zona específica
@@ -30,7 +49,20 @@ class PatientController extends BaseController
     
         return $this->sendResponse(PatientResource::collection($patients), 'Pacientes de la zona recuperados con éxito', 200);
     }  
-
+  /**
+     * @OA\Get(
+     *     path="/api/patients/current",
+     *     summary="Obtener pacientes del usuario autenticado",
+     *     description="Devuelve la lista de pacientes asignados al usuario autenticado.",
+     *     security={{"bearerAuth": {}}},
+     *     tags={"Patients"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Pacientes devueltos con éxito.",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/PatientResource"))
+     *     )
+     * )
+     */
     public function current(Request $request){
         // Obtiene el usuario autenticado
         $authUser = Auth::user();
@@ -45,12 +77,13 @@ class PatientController extends BaseController
      * @OA\Get(
      *     path="/api/patients",
      *     summary="Obtener todos los pacientes",
-     *     description="Devuelve una lista paginada de pacientes.",
+     *     description="Devuelve una lista de todos los pacientes.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Patients"},
      *     @OA\Response(
      *         response=200,
      *         description="Lista de pacientes devuelta con éxito.",
-     *         @OA\JsonContent(type="array", @OA\Items(ref="/components/schemas/Patients"))
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/PatientResource"))
      *     )
      * )
      */
@@ -59,11 +92,12 @@ class PatientController extends BaseController
         return PatientResource::collection(Patient::all());
     }
 
-    /**
+     /**
      * @OA\Get(
      *     path="/api/patients/{id}",
-     *     summary="Obtener un paciente",
-     *     description="Devuelve los datos de un paciente específico por su ID.",
+     *     summary="Obtener un paciente por ID",
+     *     description="Devuelve los datos de un paciente por su ID.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Patients"},
      *     @OA\Parameter(
      *         name="id",
@@ -75,11 +109,7 @@ class PatientController extends BaseController
      *     @OA\Response(
      *         response=200,
      *         description="Paciente recuperado con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Patients")
-     *     ),
-     *     @OA\Response(
-     *         response=404,
-     *         description="Paciente no encontrado."
+     *         @OA\JsonContent(ref="#/components/schemas/PatientResource")
      *     )
      * )
      */
@@ -88,20 +118,21 @@ class PatientController extends BaseController
         return $this->sendResponse(new PatientResource($patient), 'Paciente recuperado con éxito', 200);
     }
 
-    /**
+   /**
      * @OA\Post(
      *     path="/api/patients",
      *     summary="Crear un nuevo paciente",
      *     description="Crea un nuevo paciente con los datos proporcionados.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Patients"},
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(ref="/components/schemas/StorePatientRequest")
+     *         @OA\JsonContent(ref="#/components/schemas/PatientStoreRequest")
      *     ),
      *     @OA\Response(
      *         response=201,
      *         description="Paciente creado con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Patients")
+     *         @OA\JsonContent(ref="#/components/schemas/PatientResource")
      *     )
      * )
      */
@@ -111,11 +142,12 @@ class PatientController extends BaseController
         return $this->sendResponse($patient, 'Paciente creado con éxito', 201);
     }
 
-    /**
+   /**
      * @OA\Put(
      *     path="/api/patients/{id}",
      *     summary="Actualizar un paciente",
      *     description="Actualiza los datos de un paciente existente.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Patients"},
      *     @OA\Parameter(
      *         name="id",
@@ -126,12 +158,12 @@ class PatientController extends BaseController
      *     ),
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(ref="/components/schemas/UpdatePatientRequest")
+     *         @OA\JsonContent(ref="#/components/schemas/PatientUpdateRequest")
      *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Paciente actualizado con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Patients")
+     *         @OA\JsonContent(ref="#/components/schemas/PatientResource")
      *     )
      * )
      */
@@ -145,7 +177,8 @@ class PatientController extends BaseController
      * @OA\Delete(
      *     path="/api/patients/{id}",
      *     summary="Eliminar un paciente",
-     *     description="Elimina un paciente específico por su ID.",
+     *     description="Elimina un paciente por su ID.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Patients"},
      *     @OA\Parameter(
      *         name="id",
@@ -157,10 +190,6 @@ class PatientController extends BaseController
      *     @OA\Response(
      *         response=200,
      *         description="Paciente eliminado con éxito."
-     *     ),
-     *     @OA\Response(
-     *         response=404,
-     *         description="Paciente no encontrado."
      *     )
      * )
      */

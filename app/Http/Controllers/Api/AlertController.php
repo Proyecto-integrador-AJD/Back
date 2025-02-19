@@ -8,15 +8,23 @@ use App\Http\Requests\Alert\{AlertStoreRequest, AlertUpdateRequest};
 use App\Http\Resources\AlertResource;
 use App\Http\Controllers\Api\BaseController;
 
-/**
- * @OA\Info(
- *     title="Alerts API",
- *     version="1.0.0",
- *     description="API para gestionar los pacientes."
- * )
- */
+
 class AlertController extends BaseController
 {
+    /**
+     * @OA\Get(
+     *     path="/api/alerts/user",
+     *     summary="Obtener alertas asignadas al usuario",
+     *     description="Devuelve una lista de alertas asignadas al usuario autenticado.",
+     *     security={{"bearerAuth": {}}},
+     *     tags={"Alerts"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Alertas asignadas al usuario recuperadas con éxito.",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/AlertResource"))
+     *     )
+     * )
+     */
     public function user()
     {
         $userId = auth()->id(); // Obtener ID del usuario autenticado
@@ -25,7 +33,20 @@ class AlertController extends BaseController
     
         return $this->sendResponse(AlertResource::collection($alerts), 'Alertas asignadas al usuario recuperadas con éxito', 200);
     }
-
+/**
+     * @OA\Get(
+     *     path="/api/alerts/unassigned",
+     *     summary="Obtener alertas sin llamadas asignadas",
+     *     description="Devuelve las alertas que no están asociadas a ninguna llamada.",
+     *     security={{"bearerAuth": {}}},
+     *     tags={"Alerts"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Alertas sin llamadas asignadas recuperadas con éxito.",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/AlertResource"))
+     *     )
+     * )
+     */
     public function unassigned()
     {
         // Obtener todas las alertas cuyo ID no está en ninguna llamada
@@ -35,133 +56,138 @@ class AlertController extends BaseController
 
         return $this->sendResponse(AlertResource::collection($alerts), 'Alertas sin llamas asignadas recuperadas con éxito', 200);
     }
-
-    /**
+/**
      * @OA\Get(
      *     path="/api/alerts",
-     *     summary="Obtener todos los pacientes",
-     *     description="Devuelve una lista paginada de pacientes.",
+     *     summary="Obtener todas las alertas",
+     *     description="Devuelve una lista de todas las alertas.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Alerts"},
      *     @OA\Response(
      *         response=200,
-     *         description="Lista de pacientes devuelta con éxito.",
-     *         @OA\JsonContent(type="array", @OA\Items(ref="/components/schemas/Alerts"))
+     *         description="Lista de alertas devuelta con éxito.",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/AlertResource"))
      *     )
      * )
      */
+ 
     public function index()
     {
         return AlertResource::collection(Alert::all());
     }
-
-    /**
+/**
      * @OA\Get(
      *     path="/api/alerts/{id}",
-     *     summary="Obtener un paciente",
-     *     description="Devuelve los datos de un paciente específico por su ID.",
+     *     summary="Obtener una alerta específica",
+     *     description="Devuelve los datos de una alerta específica por su ID.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Alerts"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="ID del paciente",
+     *         description="ID de la alerta",
      *         required=true,
      *         @OA\Schema(type="integer")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Paciente recuperado con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Alerts")
+     *         description="Alerta recuperada con éxito.",
+     *         @OA\JsonContent(ref="#/components/schemas/AlertResource")
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Paciente no encontrado."
+     *         description="Alerta no encontrada."
      *     )
      * )
      */
+   
     public function show(Alert $alert)
     {
-        return $this->sendResponse(new AlertResource($alert), 'Paciente recuperado con éxito', 200);
+        return $this->sendResponse(new AlertResource($alert), 'Alerta recuperada con éxito', 200);
     }
 
-    /**
+   /**
      * @OA\Post(
      *     path="/api/alerts",
-     *     summary="Crear un nuevo paciente",
-     *     description="Crea un nuevo paciente con los datos proporcionados.",
+     *     summary="Crear una nueva alerta",
+     *     description="Crea una nueva alerta con los datos proporcionados.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Alerts"},
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(ref="/components/schemas/StoreAlertRequest")
+     *         @OA\JsonContent(ref="#/components/schemas/AlertStoreRequest")
      *     ),
      *     @OA\Response(
      *         response=201,
-     *         description="Paciente creado con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Alerts")
+     *         description="Alerta creada con éxito.",
+     *         @OA\JsonContent(ref="#/components/schemas/AlertResource")
      *     )
      * )
      */
     public function store(AlertStoreRequest $request)
     {
         $alert = Alert::create($request->validated());
-        return $this->sendResponse($alert, 'Paciente creado con éxito', 201);
+        return $this->sendResponse($alert, 'Alerta creada con éxito', 201);
     }
-
-    /**
+  /**
      * @OA\Put(
      *     path="/api/alerts/{id}",
-     *     summary="Actualizar un paciente",
-     *     description="Actualiza los datos de un paciente existente.",
+     *     summary="Actualizar una alerta",
+     *     description="Actualiza los datos de una alerta existente.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Alerts"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="ID del paciente",
+     *         description="ID de la alerta",
      *         required=true,
      *         @OA\Schema(type="integer")
      *     ),
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(ref="/components/schemas/UpdateAlertRequest")
+     *         @OA\JsonContent(ref="#/components/schemas/AlertUpdateRequest")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Paciente actualizado con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Alerts")
+     *         description="Alerta actualizada con éxito.",
+     *         @OA\JsonContent(ref="#/components/schemas/AlertResource")
      *     )
      * )
      */
+    
     public function update(Alert $alert, AlertUpdateRequest $request)
     {
         $alert->update($request->validated());
-        return $this->sendResponse($alert, 'Paciente actualizado con éxito', 200);
+        return $this->sendResponse($alert, 'Alerta actualizada con éxito', 200);
     }
-
-    /**
+ /**
      * @OA\Delete(
      *     path="/api/alerts/{id}",
-     *     summary="Eliminar un paciente",
-     *     description="Elimina un paciente específico por su ID.",
+     *     summary="Eliminar una alerta",
+     *     description="Elimina una alerta específica por su ID.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Alerts"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="ID del paciente",
+     *         description="ID de la alerta",
      *         required=true,
      *         @OA\Schema(type="integer")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Paciente eliminado con éxito."
+     *         description="Alerta eliminada con éxito."
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Paciente no encontrado."
+     *         description="Alerta no encontrada."
      *     )
      * )
      */
+   
     public function destroy(Alert $alert)
     {
         $alert->delete();
-        return $this->sendResponse(null, 'Paciente eliminado con éxito', 200);
+        return $this->sendResponse(null, 'Alerta eliminado con éxito', 200);
     }
 }

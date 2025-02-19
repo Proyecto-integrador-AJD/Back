@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Models\Zone;
+use App\Http\Requests\Zone\ZoneStoreRequest;
+use App\Http\Requests\Zone\ZoneUpdateRequest;
 
 class ZoneController extends Controller
 {
@@ -21,17 +23,24 @@ class ZoneController extends Controller
         return view('zones.create');
     }
 
-    public function store(Request $request)
+    public function store(ZoneStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-        ]);
+        // $request->validate([
+        //     'name' => 'required',
+        //     'description' => 'required',
+        // ]);
 
-        Zone::create($request->all());
+        // Zone::create($request->all());
 
-        return redirect()->route('zones.index')
-            ->with('success', 'Zone created successfully.');
+        // return redirect()->route('zones.index')
+        //     ->with('success', 'Zone created successfully.');
+
+
+            $validated = $request->validated(); 
+        
+            Zone::create($validated);
+        
+            return redirect()->route('zones.index')->with('success', 'Zona creada correctamente!');
     }
 
     public function show(Zone $zone)
@@ -44,28 +53,40 @@ class ZoneController extends Controller
         return view('zones.edit', compact('zone'));
     }
 
-    public function update(Request $request, Zone $zone)
+    public function update(ZoneUpdateRequest $request, Zone $zone)
     {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-        ]);
+        // $request->validate([
+        //     'name' => 'required',
+        //     'description' => 'required',
+        // ]);
 
-        $zone->update($request->all());
+        // $zone->update($request->all());
 
-        return redirect()->route('zones.index')
-            ->with('success', 'Zone updated successfully');
+        // return redirect()->route('zones.index')
+        //     ->with('success', 'Zone updated successfully');
+
+        $validated = $request->validated();
+
+        $zone->update($validated);
+
+        return redirect()->route('zones.index')->with('success', 'Zona actualizada correctamente!');
     }
 
-    public function destroy(Zone $zone)
+    public function destroy($id)
     {
-        $zone->delete();
+        // $zone->delete();
 
-        return redirect()->route('zones.index')
-            ->with('success', 'Zone deleted successfully');
+        // return redirect()->route('zones.index')
+        //     ->with('success', 'Zone deleted successfully');
+
+            $zone = Zone::findOrFail($id);
+        
+           
+            $zone->delete();
+            
+            return redirect()->route('zones.index')->with('success', 'Zona eliminada correctamente');
+        }
     }
 
 
 
-
-}
