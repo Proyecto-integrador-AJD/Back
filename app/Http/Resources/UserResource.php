@@ -5,6 +5,75 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+
+/**
+ * @OA\Schema(
+ *     schema="UserResource",
+ *     description="Respuesta de los datos del usuario",
+ *     @OA\Property(
+ *         property="id",
+ *         type="integer",
+ *         description="ID del usuario",
+ *         example=1
+ *     ),
+ *     @OA\Property(
+ *         property="name",
+ *         type="string",
+ *         description="Nombre del usuario",
+ *         example="Anna"
+ *     ),
+ *     @OA\Property(
+ *         property="lastName",
+ *         type="string",
+ *         description="Apellido del usuario",
+ *         example="Martínez"
+ *     ),
+ *     @OA\Property(
+ *         property="email",
+ *         type="string",
+ *         description="Correo electrónico del usuario",
+ *         example="anna.martinez@example.com"
+ *     ),
+ *     @OA\Property(
+ *         property="prefix",
+ *         type="string",
+ *         description="Prefijo telefónico del usuario",
+ *         example="34"
+ *     ),
+ *     @OA\Property(
+ *         property="phone",
+ *         type="string",
+ *         description="Número de teléfono del usuario",
+ *         example="666777888"
+ *     ),
+ *     @OA\Property(
+ *         property="language",
+ *         type="array",
+ *         description="Idiomas preferidos del usuario",
+ *         @OA\Items(type="string", example="Català")
+ *     ),
+ *     @OA\Property(
+ *         property="dateHire",
+ *         type="string",
+ *         format="date",
+ *         description="Fecha de contratación del usuario",
+ *         example="2023-01-01"
+ *     ),
+ *     @OA\Property(
+ *         property="dateTermination",
+ *         type="string",
+ *         format="date",
+ *         description="Fecha de terminación del usuario (puede ser nula)",
+ *         example=null
+ *     ),
+ *     @OA\Property(
+ *         property="username",
+ *         type="string",
+ *         description="Nombre de usuario",
+ *         example="operator_anna"
+ *     )
+ * )
+ */
 class UserResource extends JsonResource
 {
     /**
@@ -17,17 +86,17 @@ class UserResource extends JsonResource
 
         /*
         "id": 1,
-            "role": "admin",
+            "role": "operator",
             "name": "Anna",
             "lastName": "Martínez",
-            "email": "anna.martinez@example.com",
+            "email": "anna.martinez@exple.com",
             "prefix": "34",
             "phone": "666777888",
             "zoneIds": [1],
             "language": ["Català"],
             "dateHire": "2023-01-01",
             "dateTermination": null,
-            "username": "admin_anna",
+            "username": "operadoranna",
             "passwordHash": "hashed_password"
         */
         return [

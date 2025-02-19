@@ -4,6 +4,33 @@ namespace App\Http\Requests\Zone;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *     schema="ZoneUpdateRequest",
+ *     type="object",
+ *     @OA\Property(
+ *         property="name",
+ *         type="string",
+ *         description="Nombre de la zona",
+ *         example="Ronny Feest",
+ *         maxLength=255
+ *     ),
+ *     @OA\Property(
+ *         property="description",
+ *         type="string",
+ *         description="Descripcion de la zona",
+ *         example="Veniam neque libero sed sunt aut porro unde.",
+ *          maxLength=255
+ *     ),
+ *     @OA\Property(
+ *         property="location",
+ *         type="string",
+ *         description="Ubicacion de la zona",
+ *         example="A Coruña",
+ *         maxLength=255
+ *     )
+ * )
+ */
 class ZoneUpdateRequest extends FormRequest
 {
     /**

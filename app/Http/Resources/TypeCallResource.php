@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class LanguageResource extends JsonResource
+class TypeCallResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,13 +14,13 @@ class LanguageResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-
-
         return [
             'id' => $this->id,
             'name' => $this->name,
             'spanishName' => $this->spanishName,
             'valencianName' => $this->valencianName,
+            'incoming' => $this->incoming,
+            'subtypes' => SubTypeCallResource::collection($this->subtypes),
         ];
     }
 }
