@@ -226,53 +226,53 @@ class ReportController extends BaseController
         // }
     }
 
-    private function generateAlerts($dateInit, $dateEnd, $alert) {
-        $alerts = [];
-        $recurrence = $alert['recurrenceType'];
-        $puntoInicio = null;
-        $days = 0;
+    // private function generateAlerts($dateInit, $dateEnd, $alert) {
+    //     $alerts = [];
+    //     $recurrence = $alert['recurrenceType'];
+    //     $puntoInicio = null;
+    //     $days = 0;
     
-        if ($recurrence == 'daily') {
-            $days = 1;
-            $puntoInicio = clone $dateInit;
-        } elseif ($recurrence == 'weekly') {
-            $days = 7;
-            $fechaAlerta = new DateTime($alert['startDate']);
-            $diaSemana = (int)$fechaAlerta->format('w');
+    //     if ($recurrence == 'daily') {
+    //         $days = 1;
+    //         $puntoInicio = clone $dateInit;
+    //     } elseif ($recurrence == 'weekly') {
+    //         $days = 7;
+    //         $fechaAlerta = new DateTime($alert['startDate']);
+    //         $diaSemana = (int)$fechaAlerta->format('w');
     
-            for ($i = 0; $i < 7; $i++) {
-                $diaSemanaActual = (int)$dateInit->format('w');
-                if ($diaSemanaActual == $diaSemana) {
-                    $puntoInicio = clone $dateInit;
-                    break;
-                }
-                $dateInit->modify('+1 day');
-            }
-        } elseif ($recurrence == 'monthly') {
-            $days = 30;
-            $fechaAlerta = new DateTime($alert['startDate']);
-            $diaMes = (int)$fechaAlerta->format('d');
+    //         for ($i = 0; $i < 7; $i++) {
+    //             $diaSemanaActual = (int)$dateInit->format('w');
+    //             if ($diaSemanaActual == $diaSemana) {
+    //                 $puntoInicio = clone $dateInit;
+    //                 break;
+    //             }
+    //             $dateInit->modify('+1 day');
+    //         }
+    //     } elseif ($recurrence == 'monthly') {
+    //         $days = 30;
+    //         $fechaAlerta = new DateTime($alert['startDate']);
+    //         $diaMes = (int)$fechaAlerta->format('d');
     
-            for ($i = 0; $i < 30; $i++) {
-                $diaMesActual = (int)$dateInit->format('d');
-                if ($diaMesActual == $diaMes) {
-                    $puntoInicio = clone $dateInit;
-                    break;
-                }
-                $dateInit->modify('+1 day');
-            }
-        }
+    //         for ($i = 0; $i < 30; $i++) {
+    //             $diaMesActual = (int)$dateInit->format('d');
+    //             if ($diaMesActual == $diaMes) {
+    //                 $puntoInicio = clone $dateInit;
+    //                 break;
+    //             }
+    //             $dateInit->modify('+1 day');
+    //         }
+    //     }
     
-        if ($puntoInicio) {
-            $date = clone $puntoInicio;
-            while ($date <= $dateEnd) {
-                $copy = $alert;
-                $copy['startDate'] = $date->format('Y-m-d H:i:s');
-                $alerts[] = $copy;
-                $date->modify("+$days days");
-            }
-        }
-        return $alerts;
-    }
+    //     if ($puntoInicio) {
+    //         $date = clone $puntoInicio;
+    //         while ($date <= $dateEnd) {
+    //             $copy = $alert;
+    //             $copy['startDate'] = $date->format('Y-m-d H:i:s');
+    //             $alerts[] = $copy;
+    //             $date->modify("+$days days");
+    //         }
+    //     }
+    //     return $alerts;
+    // }
     
 }
