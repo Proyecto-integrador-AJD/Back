@@ -234,6 +234,190 @@
                 ]
             }
         },
+        "/api/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Obtener todos los usuarios",
+                "description": "Devuelve una lista de todos los usuarios.",
+                "operationId": "566aed8efb436ca506e0ef51a032ecd9",
+                "responses": {
+                    "200": {
+                        "description": "Lista de usuarios devuelta con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/UserResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Crear un nuevo usuario",
+                "description": "Crea un nuevo usuario con los datos proporcionados.",
+                "operationId": "be551c1d694a01c164966f58bfa77013",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuario creado con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/users/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Obtener un usuario",
+                "description": "Devuelve los datos de un usuario por su ID.",
+                "operationId": "6f51bd5fa2dddcd25e44cfa53dcbd10a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuario recuperado con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuario no encontrado."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Actualizar un usuario",
+                "description": "Actualiza los datos de un usuario existente.",
+                "operationId": "070e37fc9aff78ae73860751bc990ed3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserUpdateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Usuario actualizado con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Eliminar un usuario",
+                "description": "Elimina un usuario por su ID.",
+                "operationId": "0b4133ed462528a5e648b88ead11e929",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuario eliminado con éxito."
+                    },
+                    "404": {
+                        "description": "Usuario no encontrado."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/zones": {
             "get": {
                 "tags": [
@@ -532,6 +716,160 @@
                 },
                 "type": "object"
             },
+            "UserStoreRequest": {
+                "required": [
+                    "name",
+                    "lastName",
+                    "email",
+                    "prefix",
+                    "phone",
+                    "language",
+                    "dateHire",
+                    "username",
+                    "password"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Nombre del usuario",
+                        "type": "string",
+                        "example": "Juan"
+                    },
+                    "lastName": {
+                        "description": "Apellido del usuario",
+                        "type": "string",
+                        "example": "Pérez"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del usuario",
+                        "type": "string",
+                        "example": "juan.perez@example.com"
+                    },
+                    "prefix": {
+                        "description": "Prefijo telefónico del usuario",
+                        "type": "string",
+                        "example": "+34"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono del usuario",
+                        "type": "integer",
+                        "example": "123456789"
+                    },
+                    "role": {
+                        "description": "Rol del usuario",
+                        "type": "string",
+                        "example": "admin"
+                    },
+                    "language": {
+                        "description": "Idiomas del usuario",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "example": "Castellano"
+                        },
+                        "example": [
+                            "Castellano",
+                            "Valenciano"
+                        ]
+                    },
+                    "dateHire": {
+                        "description": "Fecha de contratación del usuario",
+                        "type": "string",
+                        "format": "date",
+                        "example": "2025-02-19"
+                    },
+                    "dateTermination": {
+                        "description": "Fecha de terminación del usuario",
+                        "type": "string",
+                        "format": "date",
+                        "example": "2026-02-19"
+                    },
+                    "username": {
+                        "description": "Nombre de usuario",
+                        "type": "string",
+                        "example": "juanperez"
+                    },
+                    "password": {
+                        "description": "Contraseña del usuario",
+                        "type": "string",
+                        "example": "password123"
+                    }
+                },
+                "type": "object"
+            },
+            "UserUpdateRequest": {
+                "properties": {
+                    "name": {
+                        "description": "Nombre del usuario",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Juan"
+                    },
+                    "lastName": {
+                        "description": "Apellido del usuario",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Pérez"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del usuario",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "juan.perez@example.com"
+                    },
+                    "prefix": {
+                        "description": "Prefijo telefónico del usuario",
+                        "type": "string",
+                        "example": "+34"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono del usuario",
+                        "type": "integer",
+                        "example": 123456789
+                    },
+                    "role": {
+                        "description": "Rol del usuario",
+                        "type": "string",
+                        "example": "admin"
+                    },
+                    "language": {
+                        "description": "Idiomas del usuario",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "example": "Castellano"
+                        },
+                        "example": [
+                            "Castellano",
+                            "Inglés"
+                        ]
+                    },
+                    "dateHire": {
+                        "description": "Fecha de contratación del usuario",
+                        "type": "string",
+                        "format": "date",
+                        "example": "2025-02-19"
+                    },
+                    "dateTermination": {
+                        "description": "Fecha de terminación del usuario",
+                        "type": "string",
+                        "format": "date",
+                        "example": "2026-02-19"
+                    },
+                    "username": {
+                        "description": "Nombre de usuario",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "juanperez"
+                    },
+                    "password": {
+                        "description": "Contraseña del usuario",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "password123"
+                    }
+                },
+                "type": "object"
+            },
             "ZoneStoreRequest": {
                 "required": [
                     "name",
@@ -636,6 +974,72 @@
                 },
                 "type": "object"
             },
+            "UserResource": {
+                "description": "Respuesta de los datos del usuario",
+                "properties": {
+                    "id": {
+                        "description": "ID del usuario",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "role": {
+                        "description": "Rol del usuario",
+                        "type": "string",
+                        "example": "admin"
+                    },
+                    "name": {
+                        "description": "Nombre del usuario",
+                        "type": "string",
+                        "example": "Anna"
+                    },
+                    "lastName": {
+                        "description": "Apellido del usuario",
+                        "type": "string",
+                        "example": "Martínez"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del usuario",
+                        "type": "string",
+                        "example": "anna.martinez@example.com"
+                    },
+                    "prefix": {
+                        "description": "Prefijo telefónico del usuario",
+                        "type": "string",
+                        "example": "34"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono del usuario",
+                        "type": "string",
+                        "example": "666777888"
+                    },
+                    "language": {
+                        "description": "Idiomas preferidos del usuario",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "example": "Català"
+                        }
+                    },
+                    "dateHire": {
+                        "description": "Fecha de contratación del usuario",
+                        "type": "string",
+                        "format": "date",
+                        "example": "2023-01-01"
+                    },
+                    "dateTermination": {
+                        "description": "Fecha de terminación del usuario (puede ser nula)",
+                        "type": "string",
+                        "format": "date",
+                        "example": null
+                    },
+                    "username": {
+                        "description": "Nombre de usuario",
+                        "type": "string",
+                        "example": "admin_anna"
+                    }
+                },
+                "type": "object"
+            },
             "ZoneResource": {
                 "description": "Respuestas de la zona",
                 "properties": {
@@ -654,6 +1058,52 @@
                     "location": {
                         "description": "Ubicacion de la zona",
                         "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Alert": {
+                "description": "Esquema del modelo Alerta",
+                "properties": {
+                    "id": {
+                        "description": "ID de la alerta",
+                        "type": "integer"
+                    },
+                    "patientId": {
+                        "description": "ID del paciente asociado a la alerta",
+                        "type": "integer"
+                    },
+                    "type": {
+                        "description": "Tipo de alerta",
+                        "type": "string"
+                    },
+                    "subType": {
+                        "description": "Subtipo de alerta",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Descripción de la alerta",
+                        "type": "string"
+                    },
+                    "startDate": {
+                        "description": "Fecha de inicio de la alerta",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "isRecurring": {
+                        "description": "Indica si la alerta es recurrente",
+                        "type": "boolean"
+                    },
+                    "recurrenceType": {
+                        "description": "Tipo de recurrencia de la alerta (por ejemplo, diaria, semanal, etc.)",
+                        "type": "string"
+                    },
+                    "recurrence": {
+                        "description": "Frecuencia de la recurrencia de la alerta en días",
+                        "type": "integer"
+                    },
+                    "patient": {
+                        "$ref": "#/components/schemas/Patient"
                     }
                 },
                 "type": "object"
@@ -701,6 +1151,308 @@
                 },
                 "type": "object"
             },
+            "Contact": {
+                "description": "Esquema del modelo Contacto",
+                "properties": {
+                    "id": {
+                        "description": "ID del contacto",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nombre del contacto",
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "description": "Apellido del contacto",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del contacto",
+                        "type": "string"
+                    },
+                    "prefix": {
+                        "description": "Prefijo del contacto",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono del contacto",
+                        "type": "string"
+                    },
+                    "patientId": {
+                        "description": "ID del paciente asociado al contacto",
+                        "type": "integer"
+                    },
+                    "relationship": {
+                        "description": "Relación con el paciente",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "Fecha de creación del contacto",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Fecha de actualización del contacto",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "patient": {
+                        "$ref": "#/components/schemas/Patient"
+                    }
+                },
+                "type": "object"
+            },
+            "Patient": {
+                "description": "Esquema del modelo Paciente",
+                "properties": {
+                    "id": {
+                        "description": "ID del paciente",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nombre del paciente",
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "description": "Apellido del paciente",
+                        "type": "string"
+                    },
+                    "userId": {
+                        "description": "ID del usuario asociado al paciente",
+                        "type": "integer"
+                    },
+                    "birthDate": {
+                        "description": "Fecha de nacimiento del paciente",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "addressStreet": {
+                        "description": "Calle de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressNumber": {
+                        "description": "Número de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressFloor": {
+                        "description": "Piso de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressDoor": {
+                        "description": "Puerta de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressPostalCode": {
+                        "description": "Código postal de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressCity": {
+                        "description": "Ciudad de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressProvince": {
+                        "description": "Provincia de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressCountry": {
+                        "description": "País de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "dni": {
+                        "description": "DNI del paciente",
+                        "type": "string"
+                    },
+                    "healthCardNumber": {
+                        "description": "Número de tarjeta sanitaria del paciente",
+                        "type": "string"
+                    },
+                    "prefix": {
+                        "description": "Prefijo del paciente",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono del paciente",
+                        "type": "string"
+                    },
+                    "language": {
+                        "description": "Idiomas hablados por el paciente",
+                        "type": "array",
+                        "items": {
+                            "description": "Lenguas del paciente",
+                            "type": "string",
+                            "enum": [
+                                "Castellano",
+                                "Valenciano"
+                            ]
+                        }
+                    },
+                    "email": {
+                        "description": "Correo electrónico del paciente",
+                        "type": "string"
+                    },
+                    "zoneId": {
+                        "description": "ID de la zona asociada al paciente",
+                        "type": "integer"
+                    },
+                    "situationPersonalFamily": {
+                        "description": "Situación personal y familiar del paciente",
+                        "type": "string"
+                    },
+                    "healthSituation": {
+                        "description": "Situación de salud del paciente",
+                        "type": "string"
+                    },
+                    "housingSituationType": {
+                        "description": "Tipo de situación de la vivienda del paciente",
+                        "type": "string"
+                    },
+                    "housingSituationStatus": {
+                        "description": "Estado de la situación de vivienda del paciente",
+                        "type": "string"
+                    },
+                    "housingSituationNumberOfRooms": {
+                        "description": "Número de habitaciones de la vivienda del paciente",
+                        "type": "integer"
+                    },
+                    "housingSituationLocation": {
+                        "description": "Ubicación de la vivienda del paciente",
+                        "type": "string"
+                    },
+                    "personalAutonomy": {
+                        "description": "Autonomía personal del paciente",
+                        "type": "string"
+                    },
+                    "economicSituation": {
+                        "description": "Situación económica del paciente",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "Fecha de creación del registro del paciente",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Fecha de actualización del registro del paciente",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    "zone": {
+                        "$ref": "#/components/schemas/Zone"
+                    },
+                    "contacts": {
+                        "description": "Contactos asociados al paciente",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Contact"
+                        }
+                    },
+                    "alerts": {
+                        "description": "Alertas asociadas al paciente",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Alert"
+                        }
+                    },
+                    "calls": {
+                        "description": "Llamadas asociadas al paciente",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Call"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "description": "Esquema del modelo Usuario",
+                "properties": {
+                    "id": {
+                        "description": "ID del usuario",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nombre del usuario",
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "description": "Apellido del usuario",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del usuario",
+                        "type": "string"
+                    },
+                    "password": {
+                        "description": "Contraseña del usuario",
+                        "type": "string"
+                    },
+                    "role": {
+                        "description": "Rol del usuario (e.g., admin, user)",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono del usuario",
+                        "type": "string"
+                    },
+                    "dateHire": {
+                        "description": "Fecha de contratación",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "dateTermination": {
+                        "description": "Fecha de terminación (si aplica)",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "username": {
+                        "description": "Nombre de usuario para autenticación",
+                        "type": "string"
+                    },
+                    "language": {
+                        "description": "Idiomas hablados por el usuario",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "prefix": {
+                        "description": "Prefijo asociado al usuario",
+                        "type": "string"
+                    },
+                    "zones": {
+                        "description": "Zonas asignadas al usuario",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Zone"
+                        }
+                    },
+                    "patients": {
+                        "description": "Pacientes asignados al usuario",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Patient"
+                        }
+                    },
+                    "calls": {
+                        "description": "Llamadas realizadas por el usuario",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Call"
+                        }
+                    },
+                    "alerts": {
+                        "description": "Alertas asociadas al usuario",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Alert"
+                        }
+                    }
+                },
+                "type": "object"
+            },
             "Zone": {
                 "description": "Esquema del model Zona",
                 "properties": {
@@ -732,6 +1484,10 @@
         {
             "name": "Calls",
             "description": "Operaciones relacionadas con las llamadas"
+        },
+        {
+            "name": "Users",
+            "description": "Users"
         },
         {
             "name": "Zones",

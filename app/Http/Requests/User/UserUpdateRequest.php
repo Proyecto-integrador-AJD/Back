@@ -5,6 +5,90 @@ namespace App\Http\Requests\User;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Enums\Language;
 
+
+/**
+ * @OA\Schema(
+ *     schema="UserUpdateRequest",
+ *     type="object",
+ *     @OA\Property(
+ *         property="name",
+ *         type="string",
+ *         description="Nombre del usuario",
+ *         example="Juan",
+ *         maxLength=255
+ *     ),
+ *     @OA\Property(
+ *         property="lastName",
+ *         type="string",
+ *         description="Apellido del usuario",
+ *         example="Pérez",
+ *         maxLength=255
+ *     ),
+ *     @OA\Property(
+ *         property="email",
+ *         type="string",
+ *         description="Correo electrónico del usuario",
+ *         example="juan.perez@example.com",
+ *         maxLength=255
+ *     ),
+ *     @OA\Property(
+ *         property="prefix",
+ *         type="string",
+ *         description="Prefijo telefónico del usuario",
+ *         example="+34"
+ *     ),
+ *     @OA\Property(
+ *         property="phone",
+ *         type="integer",
+ *         description="Número de teléfono del usuario",
+ *         example=123456789
+ *     ),
+ *     @OA\Property(
+ *         property="role",
+ *         type="string",
+ *         description="Rol del usuario",
+ *         example="admin"
+ *     ),
+ *     @OA\Property(
+ *         property="language",
+ *         type="array",
+ *         description="Idiomas del usuario",
+ *         @OA\Items(
+ *             type="string",
+ *             example="Castellano"
+ *         ),
+ *         example={"Castellano", "Inglés"}
+ *     ),
+ *     @OA\Property(
+ *         property="dateHire",
+ *         type="string",
+ *         format="date",
+ *         description="Fecha de contratación del usuario",
+ *         example="2025-02-19"
+ *     ),
+ *     @OA\Property(
+ *         property="dateTermination",
+ *         type="string",
+ *         format="date",
+ *         description="Fecha de terminación del usuario",
+ *         example="2026-02-19"
+ *     ),
+ *     @OA\Property(
+ *         property="username",
+ *         type="string",
+ *         description="Nombre de usuario",
+ *         example="juanperez",
+ *         maxLength=255
+ *     ),
+ *     @OA\Property(
+ *         property="password",
+ *         type="string",
+ *         description="Contraseña del usuario",
+ *         example="password123",
+ *         maxLength=255
+ *     )
+ * )
+ */
 class UserUpdateRequest extends FormRequest
 {
     /**
