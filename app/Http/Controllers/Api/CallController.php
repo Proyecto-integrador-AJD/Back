@@ -10,7 +10,7 @@ use App\Http\Controllers\Api\BaseController;
 /**
  * @OA\Tag(
  *     name="Calls",
- *     description="Operaciones relacionadas con las llamadas"
+ *     description="Calls"
  * )
  */
 

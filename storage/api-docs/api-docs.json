@@ -478,6 +478,190 @@
                 ]
             }
         },
+        "/api/contacts": {
+            "get": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Obtener todos los contactos",
+                "description": "Devuelve una lista de todos los contactos.",
+                "operationId": "bc39494d59500e2d75e6f6648b43c8de",
+                "responses": {
+                    "200": {
+                        "description": "Lista de contactos devuelta con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ContactResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Crear un nuevo contacto",
+                "description": "Crea un nuevo contacto con los datos proporcionados.",
+                "operationId": "779a1f2268bae1138e7ea7843dd88d90",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ContactStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Contacto creado con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ContactResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/contacts/{id}": {
+            "get": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Obtener un contacto",
+                "description": "Devuelve los detalles de un contacto específico por su ID.",
+                "operationId": "2a2c193f37e667891b7a6bc95e8e4132",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del contacto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Contacto recuperado con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ContactResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Contacto no encontrado."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Actualizar un contacto",
+                "description": "Actualiza los datos de un contacto existente.",
+                "operationId": "45636eb97c78bd0e474d5507fde18f1a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del contacto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ContactUpdateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Contacto actualizado con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ContactResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Eliminar un contacto",
+                "description": "Elimina un contacto específico por su ID.",
+                "operationId": "a4fa6d0e82512d1fac868a7b61e6a2e7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del contacto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Contacto eliminado con éxito."
+                    },
+                    "404": {
+                        "description": "Contacto no encontrado."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/patients/zone/{id}": {
             "get": {
                 "tags": [
@@ -1314,6 +1498,98 @@
                 },
                 "type": "object"
             },
+            "ContactStoreRequest": {
+                "required": [
+                    "name",
+                    "lastName",
+                    "email",
+                    "prefix",
+                    "phone",
+                    "patientId",
+                    "relationship"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Nombre del contacto",
+                        "type": "string",
+                        "example": "Juan"
+                    },
+                    "lastName": {
+                        "description": "Apellido del contacto",
+                        "type": "string",
+                        "example": "Pérez"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del contacto",
+                        "type": "string",
+                        "example": "juan.perez@example.com"
+                    },
+                    "prefix": {
+                        "description": "Prefijo telefónico del contacto",
+                        "type": "string",
+                        "example": "+34"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono del contacto",
+                        "type": "integer",
+                        "example": "612345678"
+                    },
+                    "patientId": {
+                        "description": "ID del paciente asociado al contacto",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "relationship": {
+                        "description": "Relación del contacto con el paciente",
+                        "type": "string",
+                        "example": "Madre"
+                    }
+                },
+                "type": "object"
+            },
+            "ContactUpdateRequest": {
+                "properties": {
+                    "name": {
+                        "description": "Nombre del contacto",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Juan"
+                    },
+                    "lastName": {
+                        "description": "Apellido del contacto",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Pérez"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del contacto",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "juan.perez@example.com"
+                    },
+                    "prefix": {
+                        "description": "Prefijo telefónico del contacto",
+                        "type": "string",
+                        "example": "+34"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono del contacto",
+                        "type": "integer",
+                        "example": "612345678"
+                    },
+                    "patientId": {
+                        "description": "ID del paciente asociado al contacto",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "relationship": {
+                        "description": "Relación del contacto con el paciente",
+                        "type": "string",
+                        "example": "Madre"
+                    }
+                },
+                "type": "object"
+            },
             "PatientStoreRequest": {
                 "required": [
                     "name",
@@ -1858,6 +2134,44 @@
                         "description": "Descripción de la llamada",
                         "type": "string",
                         "example": "Paciente con dificultad respiratoria"
+                    }
+                },
+                "type": "object"
+            },
+            "ContactResource": {
+                "description": "Respuestas del contacto",
+                "properties": {
+                    "id": {
+                        "description": "ID del contacto",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nombre del contacto",
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "description": "Apellido del contacto",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del contacto",
+                        "type": "string"
+                    },
+                    "prefix": {
+                        "description": "Prefijo telefónico del contacto",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono del contacto",
+                        "type": "integer"
+                    },
+                    "patientId": {
+                        "description": "ID del paciente asociado al contacto",
+                        "type": "integer"
+                    },
+                    "relationship": {
+                        "description": "Relación del contacto con el paciente",
+                        "type": "string"
                     }
                 },
                 "type": "object"
@@ -2498,11 +2812,15 @@
     "tags": [
         {
             "name": "Calls",
-            "description": "Operaciones relacionadas con las llamadas"
+            "description": "Calls"
         },
         {
             "name": "Alerts",
             "description": "Alerts"
+        },
+        {
+            "name": "Contacts",
+            "description": "Contacts"
         },
         {
             "name": "Patients",
