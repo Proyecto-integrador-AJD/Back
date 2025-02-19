@@ -23,6 +23,10 @@ class AdminPermissionsMiddleware
         if ($request->isMethod('put') || $request->isMethod('patch') || $request->isMethod('delete')) {
             $routeUser = $request->route('user'); // Usuario que se intenta modificar
 
+            if ($request->isMethod('put') || $request->isMethod('patch') && $routeUser->id == $user->id) {
+                return $next($request);
+            }
+
             if (!$user->isAdmin()) {
                 return response()->json(['error' => 'No tienes permisos para modificar administradores.'], 403);
             }
