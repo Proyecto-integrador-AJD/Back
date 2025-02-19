@@ -10,6 +10,7 @@ use App\Http\Resources\CallResource;
 use App\Http\Resources\PatientResource;
 use App\Http\Controllers\Api\BaseController;
 use Dompdf\Dompdf;
+use DateTime;
 class ReportController extends BaseController
 {
     /**
@@ -114,20 +115,26 @@ class ReportController extends BaseController
 
 
         //! LLamadas con alerta
-        $query = Call::select(
-            'calls.*',
-            'patients.zoneId',
+        $query = Alert::select(
+            'calls.date', 'zones.name as zone', 'calls.type', 'calls.subType', 'calls.duration', 'calls.description',
             'alerts.type as alertType',
             'alerts.subType as alertSubType',
             'alerts.description as alertDescription',
             'alerts.startDate as alertStartDate',
             'alerts.recurrenceType as alertRecurrenceType'
         )
+            ->join('calls', 'alerts.id', '=', 'calls.alertId')
+            ->join('users', 'calls.userId', '=', 'users.id')
             ->join('patients', 'calls.patientId', '=', 'patients.id')
-            ->join('alerts', 'calls.alertId', '=', 'alerts.id');
+            ->join('zones', 'patients.zoneId', '=', 'zones.id');
+
+        $query->selectRaw("CONCAT(users.name, ' ', users.lastName) as operator");
+        $query->selectRaw("CONCAT(patients.name, ' ', patients.lastName) as patient");
+
 
         if ($dateInit != null) {
             $query->whereBetween('calls.date', [$dateInit, $dateEnd]);
+
         }
 
         if ($zoneId) {
@@ -138,7 +145,6 @@ class ReportController extends BaseController
             $query->where('calls.type', 'LIKE', "%$type%");
         }
 
-        //! LLamadas con alerta
         $calls = $query->get();
 
         // dd($calls, $dateInit, $dateEnd, $zoneId, $type);
@@ -189,7 +195,84 @@ class ReportController extends BaseController
             ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
         return $response;
-        // return $pdf->download('reporte.pdf'); // O return $pdf->stream(); para verlo en el navegador
 
+
+
+
+
+
+        //! Generar alertas
+
+
+        // $ejemloAlert = [
+        //     "id" => 2,
+        //     "patientId" => 5,
+        //     "type" => "Follow-up in application according to protocols",
+        //     "subType" => null,
+        //     "description" => "Autem fugit odio quae odit.",
+        //     "startDate" => "2025-02-05 23:36:03",
+        //     "isRecurring" => 1,
+        //     "recurrenceType" => "weekly",
+        //     "recurrence" => 6
+        // ];
+        
+        // $dateInit = new DateTime('2025-01-27 08:46:29');
+        // $dateEnd = new DateTime('2025-07-27 08:46:29');
+    
+        // $resultado = $this->generateAlerts($dateInit, $dateEnd, $ejemloAlert);
+        
+        // foreach ($resultado as $alert) {
+        //     echo $alert['startDate'] . PHP_EOL . '<br>';
+        // }
     }
+
+    private function generateAlerts($dateInit, $dateEnd, $alert) {
+        $alerts = [];
+        $recurrence = $alert['recurrenceType'];
+        $puntoInicio = null;
+        $days = 0;
+    
+        if ($recurrence == 'daily') {
+            $days = 1;
+            $puntoInicio = clone $dateInit;
+        } elseif ($recurrence == 'weekly') {
+            $days = 7;
+            $fechaAlerta = new DateTime($alert['startDate']);
+            $diaSemana = (int)$fechaAlerta->format('w');
+    
+            for ($i = 0; $i < 7; $i++) {
+                $diaSemanaActual = (int)$dateInit->format('w');
+                if ($diaSemanaActual == $diaSemana) {
+                    $puntoInicio = clone $dateInit;
+                    break;
+                }
+                $dateInit->modify('+1 day');
+            }
+        } elseif ($recurrence == 'monthly') {
+            $days = 30;
+            $fechaAlerta = new DateTime($alert['startDate']);
+            $diaMes = (int)$fechaAlerta->format('d');
+    
+            for ($i = 0; $i < 30; $i++) {
+                $diaMesActual = (int)$dateInit->format('d');
+                if ($diaMesActual == $diaMes) {
+                    $puntoInicio = clone $dateInit;
+                    break;
+                }
+                $dateInit->modify('+1 day');
+            }
+        }
+    
+        if ($puntoInicio) {
+            $date = clone $puntoInicio;
+            while ($date <= $dateEnd) {
+                $copy = $alert;
+                $copy['startDate'] = $date->format('Y-m-d H:i:s');
+                $alerts[] = $copy;
+                $date->modify("+$days days");
+            }
+        }
+        return $alerts;
+    }
+    
 }
