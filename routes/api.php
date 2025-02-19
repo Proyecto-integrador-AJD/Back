@@ -59,3 +59,4 @@ Route::middleware(['auth:sanctum','api'])->group( function () {
 
 // Define una nueva ruta para obtener las llamadas de un paciente específico
 Route::get('calls/patient/{id}', [CallController::class, 'getCallsByPatient']);
+Route::get('patients/zone/{id}', [PatientController::class, 'getPatientsByZone']);

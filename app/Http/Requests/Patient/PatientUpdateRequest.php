@@ -4,6 +4,95 @@ namespace App\Http\Requests\Patient;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *     schema="PatientUpdateRequest",
+ *     type="object",
+ *     @OA\Property(
+ *         property="name",
+ *         type="string",
+ *         description="Nombre del paciente",
+ *         example="Juan",
+ *         maxLength=255
+ *     ),
+ *     @OA\Property(
+ *         property="lastName",
+ *         type="string",
+ *         description="Apellido del paciente",
+ *         example="Pérez",
+ *         maxLength=255
+ *     ),
+ *     @OA\Property(
+ *         property="birthDate",
+ *         type="string",
+ *         format="date",
+ *         description="Fecha de nacimiento del paciente",
+ *         example="1980-05-15"
+ *     ),
+ *     @OA\Property(
+ *         property="addressStreet",
+ *         type="string",
+ *         description="Calle de la dirección del paciente",
+ *         example="Calle Mayor",
+ *         maxLength=255
+ *     ),
+ *     @OA\Property(
+ *         property="addressNumber",
+ *         type="integer",
+ *         description="Número de la dirección del paciente",
+ *         example=123
+ *     ),
+ *     @OA\Property(
+ *         property="addressPostalCode",
+ *         type="integer",
+ *         description="Código postal de la dirección del paciente",
+ *         example=28001
+ *     ),
+ *     @OA\Property(
+ *         property="email",
+ *         type="string",
+ *         format="email",
+ *         description="Correo electrónico del paciente",
+ *         example="juan.perez@example.com",
+ *         maxLength=255
+ *     ),
+ *     @OA\Property(
+ *         property="phone",
+ *         type="integer",
+ *         description="Número de teléfono del paciente",
+ *         example=600123456
+ *     ),
+ *     @OA\Property(
+ *         property="healthCardNumber",
+ *         type="string",
+ *         description="Número de la tarjeta sanitaria del paciente",
+ *         example="1234567890",
+ *         maxLength=255
+ *     ),
+ *     @OA\Property(
+ *         property="zoneId",
+ *         type="integer",
+ *         description="ID de la zona asignada al paciente",
+ *         example=1
+ *     ),
+ *     @OA\Property(
+ *         property="language",
+ *         type="array",
+ *         @OA\Items(
+ *             type="string",
+ *             description="Idioma preferido",
+ *             example="Español"
+ *         )
+ *     ),
+ *     @OA\Property(
+ *         property="economicSituation",
+ *         type="string",
+ *         description="Situación económica del paciente",
+ *         example="Ingresos bajos",
+ *         maxLength=255
+ *     )
+ * )
+ */
 class PatientUpdateRequest extends FormRequest
 {
     /**

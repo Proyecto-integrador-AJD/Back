@@ -4,6 +4,46 @@ namespace App\Http\Requests\Patient;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *     schema="PatientStoreRequest",
+ *     type="object",
+ *     required={
+ *         "name", "lastName", "birthDate", "addressStreet", "addressNumber", 
+ *         "addressPostalCode", "addressCity", "addressProvince", "addressCountry",
+ *         "dni", "healthCardNumber", "phone", "email", "language", "zoneId",
+ *         "situationPersonalFamily", "healthSituation", "housingSituationType",
+ *         "housingSituationStatus", "housingSituationNumberOfRooms", 
+ *         "housingSituationLocation", "personalAutonomy", "economicSituation"
+ *     },
+ *     @OA\Property(property="name", type="string", description="Nombre del paciente", example="John"),
+ *     @OA\Property(property="lastName", type="string", description="Apellido del paciente", example="Doe"),
+ *     @OA\Property(property="birthDate", type="string", format="date", description="Fecha de nacimiento del paciente", example="1990-05-15"),
+ *     @OA\Property(property="addressStreet", type="string", description="Calle de la dirección del paciente", example="Calle Principal"),
+ *     @OA\Property(property="addressNumber", type="integer", description="Número de la dirección", example=123),
+ *     @OA\Property(property="addressFloor", type="string", description="Piso de la dirección", example="2A"),
+ *     @OA\Property(property="addressDoor", type="string", description="Puerta de la dirección", example="B"),
+ *     @OA\Property(property="addressPostalCode", type="string", description="Código postal", example="08001"),
+ *     @OA\Property(property="addressCity", type="string", description="Ciudad de residencia", example="Barcelona"),
+ *     @OA\Property(property="addressProvince", type="string", description="Provincia de residencia", example="Barcelona"),
+ *     @OA\Property(property="addressCountry", type="string", description="País de residencia", example="España"),
+ *     @OA\Property(property="dni", type="string", description="DNI del paciente", example="12345678X"),
+ *     @OA\Property(property="healthCardNumber", type="string", description="Número de la tarjeta sanitaria", example="TSC123456"),
+ *     @OA\Property(property="prefix", type="string", description="Prefijo del teléfono", example="+34"),
+ *     @OA\Property(property="phone", type="integer", description="Número de teléfono", example=600123456),
+ *     @OA\Property(property="email", type="string", format="email", description="Correo electrónico del paciente", example="example@gmail.com"),
+ *     @OA\Property(property="language", type="array", @OA\Items(type="string"), description="Idiomas del paciente", example={"Español", "Catalán"}),
+ *     @OA\Property(property="zoneId", type="integer", description="ID de la zona", example=1),
+ *     @OA\Property(property="situationPersonalFamily", type="string", description="Situación personal y familiar", example="Viviendo con familia"),
+ *     @OA\Property(property="healthSituation", type="string", description="Situación de salud", example="Salud estable"),
+ *     @OA\Property(property="housingSituationType", type="string", description="Tipo de vivienda", example="Apartamento"),
+ *     @OA\Property(property="housingSituationStatus", type="string", description="Estado de la vivienda", example="Propiedad"),
+ *     @OA\Property(property="housingSituationNumberOfRooms", type="integer", description="Número de habitaciones en la vivienda", example=3),
+ *     @OA\Property(property="housingSituationLocation", type="string", description="Ubicación de la vivienda", example="Centro de la ciudad"),
+ *     @OA\Property(property="personalAutonomy", type="string", description="Autonomía personal", example="Independiente"),
+ *     @OA\Property(property="economicSituation", type="string", description="Situación económica", example="Estable"),
+ * )
+ */
 class PatientStoreRequest extends FormRequest
 {
     /**

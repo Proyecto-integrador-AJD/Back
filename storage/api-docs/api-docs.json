@@ -234,6 +234,258 @@
                 ]
             }
         },
+        "/api/patients/zone/{id}": {
+            "get": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Obtener pacientes por zona",
+                "description": "Devuelve una lista de pacientes de una zona específica.",
+                "operationId": "99bbe15643ec7928c2f01d2aeb805b35",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la zona",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pacientes de la zona devueltos con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PatientResource"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No se encontraron pacientes en la zona."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/patients/current": {
+            "get": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Obtener pacientes del usuario autenticado",
+                "description": "Devuelve la lista de pacientes asignados al usuario autenticado.",
+                "operationId": "406f7892715c90dc16053e5ed099a6ab",
+                "responses": {
+                    "200": {
+                        "description": "Pacientes devueltos con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PatientResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/patients": {
+            "get": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Obtener todos los pacientes",
+                "description": "Devuelve una lista de todos los pacientes.",
+                "operationId": "0df0d65f049161931654c3e188ca8f93",
+                "responses": {
+                    "200": {
+                        "description": "Lista de pacientes devuelta con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PatientResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Crear un nuevo paciente",
+                "description": "Crea un nuevo paciente con los datos proporcionados.",
+                "operationId": "2149729f1bf1af8877352f04be3a683f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PatientStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Paciente creado con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PatientResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/patients/{id}": {
+            "get": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Obtener un paciente por ID",
+                "description": "Devuelve los datos de un paciente por su ID.",
+                "operationId": "900a000f9712c06fdf96fa64333bbaff",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del paciente",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Paciente recuperado con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PatientResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Actualizar un paciente",
+                "description": "Actualiza los datos de un paciente existente.",
+                "operationId": "49d64723ad7c62df6eddc6fa8a778755",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del paciente",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PatientUpdateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Paciente actualizado con éxito.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PatientResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Eliminar un paciente",
+                "description": "Elimina un paciente por su ID.",
+                "operationId": "0187379ab8f57fd78eeb510643be993b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del paciente",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Paciente eliminado con éxito."
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/users": {
             "get": {
                 "tags": [
@@ -716,6 +968,250 @@
                 },
                 "type": "object"
             },
+            "PatientStoreRequest": {
+                "required": [
+                    "name",
+                    "lastName",
+                    "birthDate",
+                    "addressStreet",
+                    "addressNumber",
+                    "addressPostalCode",
+                    "addressCity",
+                    "addressProvince",
+                    "addressCountry",
+                    "dni",
+                    "healthCardNumber",
+                    "phone",
+                    "email",
+                    "language",
+                    "zoneId",
+                    "situationPersonalFamily",
+                    "healthSituation",
+                    "housingSituationType",
+                    "housingSituationStatus",
+                    "housingSituationNumberOfRooms",
+                    "housingSituationLocation",
+                    "personalAutonomy",
+                    "economicSituation"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Nombre del paciente",
+                        "type": "string",
+                        "example": "John"
+                    },
+                    "lastName": {
+                        "description": "Apellido del paciente",
+                        "type": "string",
+                        "example": "Doe"
+                    },
+                    "birthDate": {
+                        "description": "Fecha de nacimiento del paciente",
+                        "type": "string",
+                        "format": "date",
+                        "example": "1990-05-15"
+                    },
+                    "addressStreet": {
+                        "description": "Calle de la dirección del paciente",
+                        "type": "string",
+                        "example": "Calle Principal"
+                    },
+                    "addressNumber": {
+                        "description": "Número de la dirección",
+                        "type": "integer",
+                        "example": 123
+                    },
+                    "addressFloor": {
+                        "description": "Piso de la dirección",
+                        "type": "string",
+                        "example": "2A"
+                    },
+                    "addressDoor": {
+                        "description": "Puerta de la dirección",
+                        "type": "string",
+                        "example": "B"
+                    },
+                    "addressPostalCode": {
+                        "description": "Código postal",
+                        "type": "string",
+                        "example": "08001"
+                    },
+                    "addressCity": {
+                        "description": "Ciudad de residencia",
+                        "type": "string",
+                        "example": "Barcelona"
+                    },
+                    "addressProvince": {
+                        "description": "Provincia de residencia",
+                        "type": "string",
+                        "example": "Barcelona"
+                    },
+                    "addressCountry": {
+                        "description": "País de residencia",
+                        "type": "string",
+                        "example": "España"
+                    },
+                    "dni": {
+                        "description": "DNI del paciente",
+                        "type": "string",
+                        "example": "12345678X"
+                    },
+                    "healthCardNumber": {
+                        "description": "Número de la tarjeta sanitaria",
+                        "type": "string",
+                        "example": "TSC123456"
+                    },
+                    "prefix": {
+                        "description": "Prefijo del teléfono",
+                        "type": "string",
+                        "example": "+34"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono",
+                        "type": "integer",
+                        "example": 600123456
+                    },
+                    "email": {
+                        "description": "Correo electrónico del paciente",
+                        "type": "string",
+                        "format": "email",
+                        "example": "example@gmail.com"
+                    },
+                    "language": {
+                        "description": "Idiomas del paciente",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "example": [
+                            "Español",
+                            "Catalán"
+                        ]
+                    },
+                    "zoneId": {
+                        "description": "ID de la zona",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "situationPersonalFamily": {
+                        "description": "Situación personal y familiar",
+                        "type": "string",
+                        "example": "Viviendo con familia"
+                    },
+                    "healthSituation": {
+                        "description": "Situación de salud",
+                        "type": "string",
+                        "example": "Salud estable"
+                    },
+                    "housingSituationType": {
+                        "description": "Tipo de vivienda",
+                        "type": "string",
+                        "example": "Apartamento"
+                    },
+                    "housingSituationStatus": {
+                        "description": "Estado de la vivienda",
+                        "type": "string",
+                        "example": "Propiedad"
+                    },
+                    "housingSituationNumberOfRooms": {
+                        "description": "Número de habitaciones en la vivienda",
+                        "type": "integer",
+                        "example": 3
+                    },
+                    "housingSituationLocation": {
+                        "description": "Ubicación de la vivienda",
+                        "type": "string",
+                        "example": "Centro de la ciudad"
+                    },
+                    "personalAutonomy": {
+                        "description": "Autonomía personal",
+                        "type": "string",
+                        "example": "Independiente"
+                    },
+                    "economicSituation": {
+                        "description": "Situación económica",
+                        "type": "string",
+                        "example": "Estable"
+                    }
+                },
+                "type": "object"
+            },
+            "PatientUpdateRequest": {
+                "properties": {
+                    "name": {
+                        "description": "Nombre del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Juan"
+                    },
+                    "lastName": {
+                        "description": "Apellido del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Pérez"
+                    },
+                    "birthDate": {
+                        "description": "Fecha de nacimiento del paciente",
+                        "type": "string",
+                        "format": "date",
+                        "example": "1980-05-15"
+                    },
+                    "addressStreet": {
+                        "description": "Calle de la dirección del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Calle Mayor"
+                    },
+                    "addressNumber": {
+                        "description": "Número de la dirección del paciente",
+                        "type": "integer",
+                        "example": 123
+                    },
+                    "addressPostalCode": {
+                        "description": "Código postal de la dirección del paciente",
+                        "type": "integer",
+                        "example": 28001
+                    },
+                    "email": {
+                        "description": "Correo electrónico del paciente",
+                        "type": "string",
+                        "format": "email",
+                        "maxLength": 255,
+                        "example": "juan.perez@example.com"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono del paciente",
+                        "type": "integer",
+                        "example": 600123456
+                    },
+                    "healthCardNumber": {
+                        "description": "Número de la tarjeta sanitaria del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "1234567890"
+                    },
+                    "zoneId": {
+                        "description": "ID de la zona asignada al paciente",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "language": {
+                        "type": "array",
+                        "items": {
+                            "description": "Idioma preferido",
+                            "type": "string",
+                            "example": "Español"
+                        }
+                    },
+                    "economicSituation": {
+                        "description": "Situación económica del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Ingresos bajos"
+                    }
+                },
+                "type": "object"
+            },
             "UserStoreRequest": {
                 "required": [
                     "name",
@@ -970,6 +1466,133 @@
                         "description": "Descripción de la llamada",
                         "type": "string",
                         "example": "Paciente con dificultad respiratoria"
+                    }
+                },
+                "type": "object"
+            },
+            "PatientResource": {
+                "description": "Recurso de paciente",
+                "properties": {
+                    "id": {
+                        "description": "ID del paciente",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nombre del paciente",
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "description": "Apellido del paciente",
+                        "type": "string"
+                    },
+                    "birthDate": {
+                        "description": "Fecha de nacimiento del paciente",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "userId": {
+                        "description": "ID del usuario asociado al paciente",
+                        "type": "integer"
+                    },
+                    "addressStreet": {
+                        "description": "Calle de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressNumber": {
+                        "description": "Número de la dirección del paciente",
+                        "type": "integer"
+                    },
+                    "addressFloor": {
+                        "description": "Piso de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressDoor": {
+                        "description": "Puerta de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressPostalCode": {
+                        "description": "Código postal de la dirección del paciente",
+                        "type": "integer"
+                    },
+                    "addressCity": {
+                        "description": "Ciudad de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressProvince": {
+                        "description": "Provincia de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "addressCountry": {
+                        "description": "País de la dirección del paciente",
+                        "type": "string"
+                    },
+                    "dni": {
+                        "description": "DNI del paciente",
+                        "type": "string"
+                    },
+                    "healthCardNumber": {
+                        "description": "Número de la tarjeta sanitaria del paciente",
+                        "type": "string"
+                    },
+                    "prefix": {
+                        "description": "Prefijo del teléfono del paciente",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "description": "Número de teléfono del paciente",
+                        "type": "integer"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del paciente",
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "language": {
+                        "description": "Idioma preferido del paciente",
+                        "type": "string"
+                    },
+                    "zoneId": {
+                        "description": "ID de la zona asignada al paciente",
+                        "type": "integer"
+                    },
+                    "healthSituation": {
+                        "description": "Situación de salud del paciente",
+                        "type": "string"
+                    },
+                    "situationPersonalFamily": {
+                        "description": "Situación personal/familiar del paciente",
+                        "type": "string"
+                    },
+                    "housingSituationType": {
+                        "description": "Tipo de situación de vivienda del paciente",
+                        "type": "string"
+                    },
+                    "housingSituationStatus": {
+                        "description": "Estado de situación de vivienda del paciente",
+                        "type": "string"
+                    },
+                    "housingSituationNumberOfRooms": {
+                        "description": "Número de habitaciones en la vivienda del paciente",
+                        "type": "integer"
+                    },
+                    "housingSituationLocation": {
+                        "description": "Ubicación de la vivienda del paciente",
+                        "type": "string"
+                    },
+                    "personalAutonomy": {
+                        "description": "Autonomía personal del paciente",
+                        "type": "string"
+                    },
+                    "economicSituation": {
+                        "description": "Situación económica del paciente",
+                        "type": "string"
+                    },
+                    "contacts": {
+                        "description": "Contactos del paciente",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
                     }
                 },
                 "type": "object"
@@ -1484,6 +2107,10 @@
         {
             "name": "Calls",
             "description": "Operaciones relacionadas con las llamadas"
+        },
+        {
+            "name": "Patients",
+            "description": "Patients"
         },
         {
             "name": "Users",
