@@ -35,6 +35,8 @@ class DatabaseSeeder extends Seeder
             ContactSeeder::class,
             AlertSeeder::class,
             CallSeeder::class,
+            TypeCallSeeder::class,
+            SubTypeCallSeeder::class,
         ]);
     }
 }

@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Api\{AuthController, AlertSubtypeController, PatientController, AlertTypeController, RecurrenceTypeController, ContactController, ZoneController, LanguageController, AlertController, CallController, UserController, RelationshipController, PrefixController, ReportController};
+use App\Http\Controllers\Api\{AuthController, AlertSubtypeController, PatientController, AlertTypeController, RecurrenceTypeController, ContactController, ZoneController, LanguageController, AlertController, CallController, UserController, RelationshipController, PrefixController, ReportController, TypeCallController, SubTypeCallController};
 use App\Http\Middleware\AdminPermissionsMiddleware;
 
 
@@ -35,6 +35,8 @@ Route::middleware(['auth:sanctum','api'])->group( function () {
     Route::get('/alerts/user', [AlertController::class, 'user']);
     Route::apiResource('alerts',  AlertController::class);
     Route::apiResource('calls',  CallController::class);
+    Route::apiResource('call/types',  TypeCallController::class);
+    Route::apiResource('call/subtypes',  SubTypeCallController::class);
     Route::get('patients/{id}/calls',  [CallController::class, 'getCallsByPatient']);
 
     Route::prefix('reports')->group(function () {
