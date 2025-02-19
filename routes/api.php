@@ -46,7 +46,8 @@ Route::middleware(['auth:sanctum','api'])->group( function () {
         Route::get('/done-calls', [ReportController::class, 'getDoneCalls']);
         Route::get('/patienthistory/{id}', [ReportController::class, 'getPatientCallHistory']);
         Route::get('/calls', [ReportController::class, 'getReportCalls']);
-        Route::get('/pdf/calls', [ReportController::class, 'getPDFcalls']);
+        Route::get('/pdf/calls/pdf', [ReportController::class, 'getPDFcalls']);
+        Route::get('/pdf/calls/csv', [ReportController::class, 'getCSVcalls']);
     });
 
     Route::get('user',  [AuthController::class, 'user']);

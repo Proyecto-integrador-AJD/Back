@@ -274,5 +274,38 @@ class ReportController extends BaseController
     //     }
     //     return $alerts;
     // }
+
+
+    public function getCSVcalls(Request $request)
+    {
+        // dd('hola');
+        // hay que generar un pdf mediante DOMPDF en base a la funcion getReportCalls
+        $dateInit = $request->query('dateInit', null);
+        $dateInit = $dateInit ? date('Y-m-d H:i:s', strtotime($dateInit)) : null;
+        $dateEnd = $request->query('dateEnd', now()->toDateString());
+        $dateEnd = $dateEnd ? date('Y-m-d H:i:s', strtotime($dateEnd)) : null;
+
+        $zoneId = $request->query('zoneId', null);
+        $type = $request->query('type', null);
+
+        $result = $this->getReportCalls($dateInit, $dateEnd, $zoneId, $type);
+        $calls = $result['calls'];
+        $filter = $result['filter'];
+
+        $data = [
+            'date' => now()->format('d-m-Y H:i'),
+            'calls' => $calls,
+            'filtros' => $filter
+        ];
+
+        $csv = view('pdf.reporteCallsCSV', compact('data'))->render();
+
+        $response = response($csv, 200)
+            ->header('Content-Type', 'text/csv')
+            ->header('Content-Disposition', 'attachment; filename="reporte_llamadas.csv"')
+            ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+        return $response;
+    }
     
 }
