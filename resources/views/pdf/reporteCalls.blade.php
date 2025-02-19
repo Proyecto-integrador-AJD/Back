@@ -45,6 +45,13 @@
     th:last-child, td:last-child {
         border-radius: 0 5px 5px 0;
     }
+
+    .center {
+        text-align: center;
+    }
+    .justify {
+        text-align: justify;
+    }
 </style>
 </head>
 
@@ -120,14 +127,14 @@
         <tbody>
             @foreach ($data['calls']['noPrevistas'] as $call)
                 <tr>
-                    <td>{{ $call->date }}</td>
+                    <td class="center">{{ date('d/m/Y H:i', strtotime($call->date)) }}</td>
                     <td>{{ $call->operator }}</td>
                     <td>{{ $call->patient }}</td>
-                    <td>{{ $call->zone }}</td>
+                    <td class="center">{{ $call->zone }}</td>
                     <td>{{ $call->type }}</td>
                     <td>{{ $call->subType }}</td>
-                    <td>{{ $call->duration }}</td>
-                    <td>{{ $call->description }}</td>
+                    <td class="center">{{ $call->duration }} {{ __('pdf.reportCalls.table.min') }}</td>
+                    <td class="justify">{{ $call->description }}</td>
                 </tr>
             @endforeach
         </tbody>

@@ -130,7 +130,8 @@
   "pdf.reportCalls.tableHeader.type": "Tipo",
   "pdf.reportCalls.tableHeader.subType": "SubTipo",
   "pdf.reportCalls.tableHeader.duration": "Duración",
-  "pdf.reportCalls.tableHeader.description": "Descripción"
+  "pdf.reportCalls.tableHeader.description": "Descripción",
+  "pdf.reportCalls.table.min": "min"
 
 
 
