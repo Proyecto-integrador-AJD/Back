@@ -19,23 +19,23 @@ Route::get('/user', function (Request $request) {
 Route::post('login', [AuthController::class, 'login'])->middleware('api');
 Route::post('register', [AuthController::class, 'register'])->middleware('api');
 
+Route::apiResource('language', LanguageController::class)->names([
+    'index'   => 'api.language.list',
+    'store'   => 'api.language.store',
+    'show'    => 'api.language.show',
+    'update'  => 'api.language.update',
+    'destroy' => 'api.language.delete',
+]);
+
+Route::apiResource('prefix', PrefixController::class)->names([
+    'index'   => 'api.prefix.list',
+    'store'   => 'api.prefix.store',
+    'show'    => 'api.prefix.show',
+    'update'  => 'api.prefix.update',
+    'destroy' => 'api.prefix.delete',
+]);
 
 Route::middleware(['auth:sanctum','api'])->group( function () {
-    Route::apiResource('prefix', PrefixController::class)->names([
-        'index'   => 'api.prefix.list',
-        'store'   => 'api.prefix.store',
-        'show'    => 'api.prefix.show',
-        'update'  => 'api.prefix.update',
-        'destroy' => 'api.prefix.delete',
-    ]);
-
-    Route::apiResource('language', LanguageController::class)->names([
-        'index'   => 'api.language.list',
-        'store'   => 'api.language.store',
-        'show'    => 'api.language.show',
-        'update'  => 'api.language.update',
-        'destroy' => 'api.language.delete',
-    ]);
 
     Route::get('patients/current', [PatientController::class, 'current'])->name('api.patients.current');
 
