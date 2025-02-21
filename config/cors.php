@@ -2,11 +2,24 @@
 
 return [
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    /*
+    |--------------------------------------------------------------------------
+    | Cross-Origin Resource Sharing (CORS) Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure your settings for cross-origin resource sharing
+    | or "CORS". This determines what cross-origin operations may execute
+    | in web browsers. You are free to adjust these settings as needed.
+    |
+    | To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+    |
+    */
+
+    'paths' => ['*'],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://backend.projectegb5.ddaw.es'], 
+    'allowed_origins' => ['http://frontend.projectegb5.ddaw.es', 'http://localhost:5173', 'http://localhost:5174'],
 
     'allowed_origins_patterns' => [],
 
@@ -16,6 +29,5 @@ return [
 
     'max_age' => 0,
 
-    'supports_credentials' => false,
-
+    'supports_credentials' => true,
 ];
