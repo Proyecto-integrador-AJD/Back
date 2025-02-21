@@ -2,8 +2,7 @@
 @section('content')
 <!-- Titulo -->
 <h1 class="text-3xl font-bold text-blue-800 mb-6">{{ __('contacts.title') }}</h1>
-<a href="{{ route('contacts.create') }}" class="bg-blue-500 text-blue font-medium">
-<button>{{ __('btn.new') }}</button>
+
 </a>
 @if (session('success'))
     <div class="bg-green-500 text-black p-4 mb-6 rounded-lg">
@@ -19,7 +18,7 @@
         <th class="border border-gray-300 p-2">{{ __('fields.actions') }}</th>
     </tr>
 </thead>
-<tbody>contact
+<tbody>
     @foreach ($contacts as $contact)
         <tr class="hover:bg-gray-100">
             <!-- Datos -->
