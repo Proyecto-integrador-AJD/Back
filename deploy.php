@@ -8,7 +8,7 @@ set('keep_releases', 3);
 set('composer_options', '--verbose --prefer-dist --no-progress --no-interaction');
 set('application', 'teleasistencia_projecte');
 set('repository', 'git@github.com:Proyecto-integrador-AJD/Back.git');
-set('branch', 'Deployer');
+set('branch', 'ADMIN');
 set('git_tty', true);
 
 add('shared_files', ['.env']);
