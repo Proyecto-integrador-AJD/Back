@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('userId')->constrained('users')->onDelete('cascade');
             $table->boolean('incoming');
             $table->string('type');
-            $table->string('subType');
+            $table->string('subType')->nullable();
             $table->foreignId('alertId')->nullable()->constrained('alerts')->onDelete('cascade');
             $table->integer('duration');
             $table->text('description');
