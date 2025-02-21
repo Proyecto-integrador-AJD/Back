@@ -192,7 +192,9 @@ class ReportController extends BaseController
         $response = response($pdf->output(), 200)
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'attachment; filename="reporte_llamadas.pdf"')
-            ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+            ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+            ->header('Access-Control-Allow-Origin', '*')
+            ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 
         return $response;
 
@@ -303,7 +305,9 @@ class ReportController extends BaseController
         $response = response($csv, 200)
             ->header('Content-Type', 'text/csv')
             ->header('Content-Disposition', 'attachment; filename="reporte_llamadas.csv"')
-            ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+            ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+            ->header('Access-Control-Allow-Origin', '*')
+            ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 
         return $response;
     }
