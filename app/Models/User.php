@@ -10,6 +10,31 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Enums\{Language};
 use App\Casts\CsvToArrayCast;
 
+/**
+ * @OA\Schema(
+ *     schema="User",
+ *     description="Esquema del modelo Usuario",
+ *     @OA\Property(property="id", type="integer", description="ID del usuario"),
+ *     @OA\Property(property="name", type="string", description="Nombre del usuario"),
+ *     @OA\Property(property="lastName", type="string", description="Apellido del usuario"),
+ *     @OA\Property(property="email", type="string", description="Correo electrónico del usuario"),
+ *     @OA\Property(property="password", type="string", description="Contraseña del usuario"),
+ *     @OA\Property(property="phone", type="string", description="Número de teléfono del usuario"),
+ *     @OA\Property(property="dateHire", type="string", format="date", description="Fecha de contratación"),
+ *     @OA\Property(property="dateTermination", type="string", format="date", description="Fecha de terminación (si aplica)"),
+ *     @OA\Property(property="username", type="string", description="Nombre de usuario para autenticación"),
+ *     @OA\Property(property="language", type="array", @OA\Items(type="string"), description="Idiomas hablados por el usuario"),
+ *     @OA\Property(property="prefix", type="string", description="Prefijo asociado al usuario"),
+ *     @OA\Property(property="zones", type="array", 
+ *         @OA\Items(ref="#/components/schemas/Zone"), description="Zonas asignadas al usuario"),
+ *     @OA\Property(property="patients", type="array", 
+ *         @OA\Items(ref="#/components/schemas/Patient"), description="Pacientes asignados al usuario"),
+ *     @OA\Property(property="calls", type="array", 
+ *         @OA\Items(ref="#/components/schemas/Call"), description="Llamadas realizadas por el usuario"),
+ *     @OA\Property(property="alerts", type="array", 
+ *         @OA\Items(ref="#/components/schemas/Alert"), description="Alertas asociadas al usuario"),
+ * )
+ */
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */

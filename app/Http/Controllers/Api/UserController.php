@@ -7,25 +7,20 @@ use App\Http\Requests\User\{UserStoreRequest, UserUpdateRequest};
 use App\Http\Resources\UserResource;
 use App\Http\Controllers\Api\BaseController;
 
-/**
- * @OA\Info(
- *     title="Users API",
- *     version="1.0.0",
- *     description="API para gestionar los usuarios."
- * )
- */
+
 class UserController extends BaseController
 {
-    /**
+   /**
      * @OA\Get(
      *     path="/api/users",
      *     summary="Obtener todos los usuarios",
-     *     description="Devuelve una lista paginada de usuarios.",
+     *     description="Devuelve una lista de todos los usuarios.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Users"},
      *     @OA\Response(
      *         response=200,
      *         description="Lista de usuarios devuelta con éxito.",
-     *         @OA\JsonContent(type="array", @OA\Items(ref="/components/schemas/Users"))
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/UserResource"))
      *     )
      * )
      */
@@ -33,12 +28,12 @@ class UserController extends BaseController
     {
         return UserResource::collection(User::all());
     }
-
-    /**
+ /**
      * @OA\Get(
      *     path="/api/users/{id}",
      *     summary="Obtener un usuario",
-     *     description="Devuelve los datos de un usuario específico por su ID.",
+     *     description="Devuelve los datos de un usuario por su ID.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Users"},
      *     @OA\Parameter(
      *         name="id",
@@ -50,7 +45,7 @@ class UserController extends BaseController
      *     @OA\Response(
      *         response=200,
      *         description="Usuario recuperado con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Users")
+     *         @OA\JsonContent(ref="#/components/schemas/UserResource")
      *     ),
      *     @OA\Response(
      *         response=404,
@@ -62,21 +57,21 @@ class UserController extends BaseController
     {
         return $this->sendResponse(new UserResource($user), 'Usuario recuperado con éxito', 200);
     }
-
-    /**
+  /**
      * @OA\Post(
      *     path="/api/users",
      *     summary="Crear un nuevo usuario",
      *     description="Crea un nuevo usuario con los datos proporcionados.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Users"},
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(ref="/components/schemas/StoreUserRequest")
+     *         @OA\JsonContent(ref="#/components/schemas/UserStoreRequest")
      *     ),
      *     @OA\Response(
      *         response=201,
      *         description="Usuario creado con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Users")
+     *         @OA\JsonContent(ref="#/components/schemas/UserResource")
      *     )
      * )
      */
@@ -91,6 +86,7 @@ class UserController extends BaseController
      *     path="/api/users/{id}",
      *     summary="Actualizar un usuario",
      *     description="Actualiza los datos de un usuario existente.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Users"},
      *     @OA\Parameter(
      *         name="id",
@@ -101,12 +97,12 @@ class UserController extends BaseController
      *     ),
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(ref="/components/schemas/UpdateUserRequest")
+     *         @OA\JsonContent(ref="#/components/schemas/UserUpdateRequest")
      *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Usuario actualizado con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Users")
+     *         @OA\JsonContent(ref="#/components/schemas/UserResource")
      *     )
      * )
      */
@@ -120,7 +116,8 @@ class UserController extends BaseController
      * @OA\Delete(
      *     path="/api/users/{id}",
      *     summary="Eliminar un usuario",
-     *     description="Elimina un usuario específico por su ID.",
+     *     description="Elimina un usuario por su ID.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Users"},
      *     @OA\Parameter(
      *         name="id",

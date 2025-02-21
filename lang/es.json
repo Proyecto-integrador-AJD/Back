@@ -130,7 +130,12 @@
   "pdf.reportCalls.tableHeader.type": "Tipo",
   "pdf.reportCalls.tableHeader.subType": "SubTipo",
   "pdf.reportCalls.tableHeader.duration": "Duración",
-  "pdf.reportCalls.tableHeader.description": "Descripción"
+  "pdf.reportCalls.tableHeader.description": "Descripción",
+  "pdf.reportCalls.table.min": "min",
+
+  "pdf.reportCalls.tableHeader.alertType": "Tipo de Alerta",
+  "pdf.reportCalls.tableHeader.alertSubType": "SubTipo de Alerta",
+  "pdf.reportCalls.tableHeader.alertDescription": "Descripcion de Alerta"
 
 
 

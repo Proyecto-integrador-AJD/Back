@@ -7,25 +7,20 @@ use App\Http\Requests\Contact\{ContactStoreRequest, ContactUpdateRequest};
 use App\Http\Resources\{ContactResource};
 use App\Http\Controllers\Api\BaseController;
 
-/**
- * @OA\Info(
- *     title="Contacts API",
- *     version="1.0.0",
- *     description="API para gestionar los pacientes."
- * )
- */
+
 class ContactController extends BaseController
 {
     /**
      * @OA\Get(
      *     path="/api/contacts",
-     *     summary="Obtener todos los pacientes",
-     *     description="Devuelve una lista paginada de pacientes.",
+     *     summary="Obtener todos los contactos",
+     *     description="Devuelve una lista de todos los contactos.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Contacts"},
      *     @OA\Response(
      *         response=200,
-     *         description="Lista de pacientes devuelta con éxito.",
-     *         @OA\JsonContent(type="array", @OA\Items(ref="/components/schemas/Contacts"))
+     *         description="Lista de contactos devuelta con éxito.",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/ContactResource"))
      *     )
      * )
      */
@@ -34,27 +29,28 @@ class ContactController extends BaseController
         return ContactResource::collection(Contact::all());
     }
 
-    /**
+     /**
      * @OA\Get(
      *     path="/api/contacts/{id}",
-     *     summary="Obtener un paciente",
-     *     description="Devuelve los datos de un paciente específico por su ID.",
+     *     summary="Obtener un contacto",
+     *     description="Devuelve los detalles de un contacto específico por su ID.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Contacts"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="ID del paciente",
+     *         description="ID del contacto",
      *         required=true,
      *         @OA\Schema(type="integer")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Paciente recuperado con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Contacts")
+     *         description="Contacto recuperado con éxito.",
+     *         @OA\JsonContent(ref="#/components/schemas/ContactResource")
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Paciente no encontrado."
+     *         description="Contacto no encontrado."
      *     )
      * )
      */
@@ -63,20 +59,21 @@ class ContactController extends BaseController
         return $this->sendResponse(new ContactResource($contact), 'Contacto recuperado con éxito', 200);
     }
 
-    /**
+     /**
      * @OA\Post(
      *     path="/api/contacts",
-     *     summary="Crear un nuevo paciente",
-     *     description="Crea un nuevo paciente con los datos proporcionados.",
+     *     summary="Crear un nuevo contacto",
+     *     description="Crea un nuevo contacto con los datos proporcionados.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Contacts"},
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(ref="/components/schemas/StoreContactRequest")
+     *         @OA\JsonContent(ref="#/components/schemas/ContactStoreRequest")
      *     ),
      *     @OA\Response(
      *         response=201,
-     *         description="Paciente creado con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Contacts")
+     *         description="Contacto creado con éxito.",
+     *         @OA\JsonContent(ref="#/components/schemas/ContactResource")
      *     )
      * )
      */
@@ -89,24 +86,25 @@ class ContactController extends BaseController
     /**
      * @OA\Put(
      *     path="/api/contacts/{id}",
-     *     summary="Actualizar un paciente",
-     *     description="Actualiza los datos de un paciente existente.",
+     *     summary="Actualizar un contacto",
+     *     description="Actualiza los datos de un contacto existente.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Contacts"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="ID del paciente",
+     *         description="ID del contacto",
      *         required=true,
      *         @OA\Schema(type="integer")
      *     ),
      *     @OA\RequestBody(
      *         required=true,
-     *         @OA\JsonContent(ref="/components/schemas/UpdateContactRequest")
+     *         @OA\JsonContent(ref="#/components/schemas/ContactUpdateRequest")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Paciente actualizado con éxito.",
-     *         @OA\JsonContent(ref="/components/schemas/Contacts")
+     *         description="Contacto actualizado con éxito.",
+     *         @OA\JsonContent(ref="#/components/schemas/ContactResource")
      *     )
      * )
      */
@@ -116,26 +114,27 @@ class ContactController extends BaseController
         return $this->sendResponse($contact, 'Contacto actualizado con éxito', 200);
     }
 
-    /**
+   /**
      * @OA\Delete(
      *     path="/api/contacts/{id}",
-     *     summary="Eliminar un paciente",
-     *     description="Elimina un paciente específico por su ID.",
+     *     summary="Eliminar un contacto",
+     *     description="Elimina un contacto específico por su ID.",
+     *     security={{"bearerAuth": {}}},
      *     tags={"Contacts"},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="ID del paciente",
+     *         description="ID del contacto",
      *         required=true,
      *         @OA\Schema(type="integer")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Paciente eliminado con éxito."
+     *         description="Contacto eliminado con éxito."
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Paciente no encontrado."
+     *         description="Contacto no encontrado."
      *     )
      * )
      */

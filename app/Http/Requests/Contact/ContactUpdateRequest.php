@@ -4,6 +4,57 @@ namespace App\Http\Requests\Contact;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *     schema="ContactUpdateRequest",
+ *     type="object",
+ *     @OA\Property(
+ *         property="name",
+ *         type="string",
+ *         description="Nombre del contacto",
+ *         example="Juan",
+ *         maxLength=255
+ *     ),
+ *     @OA\Property(
+ *         property="lastName",
+ *         type="string",
+ *         description="Apellido del contacto",
+ *         example="Pérez",
+ *         maxLength=255
+ *     ),
+ *     @OA\Property(
+ *         property="email",
+ *         type="string",
+ *         description="Correo electrónico del contacto",
+ *         example="juan.perez@example.com",
+ *         maxLength=255
+ *     ),
+ *     @OA\Property(
+ *         property="prefix",
+ *         type="string",
+ *         description="Prefijo telefónico del contacto",
+ *         example="+34"
+ *     ),
+ *     @OA\Property(
+ *         property="phone",
+ *         type="integer",
+ *         description="Número de teléfono del contacto",
+ *         example="612345678"
+ *     ),
+ *     @OA\Property(
+ *         property="patientId",
+ *         type="integer",
+ *         description="ID del paciente asociado al contacto",
+ *         example=1
+ *     ),
+ *     @OA\Property(
+ *         property="relationship",
+ *         type="string",
+ *         description="Relación del contacto con el paciente",
+ *         example="sister"
+ *     )
+ * )
+ */
 class ContactUpdateRequest extends FormRequest
 {
     /**

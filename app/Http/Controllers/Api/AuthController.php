@@ -10,41 +10,45 @@ use App\Models\User;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\User\UserStoreRequest;
 
+
+/**
+ * @OA\Tag(
+ *     name="Authentication",
+ *     description="Autenticación"
+ * )
+ */
+
 class AuthController extends BaseController
 {
-    /**
+    
+     /**
      * @OA\Post(
      *     path="/api/login",
-     *     summary="Log in a user",
-     *     description="Authenticate user with email and password",
-     *     tags={"Auth"},
+     *     summary="Iniciar sesión",
+     *     description="Permite iniciar sesión a un usuario con nombre de usuario y contraseña.",
+     *     tags={"Authentication"},
+     *     security={{"bearerAuth": {}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"email","password"},
-     *             @OA\Property(property="email", type="string", example="admin@example.com"),
-     *             @OA\Property(property="password", type="string", example="password")
+     *             type="object",
+     *             required={"username", "password"},
+     *             @OA\Property(property="username", type="string", description="Nombre de usuario del usuario."),
+     *             @OA\Property(property="password", type="string", description="Contraseña del usuario.")
      *         )
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="User signed in",
+     *         description="Usuario autenticado con éxito.",
      *         @OA\JsonContent(
-     *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="data", type="object",
-     *                 @OA\Property(property="token", type="string", example="your_token_here"),
-     *                 @OA\Property(property="name", type="string", example="John Doe")
-     *             ),
-     *             @OA\Property(property="message", type="string", example="User signed in")
+     *             type="object",
+     *             @OA\Property(property="token", type="string", description="Token de acceso."),
+     *             @OA\Property(property="name", type="string", description="Nombre del usuario.")
      *         )
      *     ),
      *     @OA\Response(
      *         response=401,
-     *         description="Unauthorised",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="success", type="boolean", example=false),
-     *             @OA\Property(property="error", type="string", example="incorrect Email/Password")
-     *         )
+     *         description="Credenciales no válidas."
      *     )
      * )
      */
@@ -60,41 +64,37 @@ class AuthController extends BaseController
         return $this->sendError('Unauthorised.', ['error' => 'incorrect Username/Password']);
     }
 
-    /**
+     /**
      * @OA\Post(
      *     path="/api/register",
-     *     summary="Register a new user",
-     *     description="Register a user with name, email, and password",
-     *     tags={"Auth"},
+     *     summary="Registrar un nuevo usuario",
+     *     description="Registra un nuevo usuario con un rol predeterminado de 'operator'.",
+     *     tags={"Authentication"},
+     *     security={{"bearerAuth": {}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *             required={"name","email","password","confirm_password"},
-     *             @OA\Property(property="name", type="string", example="John Doe"),
-     *             @OA\Property(property="email", type="string", example="user@example.com"),
-     *             @OA\Property(property="password", type="string", example="password123"),
-     *             @OA\Property(property="confirm_password", type="string", example="password123")
+     *             type="object",
+     *             required={"name", "email", "username", "password", "confirm_password"},
+     *             @OA\Property(property="name", type="string", description="Nombre del usuario."),
+     *             @OA\Property(property="email", type="string", description="Correo electrónico del usuario."),
+     *             @OA\Property(property="username", type="string", description="Nombre de usuario único."),
+     *             @OA\Property(property="password", type="string", description="Contraseña."),
+     *             @OA\Property(property="confirm_password", type="string", description="Confirmación de la contraseña.")
      *         )
      *     ),
      *     @OA\Response(
-     *         response=200,
-     *         description="User created successfully.",
+     *         response=201,
+     *         description="Usuario registrado con éxito.",
      *         @OA\JsonContent(
-     *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="data", type="object",
-     *                 @OA\Property(property="token", type="string", example="your_token_here"),
-     *                 @OA\Property(property="name", type="string", example="John Doe")
-     *             ),
-     *             @OA\Property(property="message", type="string", example="User created successfully.")
+     *             type="object",
+     *             @OA\Property(property="token", type="string", description="Token de acceso."),
+     *             @OA\Property(property="name", type="string", description="Nombre del usuario.")
      *         )
      *     ),
      *     @OA\Response(
-     *         response=400,
-     *         description="Validation Error",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="success", type="boolean", example=false),
-     *             @OA\Property(property="error", type="object", example={"email": {"The email field is required."}})
-     *         )
+     *         response=422,
+     *         description="Error de validación de la contraseña."
      *     )
      * )
      */
@@ -122,27 +122,24 @@ class AuthController extends BaseController
         }
     }
 
-
-    /**
+  /**
      * @OA\Post(
      *     path="/api/logout",
-     *     summary="Log out a user",
-     *     description="Invalidate the user's token",
-     *     tags={"Auth"},
-     *     security={{"sanctum":{}}},
+     *     summary="Cerrar sesión",
+     *     description="Finaliza la sesión del usuario autenticado.",
+     *     tags={"Authentication"},
+     *     security={{"bearerAuth": {}}},
      *     @OA\Response(
      *         response=200,
-     *         description="User successfully signed out.",
+     *         description="Usuario cerrado sesión con éxito.",
      *         @OA\JsonContent(
-     *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="data", type="object",
-     *                 @OA\Property(property="name", type="string", example="John Doe")
-     *             ),
-     *             @OA\Property(property="message", type="string", example="User successfully signed out.")
+     *             type="object",
+     *             @OA\Property(property="name", type="string", description="Nombre del usuario que cerró la sesión.")
      *         )
      *     )
      * )
      */
+   
     public function logout(Request $request)
     {
         $user = $request->user(); // or Auth::user()
@@ -154,6 +151,20 @@ class AuthController extends BaseController
 
     /**
      * Infomacion de user logueado
+     */
+     /**
+     * @OA\Get(
+     *     path="/api/user",
+     *     summary="Obtener la información del usuario autenticado",
+     *     description="Devuelve la información del usuario actualmente autenticado.",
+     *     tags={"Authentication"},
+     *     security={{"bearerAuth": {}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Información del usuario recuperada con éxito.",
+     *         @OA\JsonContent(ref="#/components/schemas/UserResource")
+     *     )
+     * )
      */
     public function user(Request $request){
         return $this->sendResponse(new UserResource($request->user()), 'Usuario recuperado con éxito', 200);
